@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bazar.bane.bazarshahr.mainFragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.bazar.bane.bazarshahr.mainFragments.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.bazar.bane.bazarshahr.mainFragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/myStoreFragment"
+        android:name="com.bazar.bane.bazarshahr.mainFragments.MyStoreFragment"
+        android:label="fragment_add"
+        tools:layout="@layout/fragment_my_store" />
+</navigation>
