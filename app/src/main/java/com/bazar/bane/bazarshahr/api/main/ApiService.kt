@@ -1,8 +1,6 @@
 package com.bazar.bane.bazarshahr.api.main
 
-import androidx.lifecycle.LiveData
-import com.bazar.bane.bazarshahr.api.response.*
-import retrofit2.http.*
+
 
 interface ApiService {
 

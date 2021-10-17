@@ -8,4 +8,12 @@
     <string name="category">category</string>
     <string name="search">search</string>
     <string name="my_store">myStore</string>
+    <string name="title">title</string>
+
+    <string name="home_page_title">home</string>
+    <string name="category_page_title">category</string>
+    <string name="my_store_page_title">my store</string>
+
+    <string name="search_title">جستجو کنید</string>
+    <string name="search_hint">فروشگاه ستاره</string>
 </resources>

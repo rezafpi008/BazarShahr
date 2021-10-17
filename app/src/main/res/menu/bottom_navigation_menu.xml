@@ -4,22 +4,22 @@
 
     <item
         android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_add_gallery"
+        android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
     <item
         android:id="@+id/categoryFragment"
-        android:icon="@drawable/ic_add_gallery"
+        android:icon="@drawable/ic_category"
         android:title="@string/category" />
 
     <item
         android:id="@+id/searchFragment"
-        android:icon="@drawable/ic_add_gallery"
+        android:icon="@drawable/ic_search"
         android:title="@string/search" />
 
     <item
         android:id="@+id/myStoreFragment"
-        android:icon="@drawable/ic_add_gallery"
+        android:icon="@drawable/ic_add"
         android:title="@string/my_store" />
 
 </menu>

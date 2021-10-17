@@ -87,4 +87,7 @@ dependencies {
 
     //image picker
     implementation 'com.github.yalantis:ucrop:2.2.6'
+
+    //SearchBar
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
 }
