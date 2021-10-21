@@ -214,12 +214,14 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/submit"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_round_primary"
                         android:gravity="center"
                         android:text="submit"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite" />
+
+
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>

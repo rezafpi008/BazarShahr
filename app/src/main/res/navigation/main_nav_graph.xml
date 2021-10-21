@@ -24,5 +24,20 @@
         android:id="@+id/myStoreFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.MyStoreFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_my_store" />
+        tools:layout="@layout/fragment_my_store" >
+        <action
+            android:id="@+id/action_myStoreFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_myStoreFragment_to_addStoreFragment"
+            app:destination="@id/addStoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addStoreFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.AddStoreFragment"
+        android:label="AddStoreFragment" />
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.AddProductFragment"
+        android:label="AddProductFragment" />
 </navigation>

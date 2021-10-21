@@ -1,8 +1,25 @@
 package com.bazar.bane.bazarshahr.api.main
 
+import androidx.lifecycle.LiveData
+import com.bazar.bane.bazarshahr.api.response.HomeResponse
+import com.bazar.bane.bazarshahr.api.response.SearchResponse
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Query
 
 
 interface ApiService {
+
+    @GET("auctions/published")
+    fun getHome(
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<HomeResponse>>
+
+    @GET("auctions/published")
+    fun search(
+        @Query("searchQuery") searchQuery: String,
+        @Query("page") page: Int
+    ): LiveData<GenericApiResponse<SearchResponse>>
 
     /*@POST("auth")
     fun googleAccountRegister(

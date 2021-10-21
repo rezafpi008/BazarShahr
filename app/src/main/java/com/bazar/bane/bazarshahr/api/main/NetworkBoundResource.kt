@@ -11,7 +11,7 @@ import kotlinx.coroutines.withContext
 
 abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
 
-    private val result = MediatorLiveData<ViewStateType>()
+    protected val result = MediatorLiveData<ViewStateType>()
 
     init {
 
@@ -27,7 +27,7 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
         }
     }
 
-    fun handleNetworkCall(response: GenericApiResponse<ResponseObject>) {
+    private fun handleNetworkCall(response: GenericApiResponse<ResponseObject>) {
 
         when (response) {
             is ApiSuccessResponse -> {
@@ -35,7 +35,7 @@ abstract class NetworkBoundResource<ResponseObject, ViewStateType> {
             }
             is ApiErrorResponse -> {
                 println("DEBUG: NetworkBoundResource: ${response.errorMessage}")
-                var error: String? = RetrofitErrorUtils.parseError(response.errorMessage)
+                val error: String? = RetrofitErrorUtils.parseError(response.errorMessage)
                 onReturnError(error!!)
             }
             is ApiEmptyResponse -> {

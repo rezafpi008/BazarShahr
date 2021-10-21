@@ -11,7 +11,8 @@ import com.bazar.bane.bazarshahr.databinding.FragmentSearchBinding
 import com.mancj.materialsearchbar.MaterialSearchBar
 
 
-class SearchFragment : Fragment(), ToolbarFunction, MaterialSearchBar.OnSearchActionListener {
+class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
+    MaterialSearchBar.OnSearchActionListener {
 
     private lateinit var binding: FragmentSearchBinding
 
@@ -25,8 +26,18 @@ class SearchFragment : Fragment(), ToolbarFunction, MaterialSearchBar.OnSearchAc
         /*viewModel = ExploreViewModel()
         binding.exploreViewModel = viewModel*/
         binding.lifecycleOwner = this
+        initialData()
+        subscribeObservers()
         setToolbar()
         return view
+    }
+
+    override fun initialData() {
+
+    }
+
+    override fun subscribeObservers() {
+
     }
 
     override fun setToolbar() {
@@ -42,4 +53,6 @@ class SearchFragment : Fragment(), ToolbarFunction, MaterialSearchBar.OnSearchAc
 
     override fun onButtonClicked(buttonCode: Int) {
     }
+
+
 }

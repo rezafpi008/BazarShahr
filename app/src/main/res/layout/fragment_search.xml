@@ -4,43 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".mainFragments.SearchFragment">
 
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="searchViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.SearchViewModel" />
+    </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <RelativeLayout
-                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_66sdp">
+                android:layout_height="@dimen/_66sdp"
+                android:background="@color/colorPrimary">
 
             </RelativeLayout>
 
             <RelativeLayout
-                android:background="@color/colorBackground"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="@{searchViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+
 
             </RelativeLayout>
 
         </LinearLayout>
+
         <com.mancj.materialsearchbar.MaterialSearchBar
             android:id="@+id/searchBar"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:mt_hint="@string/search_hint"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:mt_roundedSearchBarEnabled="true"
-            app:mt_searchBarColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:mt_hint="@string/search_hint"
             app:mt_maxSuggestionsCount="10"
-            app:mt_searchIconTint="@color/colorPrimaryDark"
             app:mt_placeholder="@string/search_title"
             app:mt_placeholderColor="@color/colorPrimary"
+            app:mt_roundedSearchBarEnabled="true"
+            app:mt_searchBarColor="@color/colorWhite"
+            app:mt_searchIconTint="@color/colorPrimaryDark"
             app:mt_textCursorTint="@color/colorPrimaryDark" />
     </RelativeLayout>
 

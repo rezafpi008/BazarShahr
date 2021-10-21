@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.databinding.FragmentMyStoreBinding
 
 
-class MyStoreFragment : Fragment(), ToolbarFunction {
+class MyStoreFragment : Fragment() {
 
     private lateinit var binding: FragmentMyStoreBinding
 
@@ -26,14 +27,18 @@ class MyStoreFragment : Fragment(), ToolbarFunction {
         /*viewModel = ExploreViewModel()
         binding.exploreViewModel = viewModel*/
         binding.lifecycleOwner = this
-        setToolbar()
+        initialData()
+
         return view
     }
 
-    override fun setToolbar() {
-        val toolbar: Toolbar = binding.toolbar as Toolbar
-        toolbar.findViewById<TextView>(R.id.title_page).text =
-            getString(R.string.my_store_page_title)
-    }
+    private fun initialData(){
+        binding.submitStore.setOnClickListener {
+            findNavController().navigate(R.id.action_myStoreFragment_to_addStoreFragment)
+        }
 
+        binding.submitProduct.setOnClickListener {
+            findNavController().navigate(R.id.action_myStoreFragment_to_addProductFragment)
+        }
+    }
 }

@@ -16,4 +16,6 @@
 
     <string name="search_title">جستجو کنید</string>
     <string name="search_hint">فروشگاه ستاره</string>
+    <string name="submit_store">submit store</string>
+    <string name="submit_product">submit product</string>
 </resources>
