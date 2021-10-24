@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
@@ -40,6 +44,11 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
     }
 
     override fun setToolbar() {
+        val toolbar: Toolbar = binding.toolbar as Toolbar
+        toolbar.findViewById<TextView>(R.id.title_page).text = getString(R.string.add_store_title)
+        binding.toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun initData() {
@@ -50,7 +59,7 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
         recyclerView = binding.galleryRecycler
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val horizontalLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
         recyclerView.layoutManager = horizontalLayoutManager
         adapter =
             GalleryAdapter(requireContext(), items)

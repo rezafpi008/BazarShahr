@@ -18,4 +18,7 @@
     <string name="search_hint">فروشگاه ستاره</string>
     <string name="submit_store">submit store</string>
     <string name="submit_product">submit product</string>
+
+    <string name="add_product_title">Add product</string>
+    <string name="add_store_title">Add store</string>
 </resources>

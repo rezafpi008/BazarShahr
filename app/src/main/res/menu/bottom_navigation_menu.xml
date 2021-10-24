@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <item
-        android:id="@+id/homeFragment"
-        android:icon="@drawable/ic_home"
-        android:title="@string/home" />
-
-    <item
-        android:id="@+id/categoryFragment"
-        android:icon="@drawable/ic_category"
-        android:title="@string/category" />
+        android:id="@+id/myStoreFragment"
+        android:icon="@drawable/ic_add"
+        android:title="@string/my_store" />
 
     <item
         android:id="@+id/searchFragment"
@@ -18,8 +12,13 @@
         android:title="@string/search" />
 
     <item
-        android:id="@+id/myStoreFragment"
-        android:icon="@drawable/ic_add"
-        android:title="@string/my_store" />
+        android:id="@+id/categoryFragment"
+        android:icon="@drawable/ic_category"
+        android:title="@string/category" />
+
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
 
 </menu>

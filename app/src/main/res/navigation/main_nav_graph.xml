@@ -27,10 +27,18 @@
         tools:layout="@layout/fragment_my_store" >
         <action
             android:id="@+id/action_myStoreFragment_to_addProductFragment"
-            app:destination="@id/addProductFragment" />
+            app:destination="@id/addProductFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_myStoreFragment_to_addStoreFragment"
-            app:destination="@id/addStoreFragment" />
+            app:destination="@id/addStoreFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/addStoreFragment"
