@@ -1,14 +1,20 @@
 package com.bazar.bane.bazarshahr.api.main
 
 import androidx.lifecycle.LiveData
-import com.bazar.bane.bazarshahr.api.response.HomeResponse
-import com.bazar.bane.bazarshahr.api.response.SearchResponse
+import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
+import com.bazar.bane.bazarshahr.api.request.JobRequest
+import com.bazar.bane.bazarshahr.api.response.*
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
 
 interface ApiService {
+
+    @GET("auctions/published")
+    fun getSlider(
+    ): LiveData<GenericApiResponse<SliderResponse>>
 
     @GET("auctions/published")
     fun getHome(
@@ -20,6 +26,19 @@ interface ApiService {
         @Query("searchQuery") searchQuery: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<SearchResponse>>
+
+    fun getJobCategories(
+        @Body requestBody: JobCategoryRequest?,
+    ): LiveData<GenericApiResponse<JobCategoriesResponse>>
+
+
+    fun getJobs(
+        @Body requestBody: JobRequest?,
+    ): LiveData<GenericApiResponse<JobsResponse>>
+
+    fun getJob(
+        @Body requestBody: JobRequest?,
+    ): LiveData<GenericApiResponse<JobsResponse>>
 
     /*@POST("auth")
     fun googleAccountRegister(

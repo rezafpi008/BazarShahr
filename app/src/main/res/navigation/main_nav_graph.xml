@@ -14,7 +14,19 @@
         android:id="@+id/categoryFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
+        tools:layout="@layout/fragment_category" >
+        <argument android:name="jobId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_categoryFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.SearchFragment"
@@ -48,4 +60,8 @@
         android:id="@+id/addProductFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.AddProductFragment"
         android:label="AddProductFragment" />
+    <fragment
+        android:id="@+id/jobDetailsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.JobDetailsFragment"
+        android:label="JobDetailsFragment" />
 </navigation>

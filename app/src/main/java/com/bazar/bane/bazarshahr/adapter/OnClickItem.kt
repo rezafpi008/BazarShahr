@@ -1,5 +1,5 @@
 package com.bazar.bane.bazarshahr.adapter
 
 interface OnClickItem<T> {
-    fun clicked(t: T, position: Int)
+    fun clicked(item: T, position: Int)
 }

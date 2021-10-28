@@ -12,5 +12,10 @@ open class AppConstants {
 
         const val USER_TOKEN = "USER_TOKEN"
         const val USER_ID = "USER_ID"
+
+        const val JOB_ID = "jobId"
+
+        const val TITLE = "title"
+
     }
 }

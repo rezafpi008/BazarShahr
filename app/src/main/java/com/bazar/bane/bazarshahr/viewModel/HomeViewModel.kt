@@ -28,6 +28,9 @@ class HomeViewModel : ViewModel() {
             is HomeIntent.Home -> {
                 return HomeRepository.getHome(getPaginate())
             }
+            HomeIntent.Slider -> {
+                return HomeRepository.getSlider()
+            }
         }
     }
 
