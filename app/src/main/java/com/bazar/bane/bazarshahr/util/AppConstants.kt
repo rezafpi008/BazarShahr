@@ -17,5 +17,10 @@ open class AppConstants {
 
         const val TITLE = "title"
 
+        const val JOB_CATEGORY_STATE = "jobCategoryState"
+
+        const val JOB_STATE = "jobState"
+
+
     }
 }

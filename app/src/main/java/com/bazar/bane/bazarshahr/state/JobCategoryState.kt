@@ -1,6 +1,7 @@
 package com.bazar.bane.bazarshahr.state
 
 import com.bazar.bane.bazarshahr.api.response.JobCategoriesResponse
+import com.bazar.bane.bazarshahr.api.response.JobDetailsResponse
 import com.bazar.bane.bazarshahr.api.response.JobsResponse
 
 sealed class JobCategoryState {
@@ -12,7 +13,4 @@ sealed class JobCategoryState {
 
     data class ErrorGetJobs(val error: String?) : JobCategoryState()
 
-    data class GetJob(val response: JobsResponse) : JobCategoryState()
-
-    data class ErrorGetJob(val error: String?) : JobCategoryState()
 }

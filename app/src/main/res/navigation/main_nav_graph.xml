@@ -26,6 +26,9 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_categoryFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -63,5 +66,43 @@
     <fragment
         android:id="@+id/jobDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.JobDetailsFragment"
-        android:label="JobDetailsFragment" />
+        android:label="JobDetailsFragment" >
+        <argument android:name="jobId"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_jobDetailsFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.JobsFragment"
+        android:label="JobsFragment" >
+        <argument android:name="jobId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_jobsFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
 </navigation>

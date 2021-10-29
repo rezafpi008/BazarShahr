@@ -48,6 +48,8 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
         viewModel = JobCategoryViewModel()
         binding.jobcategoryViewModel = viewModel
         binding.lifecycleOwner = this
+        initialData()
+        subscribeObservers()
         setToolbar()
         return view
     }
@@ -89,7 +91,12 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
         jobAdapter.setItemOnClick(object : OnClickJob {
             override fun clickedProducts(job: Job, position: Int) {
-
+                val bundle = Bundle()
+                bundle.putString(JOB_ID, job.id)
+                findNavController().navigate(
+                    R.id.action_categoryFragment_to_jobDetailsFragment,
+                    bundle
+                )
             }
 
             override fun clickedInformation(job: Job, position: Int) {
@@ -128,7 +135,7 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
                 is JobCategoryState.ErrorGetJobs -> {
                     viewModel.setJobLoadingState(false)
-                    jobAdapter.setLoading(categoryAdapter.loadingFailState)
+                    jobAdapter.setLoading(jobAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
                 }
 

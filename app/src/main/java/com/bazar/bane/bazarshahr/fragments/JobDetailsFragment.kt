@@ -14,19 +14,19 @@ import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.databinding.FragmentJobDetailsBinding
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
-import com.bazar.bane.bazarshahr.state.JobCategoryState
+import com.bazar.bane.bazarshahr.state.JobState
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TITLE
 import com.bazar.bane.bazarshahr.util.ToastUtil
-import com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel
+import com.bazar.bane.bazarshahr.viewModel.JobViewModel
 import com.texonapp.oneringgit.adapter.GallerySliderAdapter
 
 class JobDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
-    lateinit var binding: FragmentJobDetailsBinding
-    lateinit var viewModel: JobCategoryViewModel
-    lateinit var auctionId: String
-    lateinit var title: String
+    private lateinit var binding: FragmentJobDetailsBinding
+    private lateinit var viewModel: JobViewModel
+    private lateinit var auctionId: String
+    private lateinit var title: String
     private lateinit var galleryAdapter: GallerySliderAdapter
     private var galleryItems: ArrayList<String> = ArrayList()
 
@@ -43,8 +43,8 @@ class JobDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_job_details, container, false)
         val view = binding.root
-        viewModel = JobCategoryViewModel()
-        binding.jobCategoryViewModel = viewModel
+        viewModel = JobViewModel()
+        binding.jobViewModel = viewModel
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
@@ -59,22 +59,27 @@ class JobDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     override fun initialData() {
         binding.showProduct.setOnClickListener {
-
+            val bundle = Bundle()
+            bundle.putString(JOB_ID, viewModel.job.value?.id)
+            findNavController().navigate(
+                R.id.action_categoryFragment_to_jobDetailsFragment,
+                bundle
+            )
         }
     }
 
     override fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
-                is JobCategoryState.GetJob -> {
+                is JobState.GetJobDetails -> {
                     viewModel.setMainLoadingState(false)
-                    //viewModel.setJob(dataState.response.jobs)
-                    //galleryItems.add(dataState.response.data.auction.product?.img!!)
-                    //galleryItems.addAll(dataState.response.data.auction.product.gallery)
+                    viewModel.setJob(dataState.response.job!!)
+                    galleryItems.add(dataState.response.job.img!!)
+                    galleryItems.addAll(dataState.response.job.gallery!!)
                     initGalleryView()
                 }
 
-                is JobCategoryState.ErrorGetJob -> {
+                is JobState.ErrorGetJob -> {
                     viewModel.setMainLoadingState(false)
                     ToastUtil.showToast(dataState.error)
                 }
@@ -85,7 +90,7 @@ class JobDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
     override fun setToolbar() {
         val toolbar: Toolbar = binding.toolbar as Toolbar
         toolbar.findViewById<TextView>(R.id.title_page).text = title
-        binding.toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
+        toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
         }
     }

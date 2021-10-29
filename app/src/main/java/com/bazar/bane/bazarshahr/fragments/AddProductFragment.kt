@@ -46,7 +46,7 @@ class AddProductFragment : Fragment(), ToolbarFunction {
     override fun setToolbar() {
         val toolbar: Toolbar = binding.toolbar as Toolbar
         toolbar.findViewById<TextView>(R.id.title_page).text = getString(R.string.add_product_title)
-        binding.toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
+        toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
         }
     }

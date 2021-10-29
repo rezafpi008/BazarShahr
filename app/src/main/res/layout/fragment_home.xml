@@ -51,6 +51,21 @@
                 app:sliderScrollTimeInSec="3"
                 app:sliderStartAutoCycle="true" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="@dimen/_5sdp"
+                android:text="@string/malls"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_12sdp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@color/colorPrimaryDark" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/job_recycler"
                 android:layout_width="match_parent"

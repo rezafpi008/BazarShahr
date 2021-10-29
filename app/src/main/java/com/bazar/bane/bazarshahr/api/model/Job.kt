@@ -20,7 +20,7 @@ class Job {
     val address: String? = null
 
     @SerializedName("gallery")
-    val gallery: String? = null
+    val gallery: ArrayList<String>? = null
 
     @SerializedName("phone_number")
     val phoneNumber: String? = null

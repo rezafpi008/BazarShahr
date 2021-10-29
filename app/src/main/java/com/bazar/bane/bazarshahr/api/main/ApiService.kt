@@ -3,43 +3,56 @@ package com.bazar.bane.bazarshahr.api.main
 import androidx.lifecycle.LiveData
 import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
 import com.bazar.bane.bazarshahr.api.request.JobRequest
+import com.bazar.bane.bazarshahr.api.request.ProductRequest
 import com.bazar.bane.bazarshahr.api.response.*
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 
 interface ApiService {
 
-    @GET("auctions/published")
+    @POST("api/slider/all/")
     fun getSlider(
     ): LiveData<GenericApiResponse<SliderResponse>>
 
-    @GET("auctions/published")
+    @POST("auctions/published")
     fun getHome(
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<HomeResponse>>
 
-    @GET("auctions/published")
+    @POST("auctions/published")
     fun search(
         @Query("searchQuery") searchQuery: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<SearchResponse>>
 
+    @POST("api/jobs/categories")
     fun getJobCategories(
         @Body requestBody: JobCategoryRequest?,
     ): LiveData<GenericApiResponse<JobCategoriesResponse>>
 
 
+    @POST("api/jobs/")
     fun getJobs(
         @Body requestBody: JobRequest?,
     ): LiveData<GenericApiResponse<JobsResponse>>
 
-    fun getJob(
+    @POST("api/job/")
+    fun getJobDetails(
         @Body requestBody: JobRequest?,
-    ): LiveData<GenericApiResponse<JobsResponse>>
+    ): LiveData<GenericApiResponse<JobDetailsResponse>>
 
+    @POST("auctions/published")
+    fun getProducts(
+        @Body requestBody: ProductRequest?,
+    ): LiveData<GenericApiResponse<ProductsResponse>>
+
+    @POST("auctions/published")
+    fun getProductDetails(
+        @Body requestBody: ProductRequest?,
+    ): LiveData<GenericApiResponse<ProductDetailsResponse>>
     /*@POST("auth")
     fun googleAccountRegister(
         @Body requestBody: SocialRegisterRequest?,

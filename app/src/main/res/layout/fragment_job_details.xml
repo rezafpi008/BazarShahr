@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="jobCategoryViewModel"
-            type="com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel" />
+            name="jobViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.JobViewModel" />
     </data>
 
     <RelativeLayout
@@ -59,7 +59,7 @@
                         android:id="@+id/title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@{jobCategoryViewModel.job.name}"
+                        android:text="@{jobViewModel.job.name}"
                         android:textColor="@color/colorBlack"
                         android:textSize="@dimen/_14sdp" />
 
@@ -78,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:text="@{jobCategoryViewModel.job.phoneNumber}"
+                            android:text="@{jobViewModel.job.phoneNumber}"
                             android:textColor="@color/colorGray"
                             android:textSize="@dimen/_14sdp" />
 
@@ -104,7 +104,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_5sdp"
-                            android:text="@{jobCategoryViewModel.job.address}"
+                            android:text="@{jobViewModel.job.address}"
                             android:textColor="@color/colorGray"
                             android:textSize="@dimen/_14sdp" />
 
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:paddingTop="@dimen/_56sdp"
-            android:visibility="@{jobCategoryViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+            android:visibility="@{jobViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
     </RelativeLayout>
 </layout>
