@@ -38,6 +38,8 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
     private lateinit var jobAdapter: JobAdapter
     private var jobItems: ArrayList<Any?> = ArrayList()
 
+    private lateinit var categoryId: String;
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,29 +53,34 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
         initialData()
         subscribeObservers()
         setToolbar()
+        viewModel.getCategories()
         return view
     }
 
     override fun initialData() {
+        categoryItems.clear()
         categoryRecyclerView = binding.categoryRecyclerView
         categoryRecyclerView.layoutManager = LinearLayoutManager(context)
-        val gridLayoutManager = GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, false)
+        val gridLayoutManager = GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, true)
         categoryRecyclerView.layoutManager = gridLayoutManager
         categoryAdapter =
             JobCategorySelectedAdapter(requireContext(), categoryItems, categoryRecyclerView)
         categoryRecyclerView.adapter = categoryAdapter
         categoryAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
             override fun onLoadMore() {
-                //viewModel.setStateEvent(ExploreIntent.ActiveAuction)
+                viewModel.getCategories()
             }
         })
         categoryAdapter.setItemOnClick(object : OnClickItem<JobCategory> {
             override fun clicked(item: JobCategory, position: Int) {
-
+                categoryId = item.id!!
+                setJobsLoading()
+                viewModel.getJobs(categoryId)
             }
         })
 
 
+        jobItems.clear()
         jobRecyclerView = binding.jobRecyclerView
         jobRecyclerView.layoutManager = LinearLayoutManager(context)
         val horizontalLayoutManager =
@@ -85,7 +92,7 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
         jobAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
             override fun onLoadMore() {
-                //viewModel.setStateEvent(ExploreIntent.ActiveAuction)
+                viewModel.getJobs(categoryId)
             }
         })
 
@@ -93,8 +100,9 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
             override fun clickedProducts(job: Job, position: Int) {
                 val bundle = Bundle()
                 bundle.putString(JOB_ID, job.id)
+                bundle.putString(TITLE, job.name)
                 findNavController().navigate(
-                    R.id.action_categoryFragment_to_jobDetailsFragment,
+                    R.id.action_categoryFragment_to_productsFragment,
                     bundle
                 )
             }
@@ -129,8 +137,11 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     viewModel.setJobLoadingState(false)
                     jobItems.addAll(dataState.response.jobs!!)
                     jobAdapter.setLoading(jobAdapter.loadingSuccessState)
-                    if (jobAdapter.itemCount == 0)
+                    if (jobAdapter.itemCount == 0){
+                        viewModel.setMessage(getString(R.string.no_job_to_show))
                         viewModel.setMessageVisibilityState(true)
+                    }
+
                 }
 
                 is JobCategoryState.ErrorGetJobs -> {
@@ -149,8 +160,9 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
             getString(R.string.category_page_title)
     }
 
-    private fun setCategoryLoading(){
+    private fun setJobsLoading() {
         jobItems.clear()
+        viewModel.resetJobsPaginate()
         viewModel.setMessageVisibilityState(false)
         viewModel.setJobLoadingState(true)
     }

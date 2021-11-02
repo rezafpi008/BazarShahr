@@ -13,6 +13,7 @@ import com.bazar.bane.bazarshahr.adapter.OnClickItem
 import com.bazar.bane.bazarshahr.adapter.SliderAdapter
 import com.bazar.bane.bazarshahr.api.model.Slider
 import com.bazar.bane.bazarshahr.databinding.FragmentHomeBinding
+import com.bazar.bane.bazarshahr.intent.HomeIntent
 import com.bazar.bane.bazarshahr.state.HomeState
 import com.bazar.bane.bazarshahr.viewModel.HomeViewModel
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
@@ -39,6 +40,7 @@ class HomeFragment : Fragment(), FragmentFunction, ToolbarFunction {
         initialData()
         subscribeObservers()
         setToolbar()
+        viewModel.setStateEvent(HomeIntent.Slider)
         return view
     }
 

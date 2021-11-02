@@ -1,12 +1,9 @@
 package com.bazar.bane.bazarshahr.api.main
 
 import androidx.lifecycle.LiveData
-import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
-import com.bazar.bane.bazarshahr.api.request.JobRequest
-import com.bazar.bane.bazarshahr.api.request.ProductRequest
+import com.bazar.bane.bazarshahr.api.request.*
 import com.bazar.bane.bazarshahr.api.response.*
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
@@ -22,13 +19,13 @@ interface ApiService {
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<HomeResponse>>
 
-    @POST("auctions/published")
+    @POST("api/search/")
     fun search(
         @Query("searchQuery") searchQuery: String,
         @Query("page") page: Int
     ): LiveData<GenericApiResponse<SearchResponse>>
 
-    @POST("api/jobs/categories")
+    @POST("api/jobs/categories/")
     fun getJobCategories(
         @Body requestBody: JobCategoryRequest?,
     ): LiveData<GenericApiResponse<JobCategoriesResponse>>
@@ -36,22 +33,22 @@ interface ApiService {
 
     @POST("api/jobs/")
     fun getJobs(
-        @Body requestBody: JobRequest?,
+        @Body requestBody: JobsRequest?,
     ): LiveData<GenericApiResponse<JobsResponse>>
 
     @POST("api/job/")
     fun getJobDetails(
-        @Body requestBody: JobRequest?,
+        @Body requestBody: JobDetailsRequest?,
     ): LiveData<GenericApiResponse<JobDetailsResponse>>
 
-    @POST("auctions/published")
+    @POST("/api/products/")
     fun getProducts(
-        @Body requestBody: ProductRequest?,
+        @Body requestBody: ProductsRequest?,
     ): LiveData<GenericApiResponse<ProductsResponse>>
 
-    @POST("auctions/published")
+    @POST("/api/product/")
     fun getProductDetails(
-        @Body requestBody: ProductRequest?,
+        @Body requestBody: ProductDetailsRequest?,
     ): LiveData<GenericApiResponse<ProductDetailsResponse>>
     /*@POST("auth")
     fun googleAccountRegister(

@@ -69,6 +69,8 @@
         android:label="JobDetailsFragment" >
         <argument android:name="jobId"
             android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
         <action
             android:id="@+id/action_jobDetailsFragment_to_productsFragment"
             app:destination="@id/productsFragment"
@@ -81,7 +83,19 @@
         android:id="@+id/productsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products" >
+        <argument android:name="productId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_productsFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/jobsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.JobsFragment"
@@ -105,4 +119,8 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
+    <fragment
+        android:id="@+id/productDetailsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.ProductDetailsFragment"
+        android:label="ProductDetailsFragment" />
 </navigation>

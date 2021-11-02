@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bazar.bane.bazarshahr.api.model.Product
+import com.bazar.bane.bazarshahr.api.request.ProductsRequest
 import com.bazar.bane.bazarshahr.intent.ProductIntent
 import com.bazar.bane.bazarshahr.repository.ProductRepository
 import com.bazar.bane.bazarshahr.state.ProductState
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PER_PAGE_ITEM
 
 class ProductViewModel : ViewModel() {
-    private var page = 0;
+    private var page = -1;
     private val _stateIntent: MutableLiveData<ProductIntent> = MutableLiveData()
 
     private val _product: MutableLiveData<Product> = MutableLiveData()
@@ -45,7 +47,7 @@ class ProductViewModel : ViewModel() {
         _mainLoadingState.value = state
     }
 
-    fun setJob(state: Product) {
+    fun setProduct(state: Product) {
         _product.value = state
     }
 
@@ -60,5 +62,18 @@ class ProductViewModel : ViewModel() {
     private fun getPaginate(): Int {
         page += 1
         return page
+    }
+
+    fun getProducts(jobId: String) {
+        setStateEvent(
+            ProductIntent.Products(
+                ProductsRequest(
+                    PER_PAGE_ITEM,
+                    null,
+                    getPaginate(),
+                    jobId
+                )
+            )
+        )
     }
 }

@@ -23,7 +23,7 @@ class JobCategoryRequest(perPage: Int, offset: Int, isPublishing: Boolean) {
 
         init {
             this.perPage = perPage
-            this.offset = offset
+            this.offset = offset * perPage
             this.isPublishing = isPublishing
         }
 

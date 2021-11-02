@@ -4,36 +4,35 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
-import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_ITEM
-import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_ITEM_SELECTED
-import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_LOADING
-import com.bazar.bane.bazarshahr.api.model.JobCategory
+import com.bazar.bane.bazarshahr.api.model.Product
 import com.bumptech.glide.Glide
 
-class JobCategorySelectedAdapter constructor(
+class ProductAdapter constructor(
     context: Context,
     itemsList: ArrayList<Any?>,
     recyclerView: RecyclerView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    companion object {
+        private const val VIEW_TYPE_ITEM = 0
+        private const val VIEW_TYPE_LOADING = 1
+    }
 
     var context: Context? = null
-    private var itemsList: ArrayList<Any?> = ArrayList()
+    var itemsList: ArrayList<Any?> = ArrayList()
     var recyclerView: RecyclerView? = null
     private var mOnLoadMoreListener: OnLoadMoreListener? = null
-    private var onClickItem: OnClickItem<JobCategory>? = null
+    private var onClickItem: OnClickItem<Product>? = null
     private var loadMore = true
     private val visibleThreshold = 1
     private var lastVisibleItem = 0
     private var totalItemCount: Int = 0
     private var loadingPosition: Int = 0
     private var itemToLoad: Int = 10
-    private var selectedItem = -1
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
@@ -65,52 +64,41 @@ class JobCategorySelectedAdapter constructor(
         this.mOnLoadMoreListener = mOnLoadMoreListener
     }
 
-    fun setItemOnClick(onClickItem: OnClickItem<JobCategory>) {
+    fun setItemOnClick(onClickItem: OnClickItem<Product>) {
         this.onClickItem = onClickItem
     }
 
 
     override fun getItemViewType(position: Int): Int {
-        return when {
-            itemsList[position] == null -> VIEW_TYPE_LOADING
-            else -> {
-                if (selectedItem == position)
-                    VIEW_TYPE_ITEM_SELECTED
-                else
-                    VIEW_TYPE_ITEM
-            }
-        }
+        return if (itemsList[position] == null) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            VIEW_TYPE_ITEM -> {
-                val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_category, parent, false)
-                LostAuctionViewHolder(view)
-            }
-            VIEW_TYPE_ITEM_SELECTED -> {
-                val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_category_selected, parent, false)
-                LostAuctionViewHolder(view)
-            }
-            else -> {
-                val view: View = LayoutInflater.from(context)
-                    .inflate(R.layout.item_loading_horizental, parent, false)
-                LoadingViewHolder(view)
-            }
+        return if (viewType == VIEW_TYPE_ITEM) {
+            val view: View =
+                LayoutInflater.from(context).inflate(R.layout.item_product, parent, false)
+            ProductViewHolder(view)
+        } else {
+            val view: View = LayoutInflater.from(context)
+                .inflate(R.layout.item_loading_vertical, parent, false)
+            LoadingViewHolder(view)
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is LostAuctionViewHolder) {
-            val item: JobCategory = itemsList[position] as JobCategory
+        if (holder is ProductViewHolder) {
+            val item: Product = itemsList[position] as Product
             holder.title.text = item.name
+            Glide.with(context!!)
+                .load(item.img!!)
+                .placeholder(R.drawable.image_default)
+                .error(R.drawable.image_default)
+                .into(holder.img)
 
             holder.itemView.setOnClickListener {
-                selectCategory(position)
                 onClickItem?.clicked(item, position)
             }
+
         } else if (holder is LoadingViewHolder) {
             holder.progressBar.isIndeterminate = true
         }
@@ -145,15 +133,16 @@ class JobCategorySelectedAdapter constructor(
         notifyDataSetChanged()
     }
 
-    fun selectCategory(position: Int) {
-        selectedItem = position
+    fun removeItem(position: Int) {
+        itemsList.removeAt(position)
         notifyDataSetChanged()
     }
 
-    class LostAuctionViewHolder(itemView: View) :
+    class ProductViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
+        var img: AppCompatImageView =
+            itemView.findViewById<View>(R.id.image) as AppCompatImageView
         var title: TextView = itemView.findViewById<View>(R.id.title) as TextView
-
     }
 
 }

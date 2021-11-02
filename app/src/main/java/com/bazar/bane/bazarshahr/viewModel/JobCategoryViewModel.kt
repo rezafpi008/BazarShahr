@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.bazar.bane.bazarshahr.api.model.Job
+import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
+import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.intent.JobCategoryIntent
 import com.bazar.bane.bazarshahr.repository.JobCategoryRepository
 import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.state.JobCategoryState
+import com.bazar.bane.bazarshahr.util.AppConstants
 
 class JobCategoryViewModel : ViewModel() {
-    private var page = 0;
+    private var categoriesPage = -1
+    private var jobsPage = -1
     private val _stateIntent: MutableLiveData<JobCategoryIntent> = MutableLiveData()
 
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -66,8 +69,42 @@ class JobCategoryViewModel : ViewModel() {
         _stateIntent.value = intent
     }
 
-    private fun getPaginate(): Int {
-        page += 1
-        return page
+    private fun getCategoriesPaginate(): Int {
+        categoriesPage += 1
+        return categoriesPage
+    }
+
+    private fun getJobsPaginate(): Int {
+        jobsPage += 1
+        return jobsPage
+    }
+
+    fun resetJobsPaginate() {
+        jobsPage = -1
+    }
+
+    fun getCategories() {
+        setStateEvent(
+            JobCategoryIntent.Categories(
+                JobCategoryRequest(
+                    AppConstants.PER_PAGE_ITEM,
+                    getCategoriesPaginate(),
+                    true
+                )
+            )
+        )
+    }
+
+    fun getJobs(categoryId: String) {
+        setStateEvent(
+            JobCategoryIntent.Jobs(
+                JobsRequest(
+                    AppConstants.PER_PAGE_ITEM,
+                    categoryId,
+                    getJobsPaginate(),
+                    null
+                )
+            )
+        )
     }
 }

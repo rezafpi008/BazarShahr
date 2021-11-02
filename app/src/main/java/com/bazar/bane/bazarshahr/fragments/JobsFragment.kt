@@ -72,7 +72,7 @@ class JobsFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 val bundle = Bundle()
                 bundle.putString(AppConstants.JOB_ID, job.id)
                 findNavController().navigate(
-                    R.id.action_jobsFragment_to_jobDetailsFragment,
+                    R.id.action_jobsFragment_to_productsFragment,
                     bundle
                 )
             }

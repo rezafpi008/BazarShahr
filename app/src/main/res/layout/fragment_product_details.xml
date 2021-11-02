@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="jobViewModel"
-            type="com.bazar.bane.bazarshahr.viewModel.JobViewModel" />
+            name="productViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.ProductViewModel" />
     </data>
 
     <LinearLayout
@@ -28,7 +28,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{jobViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
+                android:visibility="@{productViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/_10sdp"
-                                android:text="@{jobViewModel.job.name}"
+                                android:text="@{productViewModel.product.name}"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/_14sdp" />
 
@@ -89,7 +89,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="@{jobViewModel.job.phoneNumber}"
+
                                     android:textColor="@color/colorGray"
                                     android:textSize="@dimen/_14sdp" />
 
@@ -126,7 +126,6 @@
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="@{jobViewModel.job.address}"
                                     android:textColor="@color/colorGray"
                                     android:textSize="@dimen/_14sdp" />
 
@@ -155,17 +154,6 @@
 
                     </androidx.cardview.widget.CardView>
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/show_product"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:background="@drawable/bg_round_stroke_primary_dark"
-                        android:gravity="center"
-                        android:text="@string/show_products"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorPrimaryDark" />
-
                 </LinearLayout>
             </ScrollView>
 
@@ -173,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:visibility="@{jobViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+                android:visibility="@{productViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
         </RelativeLayout>
 

@@ -6,12 +6,13 @@ import com.bazar.bane.bazarshahr.api.main.ApiSuccessResponse
 import com.bazar.bane.bazarshahr.api.main.GenericApiResponse
 import com.bazar.bane.bazarshahr.api.main.MyRetrofitBuilder
 import com.bazar.bane.bazarshahr.api.main.NetworkBoundResource
-import com.bazar.bane.bazarshahr.api.request.ProductRequest
+import com.bazar.bane.bazarshahr.api.request.ProductDetailsRequest
+import com.bazar.bane.bazarshahr.api.request.ProductsRequest
 import com.bazar.bane.bazarshahr.api.response.*
 import com.bazar.bane.bazarshahr.state.ProductState
 
 object ProductRepository {
-    fun getProducts(request: ProductRequest): LiveData<ProductState> {
+    fun getProducts(request: ProductsRequest): LiveData<ProductState> {
         return object : NetworkBoundResource<ProductsResponse, ProductState>() {
 
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<ProductsResponse>) {
@@ -30,7 +31,7 @@ object ProductRepository {
         }.asLiveData()
     }
 
-    fun getProductDetails(request: ProductRequest): LiveData<ProductState> {
+    fun getProductDetails(request: ProductDetailsRequest): LiveData<ProductState> {
         return object : NetworkBoundResource<ProductDetailsResponse, ProductState>() {
 
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<ProductDetailsResponse>) {

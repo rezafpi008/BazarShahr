@@ -136,6 +136,7 @@ class JobAdapter constructor(
                     itemsList.removeAt(itemsList.size - 1)
             }
         }
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int) {

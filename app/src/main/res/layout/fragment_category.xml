@@ -100,9 +100,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="@string/nothing_to_see"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="@dimen/_16sdp"
+                            android:text="@string/please_select_category"
+                            android:textColor="@color/colorGray"
+                            android:textSize="@dimen/_14sdp"
                             android:textStyle="bold" />
 
                         <TextView

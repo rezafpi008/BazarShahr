@@ -2,15 +2,15 @@ package com.bazar.bane.bazarshahr.api.request
 
 import com.google.gson.annotations.SerializedName
 
-class ProductRequest(perPage: Int, category: String, offset: Int, mallId: String) {
+class JobsRequest(perPage: Int, category: String?, offset: Int, mallId: String?) {
     @SerializedName("data")
-    var data: ProductData? = null
+    var data: JobData? = null
 
     init {
-        data = ProductData(perPage, category, offset, mallId)
+        data = JobData(perPage, category, offset, mallId)
     }
 
-    class ProductData(perPage: Int, category: String, offset: Int, mallId: String) {
+    class JobData(perPage: Int, category: String?, offset: Int, mallId: String?) {
         @SerializedName("per_page")
         var perPage: Int? = null
 
@@ -26,7 +26,7 @@ class ProductRequest(perPage: Int, category: String, offset: Int, mallId: String
         init {
             this.perPage = perPage
             this.category = category
-            this.offset = offset
+            this.offset = offset * perPage
             this.mallId = mallId
         }
 

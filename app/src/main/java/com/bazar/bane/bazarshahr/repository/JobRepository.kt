@@ -6,7 +6,8 @@ import com.bazar.bane.bazarshahr.api.main.ApiSuccessResponse
 import com.bazar.bane.bazarshahr.api.main.GenericApiResponse
 import com.bazar.bane.bazarshahr.api.main.MyRetrofitBuilder
 import com.bazar.bane.bazarshahr.api.main.NetworkBoundResource
-import com.bazar.bane.bazarshahr.api.request.JobRequest
+import com.bazar.bane.bazarshahr.api.request.JobDetailsRequest
+import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.api.response.*
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 import com.bazar.bane.bazarshahr.state.JobState
@@ -14,15 +15,15 @@ import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_CATEGORY_STATE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_STATE
 
 object JobRepository {
-    fun getJobsCategoryState(request: JobRequest): LiveData<JobCategoryState> {
+    fun getJobsCategoryState(request: JobsRequest): LiveData<JobCategoryState> {
         return getJobs(request, JOB_CATEGORY_STATE) as LiveData<JobCategoryState>
     }
 
-    fun getJobsJobState(request: JobRequest): LiveData<JobState> {
+    fun getJobsJobState(request: JobsRequest): LiveData<JobState> {
         return getJobs(request, JOB_STATE) as LiveData<JobState>
     }
 
-    fun getJobs(request: JobRequest, state: String): LiveData<Any> {
+    fun getJobs(request: JobsRequest, state: String): LiveData<Any> {
         return object : NetworkBoundResource<JobsResponse, Any>() {
 
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<JobsResponse>) {
@@ -57,7 +58,7 @@ object JobRepository {
         }.asLiveData()
     }
 
-    fun getJobDetails(request: JobRequest): LiveData<JobState> {
+    fun getJobDetails(request: JobDetailsRequest): LiveData<JobState> {
         return object : NetworkBoundResource<JobDetailsResponse, JobState>() {
 
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<JobDetailsResponse>) {

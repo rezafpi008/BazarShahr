@@ -7,7 +7,6 @@ import com.bazar.bane.bazarshahr.api.main.GenericApiResponse
 import com.bazar.bane.bazarshahr.api.main.MyRetrofitBuilder
 import com.bazar.bane.bazarshahr.api.main.NetworkBoundResource
 import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
-import com.bazar.bane.bazarshahr.api.request.JobRequest
 import com.bazar.bane.bazarshahr.api.response.*
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 

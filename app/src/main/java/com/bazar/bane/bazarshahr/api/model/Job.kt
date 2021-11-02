@@ -7,7 +7,7 @@ class Job {
     @SerializedName("id")
     val id: String? = null
 
-    @SerializedName("name")
+    @SerializedName("title")
     val name: String? = null
 
     @SerializedName("type")

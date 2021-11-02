@@ -2,20 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/tools">
-    <data>
+    <!--<data>
 
         <import type="android.view.View" />
 
         <variable
             name="auctionViewModel"
             type="com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel" />
-    </data>
+    </data>-->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
-        <include
+        <!--<include
             android:id="@+id/toolbar"
             layout="@layout/toolbar_main" />
 
@@ -91,7 +91,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>-->
 
 
     </RelativeLayout>
