@@ -9,7 +9,26 @@
         android:id="@+id/homeFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <argument android:name="mallId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_homeFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_homeFragment_to_mallDetailsFragment"
+            app:destination="@id/mallDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.CategoryFragment"
@@ -28,13 +47,63 @@
             app:popExitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_categoryFragment_to_productsFragment"
-            app:destination="@id/productsFragment" />
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <argument android:name="productId"
+            android:defaultValue="None"/>
+        <argument android:name="categoryId"
+            android:defaultValue="None"/>
+        <argument android:name="jobId"
+            android:defaultValue="None"/>
+        <argument android:name="mallId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_searchFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_searchFragment_to_mallDetailsFragment"
+            app:destination="@id/mallDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/myStoreFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.MyStoreFragment"
@@ -123,4 +192,20 @@
         android:id="@+id/productDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.ProductDetailsFragment"
         android:label="ProductDetailsFragment" />
+    <fragment
+        android:id="@+id/mallDetailsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.MallDetailsFragment"
+        android:label="MallDetailsFragment" >
+        <argument android:name="mallId"
+            android:defaultValue="None"/>
+        <argument android:name="title"
+            android:defaultValue="None"/>
+        <action
+            android:id="@+id/action_mallDetailsFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
 </navigation>

@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="productViewModel"
-            type="com.bazar.bane.bazarshahr.viewModel.ProductViewModel" />
+            name="mallViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.MallViewModel" />
     </data>
 
     <LinearLayout
@@ -28,7 +28,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{productViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
+                android:visibility="@{mallViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -36,23 +36,13 @@
                     android:orientation="vertical">
 
 
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/gallery_view"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/mall_image"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
                         android:scaleType="fitXY"
-                        android:visibility="visible"
-                        app:sliderAnimationDuration="600"
-                        app:sliderAutoCycleDirection="back_and_forth"
-                        app:sliderIndicatorAnimationDuration="600"
-                        app:sliderIndicatorEnabled="true"
-                        app:sliderIndicatorGravity="center_horizontal|bottom"
-                        app:sliderIndicatorMargin="@dimen/_15sdp"
-                        app:sliderIndicatorOrientation="horizontal"
-                        app:sliderIndicatorSelectedColor="@color/colorPrimaryDark"
-                        app:sliderIndicatorUnselectedColor="@color/colorPrimary"
-                        app:sliderScrollTimeInSec="3"
-                        app:sliderStartAutoCycle="true" />
+                        app:srcCompat="@drawable/image_default" />
+
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -70,40 +60,45 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/_10sdp"
-                                android:text="@{productViewModel.product.name}"
+                                android:text="@{mallViewModel.mall.name}"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="@dimen/_14sdp" />
 
 
+
+
                             <LinearLayout
                                 android:layout_marginBottom="@dimen/_10sdp"
-                                android:id="@+id/price_section"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
 
                                 <TextView
                                     android:layout_margin="@dimen/_10sdp"
-                                    android:id="@+id/price"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:text="@{productViewModel.product.content}"
                                     android:layout_weight="1"
-                                    android:gravity="center"
+                                    android:text="@{mallViewModel.mall.details.address}"
                                     android:textColor="@color/colorGray"
                                     android:textSize="@dimen/_14sdp" />
 
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/address"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="@dimen/_14sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imageView2"
+                                    android:id="@+id/imageView3"
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    android:tint="@color/colorPrimaryDark"
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:layout_marginEnd="@dimen/_10sdp"
                                     android:layout_marginStart="@dimen/_5sdp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_phone_number" />
-
+                                    app:srcCompat="@drawable/ic_location" />
 
                             </LinearLayout>
 
@@ -112,6 +107,17 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/show_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/bg_round_stroke_primary_dark"
+                        android:gravity="center"
+                        android:text="@string/show_jobs"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDark" />
+
                 </LinearLayout>
             </ScrollView>
 
@@ -119,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:visibility="@{productViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+                android:visibility="@{mallViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
         </RelativeLayout>
 

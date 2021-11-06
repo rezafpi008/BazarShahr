@@ -45,23 +45,24 @@
                         android:padding="@dimen/_5sdp"
                         android:paddingEnd="@dimen/_5sdp">
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_gravity="center_horizontal|center_vertical"
-                            app:srcCompat="@drawable/ic_add"
-                            app:tint="@color/colorGray" />
 
                         <EditText
-                            android:id="@+id/link"
+                            android:id="@+id/title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:ems="10"
-                            android:hint="paste_social_link"
+                            android:hint="@string/job_name"
                             android:inputType="textPersonName"
                             android:textColorHint="@color/colorGray"
                             android:textSize="@dimen/_10sdp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            app:srcCompat="@drawable/ic_product"
+                            app:tint="@color/colorPrimaryDark" />
 
                     </LinearLayout>
 
@@ -81,23 +82,13 @@
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp">
 
-                        <TextView
-                            android:id="@+id/details_title"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
-                            android:gravity="center"
-                            android:text="@string/title"
-                            android:textColor="@color/colorBlack"
-                            android:textStyle="bold" />
-
                         <RelativeLayout
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:id="@+id/add_image"
                             android:layout_width="@dimen/_110sdp"
                             android:layout_height="@dimen/_110sdp"
                             android:layout_gravity="center"
-                            android:background="@drawable/bg_round_stroke_gray"
+                            android:background="@drawable/bg_round_stroke_primary_dark"
                             android:layout_marginBottom="@dimen/_10sdp"
                             app:cardCornerRadius="@dimen/_12sdp"
                             app:cardElevation="0dp">
@@ -116,25 +107,18 @@
                                     android:padding="@dimen/_5sdp"
                                     android:layout_gravity="center"
                                     android:scaleType="centerCrop"
-                                    android:tint="@color/colorGray"
+                                    android:tint="@color/colorPrimary"
                                     app:srcCompat="@drawable/ic_add_static" />
 
                                 <TextView
                                     android:id="@+id/text_take_photo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="ad_preview"
-                                    android:textColor="@color/colorGray" />
+                                    android:text="@string/choice_image"
+                                    android:textColor="@color/colorPrimary" />
 
                             </LinearLayout>
                         </RelativeLayout>
-
-                        <TextView
-                            android:id="@+id/recommended_img_size"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/title"
-                            android:textColor="@color/colorGray" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/gallery_recycler"
@@ -147,16 +131,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="ad_title"
-                            android:textColor="@color/colorGray" />
+                            android:text="@string/details"
+                            android:textColor="@color/colorPrimaryDark" />
 
                         <EditText
-                            android:id="@+id/title"
+                            android:id="@+id/details"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:ems="10"
-                            android:hint="create_a_title_for_your_ad"
+                            android:hint="@string/enter_details"
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
@@ -165,15 +149,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="ad_title"
-                            android:textColor="@color/colorGray" />
+                            android:text="@string/phone_number"
+                            android:textColor="@color/colorPrimaryDark" />
 
                         <EditText
+                            android:id="@+id/phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:ems="10"
-                            android:hint="create_a_title_for_your_ad"
+                            android:hint="@string/enter_phone_number"
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
@@ -182,15 +167,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
-                            android:text="ad_title"
-                            android:textColor="@color/colorGray" />
+                            android:text="@string/address"
+                            android:textColor="@color/colorPrimaryDark" />
 
                         <EditText
+                            android:id="@+id/address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:ems="10"
-                            android:hint="create_a_title_for_your_ad"
+                            android:hint="@string/enter_address"
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
@@ -200,7 +186,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
@@ -217,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_round_primary"
                         android:gravity="center"
-                        android:text="submit"
+                        android:text="@string/submit"
                         android:textAllCaps="false"
                         android:textColor="@color/colorWhite" />
 

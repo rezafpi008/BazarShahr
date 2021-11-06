@@ -62,9 +62,11 @@ class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
+        items.clear()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val gridLayoutManager = GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, true)
+        val gridLayoutManager =
+            GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = gridLayoutManager
         adapter =
             ProductAdapter(requireContext(), items, recyclerView)

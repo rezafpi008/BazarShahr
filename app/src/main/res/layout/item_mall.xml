@@ -30,15 +30,14 @@
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:gravity="end"
+                    android:layout_gravity="end"
                     android:text="@string/title"
                     android:textColor="@color/colorBlack"
                     android:textSize="@dimen/_15sdp"
-
                     card_view:ignore="NestedWeights" />
 
                 <LinearLayout
@@ -49,17 +48,17 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/products_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_round_primary"
-                        android:text="@string/products"
+                        android:text="@string/jobs"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/information_btn"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_round_stroke_primary_dark"

@@ -21,7 +21,7 @@ class ProductViewModel : ViewModel() {
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
-    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState
 
     var dataState: LiveData<ProductState> = Transformations

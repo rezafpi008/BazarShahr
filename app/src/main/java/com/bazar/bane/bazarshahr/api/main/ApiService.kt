@@ -21,13 +21,12 @@ interface ApiService {
 
     @POST("api/search/")
     fun search(
-        @Query("searchQuery") searchQuery: String,
-        @Query("page") page: Int
+        @Body requestBody: SearchRequest?
     ): LiveData<GenericApiResponse<SearchResponse>>
 
     @POST("api/jobs/categories/")
     fun getJobCategories(
-        @Body requestBody: JobCategoryRequest?,
+        @Body requestBody: JobCategoryRequest?
     ): LiveData<GenericApiResponse<JobCategoriesResponse>>
 
 
@@ -50,6 +49,27 @@ interface ApiService {
     fun getProductDetails(
         @Body requestBody: ProductDetailsRequest?,
     ): LiveData<GenericApiResponse<ProductDetailsResponse>>
+
+    @POST("api/malls/")
+    fun getMalls(
+        @Body requestBody: MallsRequest?,
+    ): LiveData<GenericApiResponse<MallsResponse>>
+
+    @POST("api/mall/")
+    fun getMallDetails(
+        @Body requestBody: MallDetailsRequest?,
+    ): LiveData<GenericApiResponse<MallDetailsResponse>>
+
+    @POST("api/mall/")
+    fun createJob(
+        @Body requestBody: CreateJobRequest?,
+    ): LiveData<GenericApiResponse<CreateJobResponse>>
+
+    @POST("api/mall/")
+    fun createProduct(
+        @Body requestBody: CreateProductRequest?,
+    ): LiveData<GenericApiResponse<CreateProductResponse>>
+
     /*@POST("auth")
     fun googleAccountRegister(
         @Body requestBody: SocialRegisterRequest?,

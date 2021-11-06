@@ -13,4 +13,7 @@ class JobCategory {
     @SerializedName("thumbnail")
     val img: String? = null
 
+    @SerializedName("title")
+    val title: String? = null
+
 }

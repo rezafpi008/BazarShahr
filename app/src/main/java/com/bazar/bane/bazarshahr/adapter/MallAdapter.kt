@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.api.model.Job
+import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bumptech.glide.Glide
 
 class MallAdapter constructor(
@@ -20,6 +21,7 @@ class MallAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_ITEM = 0
+        private const val VIEW_TYPE_ITEM_VERTICAL = 2
         private const val VIEW_TYPE_LOADING = 1
     }
 
@@ -37,6 +39,7 @@ class MallAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
+    var verticalItem = false
 
     init {
         this.context = context
@@ -71,30 +74,45 @@ class MallAdapter constructor(
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (itemsList[position] == null) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
+        return when {
+            itemsList[position] == null -> VIEW_TYPE_LOADING
+            verticalItem -> {
+                VIEW_TYPE_ITEM_VERTICAL
+            }
+            else -> VIEW_TYPE_ITEM
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == VIEW_TYPE_ITEM) {
-            val view: View =
-                LayoutInflater.from(context).inflate(R.layout.item_mall, parent, false)
-            MallViewHolder(view)
-        } else {
-            val view: View = LayoutInflater.from(context)
-                .inflate(R.layout.item_loading_vertical, parent, false)
-            LoadingViewHolder(view)
+        return when (viewType) {
+            VIEW_TYPE_ITEM -> {
+                val view: View =
+                    LayoutInflater.from(context).inflate(R.layout.item_mall, parent, false)
+                MallViewHolder(view)
+            }
+            VIEW_TYPE_ITEM_VERTICAL -> {
+                val view: View =
+                    LayoutInflater.from(context).inflate(R.layout.item_mall_vertical, parent, false)
+                MallViewHolder(view)
+            }
+            else -> {
+                val view: View = LayoutInflater.from(context)
+                    .inflate(R.layout.item_loading_vertical, parent, false)
+                LoadingViewHolder(view)
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MallViewHolder) {
-            val item: Job = itemsList[position] as Job
+            val item: Mall = itemsList[position] as Mall
             holder.title.text = item.name
-            Glide.with(context!!)
-                .load(item.img!!)
-                .placeholder(R.drawable.image_default)
-                .error(R.drawable.image_default)
-                .into(holder.jobImg)
+            if (item.img != null)
+                Glide.with(context!!)
+                    .load(item.img)
+                    .placeholder(R.drawable.image_default)
+                    .error(R.drawable.image_default)
+                    .into(holder.jobImg)
 
             holder.information.setOnClickListener {
                 onClickItem?.clickedInformation(item, position)
@@ -135,6 +153,7 @@ class MallAdapter constructor(
                     itemsList.removeAt(itemsList.size - 1)
             }
         }
+        notifyDataSetChanged()
     }
 
     fun removeItem(position: Int) {

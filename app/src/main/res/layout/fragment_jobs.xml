@@ -19,11 +19,22 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_main" />
+            layout="@layout/toolbar_with_back" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/no_job_to_show"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"
+                android:visibility="@{jobViewModel.messageVisibilityState?View.VISIBLE:View.GONE}"/>
 
             <ProgressBar
                 android:layout_width="wrap_content"

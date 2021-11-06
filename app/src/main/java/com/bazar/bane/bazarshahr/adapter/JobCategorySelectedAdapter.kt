@@ -91,7 +91,8 @@ class JobCategorySelectedAdapter constructor(
             }
             VIEW_TYPE_ITEM_SELECTED -> {
                 val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_category_selected, parent, false)
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.item_category_selected, parent, false)
                 LostAuctionViewHolder(view)
             }
             else -> {
@@ -106,6 +107,8 @@ class JobCategorySelectedAdapter constructor(
         if (holder is LostAuctionViewHolder) {
             val item: JobCategory = itemsList[position] as JobCategory
             holder.title.text = item.name
+            if (item.name == null)
+                holder.title.text = item.title
 
             holder.itemView.setOnClickListener {
                 selectCategory(position)

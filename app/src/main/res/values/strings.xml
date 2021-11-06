@@ -1,39 +1,52 @@
 <resources>
-    <string name="app_name">Bazar Shahr</string>
-    <string name="gallery">gallery</string>
-    <string name="camera">camera</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">home</string>
-    <string name="category">category</string>
-    <string name="search">search</string>
-    <string name="my_store">myStore</string>
+    <string name="app_name">بازارشهر</string>
+    <string name="gallery">گالری</string>
+    <string name="camera">دوربین</string>
+    <string name="home">خانه</string>
+    <string name="category">دسته‌بندی‌ها</string>
+    <string name="search">جستجو</string>
+    <string name="my_store">فروشگاه من</string>
     <string name="title">title</string>
 
-    <string name="home_page_title">home</string>
-    <string name="category_page_title">category</string>
-    <string name="my_store_page_title">my store</string>
-    <string name="jobs_page_title">Jobs</string>
+    <string name="home_page_title">خانه</string>
+    <string name="category_page_title">دسته‌بندی</string>
+    <string name="my_store_page_title">فروشگاه من</string>
+    <string name="jobs_page_title">فروشگاه‌ها</string>
 
     <string name="search_title">جستجو کنید</string>
     <string name="search_hint">فروشگاه ستاره</string>
-    <string name="submit_store">submit store</string>
-    <string name="submit_product">submit product</string>
+    <string name="submit_store">ثبت فروشگاه</string>
+    <string name="submit_product">ثبت محصول</string>
 
-    <string name="add_product_title">Add product</string>
-    <string name="add_store_title">Add store</string>
-    <string name="categories">categories</string>
-    <string name="jobs">Jobs</string>
-    <string name="information">Information</string>
-    <string name="products">products</string>
-    <string name="select_category">select category</string>
+    <string name="add_product_title">ثبت محصول</string>
+    <string name="add_store_title">ثبت فروشگاه</string>
+    <string name="categories">دسته‌بندی‌ها</string>
+    <string name="jobs">فروشگاه‌ها</string>
+    <string name="information">اطلاعات</string>
+    <string name="products">محصولات</string>
     <string name="nothing_to_see">nothing_to_see</string>
     <string name="phone_number">شماره تلفن:  </string>
     <string name="address">آدرس: </string>
-    <string name="show_products">Show products</string>
-    <string name="malls">Malls</string>
+    <string name="show_products">نمایش محصولات</string>
+    <string name="show_jobs">نمایش فروشگاه‌ها</string>
+    <string name="malls">پاساژها</string>
 
-    <string name="please_select_category">Select your category</string>
-    <string name="no_job_to_show">No job to show</string>
+    <string name="please_select_category">دسته بندی مورد نظر را انتخاب کنید</string>
+    <string name="no_product_to_show">محصولی برای نمایش وجود ندارد</string>
+    <string name="please_fill_this_field">لطفا این قسمت را پر کنید.</string>
+
+    <string name="product_name">نام محصول</string>
+    <string name="choice_image">انتخاب عکس</string>
+    <string name="details">توضیحات</string>
+    <string name="enter_details">توضیحات خود را وارد کنید</string>
+    <string name="job_name">نام فروشگاه</string>
+    <string name="enter_phone_number">شماره تلفن را وارد کنید</string>
+    <string name="enter_address">آدرس را وارد کنید</string>
+    <string name="submit">ثبت</string>
+
+    <string name="select_image">لطفا تصویر را وارد کنید.</string>
+
+    <string name="product_added">محصول با موفقیت اضافه شد.</string>
+    <string name="job_added">فروشگاه با موفقیت ثبت شد.</string>
 
 </resources>

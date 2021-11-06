@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bazar.bane.bazarshahr.api.model.Job
+import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.intent.JobIntent
 import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.state.JobState
+import com.bazar.bane.bazarshahr.util.AppConstants
 
 class JobViewModel : ViewModel() {
-    private var page = 0;
+    private var page = -1;
     private val _stateIntent: MutableLiveData<JobIntent> = MutableLiveData()
 
     private val _job: MutableLiveData<Job> = MutableLiveData()
@@ -19,7 +21,7 @@ class JobViewModel : ViewModel() {
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
-    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState
 
 
@@ -63,4 +65,31 @@ class JobViewModel : ViewModel() {
         page += 1
         return page
     }
+
+    fun getJobs(id: String, byCategory: Boolean) {
+        if (byCategory)
+            setStateEvent(
+                JobIntent.Jobs(
+                    JobsRequest(
+                        AppConstants.PER_PAGE_ITEM,
+                        id,
+                        getPaginate(),
+                        null
+                    )
+                )
+            )
+        else
+            setStateEvent(
+                JobIntent.Jobs(
+                    JobsRequest(
+                        AppConstants.PER_PAGE_ITEM,
+                        null,
+                        getPaginate(),
+                        id
+                    )
+                )
+            )
+
+    }
+
 }

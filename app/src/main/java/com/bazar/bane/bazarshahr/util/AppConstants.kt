@@ -17,7 +17,12 @@ open class AppConstants {
 
         const val PRODUCT_ID = "productId"
 
+        const val MALL_ID = "mallId"
+
+        const val CATEGORY_ID = "categoryId"
+
         const val TITLE = "title"
+
 
         const val JOB_CATEGORY_STATE = "jobCategoryState"
 

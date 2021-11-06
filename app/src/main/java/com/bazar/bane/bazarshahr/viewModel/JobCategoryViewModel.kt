@@ -11,6 +11,7 @@ import com.bazar.bane.bazarshahr.repository.JobCategoryRepository
 import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 import com.bazar.bane.bazarshahr.util.AppConstants
+import java.text.FieldPosition
 
 class JobCategoryViewModel : ViewModel() {
     private var categoriesPage = -1
@@ -28,6 +29,7 @@ class JobCategoryViewModel : ViewModel() {
 
     private val _message: MutableLiveData<String> = MutableLiveData()
     val message: LiveData<String> get() = _message
+
 
     var dataState: LiveData<JobCategoryState> = Transformations
         .switchMap(_stateIntent) { stateIntent ->

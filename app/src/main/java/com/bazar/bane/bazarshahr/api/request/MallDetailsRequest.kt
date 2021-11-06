@@ -2,15 +2,15 @@ package com.bazar.bane.bazarshahr.api.request
 
 import com.google.gson.annotations.SerializedName
 
-class ProductDetailsRequest(id: String) {
+class MallDetailsRequest(id: String) {
     @SerializedName("data")
-    var data: ProductDetails? = null
+    var data: MallDetails? = null
 
     init {
-        data = ProductDetails(id)
+        data = MallDetails(id)
     }
 
-    class ProductDetails(id: String) {
+    class MallDetails(id: String) {
         @SerializedName("id")
         var id: String? = null
 

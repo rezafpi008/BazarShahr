@@ -21,6 +21,7 @@ class JobAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_ITEM = 0
+        private const val VIEW_TYPE_ITEM_VERTICAL = 2
         private const val VIEW_TYPE_LOADING = 1
     }
 
@@ -38,6 +39,7 @@ class JobAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
+    var verticalItem = false
 
     init {
         this.context = context
@@ -72,18 +74,32 @@ class JobAdapter constructor(
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (itemsList[position] == null) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
+        return when {
+            itemsList[position] == null -> VIEW_TYPE_LOADING
+            verticalItem -> {
+                VIEW_TYPE_ITEM_VERTICAL
+            }
+            else -> VIEW_TYPE_ITEM
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == VIEW_TYPE_ITEM) {
-            val view: View =
-                LayoutInflater.from(context).inflate(R.layout.item_job, parent, false)
-            JobViewHolder(view)
-        } else {
-            val view: View = LayoutInflater.from(context)
-                .inflate(R.layout.item_loading_vertical, parent, false)
-            LoadingViewHolder(view)
+        return when (viewType) {
+            VIEW_TYPE_ITEM -> {
+                val view: View =
+                    LayoutInflater.from(context).inflate(R.layout.item_job, parent, false)
+                JobViewHolder(view)
+            }
+            VIEW_TYPE_ITEM_VERTICAL -> {
+                val view: View =
+                    LayoutInflater.from(context).inflate(R.layout.item_job_vertical, parent, false)
+                JobViewHolder(view)
+            }
+            else -> {
+                val view: View = LayoutInflater.from(context)
+                    .inflate(R.layout.item_loading_vertical, parent, false)
+                LoadingViewHolder(view)
+            }
         }
     }
 
@@ -91,11 +107,12 @@ class JobAdapter constructor(
         if (holder is JobViewHolder) {
             val item: Job = itemsList[position] as Job
             holder.title.text = item.name
-            Glide.with(context!!)
-                .load(item.img!!)
-                .placeholder(R.drawable.image_default)
-                .error(R.drawable.image_default)
-                .into(holder.jobImg)
+            if (item.img != null)
+                Glide.with(context!!)
+                    .load(item.img)
+                    .placeholder(R.drawable.image_default)
+                    .error(R.drawable.image_default)
+                    .into(holder.jobImg)
 
             holder.information.setOnClickListener {
                 onClickItem?.clickedInformation(item, position)
@@ -149,8 +166,10 @@ class JobAdapter constructor(
         var jobImg: AppCompatImageView =
             itemView.findViewById<View>(R.id.image) as AppCompatImageView
         var title: TextView = itemView.findViewById<View>(R.id.title) as TextView
-        var information: AppCompatButton = itemView.findViewById<View>(R.id.information_btn) as AppCompatButton
-        var products: AppCompatButton = itemView.findViewById<View>(R.id.products_btn) as AppCompatButton
+        var information: AppCompatButton =
+            itemView.findViewById<View>(R.id.information_btn) as AppCompatButton
+        var products: AppCompatButton =
+            itemView.findViewById<View>(R.id.products_btn) as AppCompatButton
 
     }
 
