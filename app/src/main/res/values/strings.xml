@@ -48,5 +48,14 @@
 
     <string name="product_added">محصول با موفقیت اضافه شد.</string>
     <string name="job_added">فروشگاه با موفقیت ثبت شد.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="register">ثبت نام</string>
+    <string name="login">ورود</string>
+    <string name="email">ایمیل</string>
+    <string name="password">رمز عبور</string>
+    <string name="login_user">ورود کاربر</string>
+    <string name="re_password">تکرار پسورد</string>
+    <string name="full_name">نام و نام‌ خانوادگی</string>
 
 </resources>

@@ -70,6 +70,15 @@ interface ApiService {
         @Body requestBody: CreateProductRequest?,
     ): LiveData<GenericApiResponse<CreateProductResponse>>
 
+    @POST("api/mall/")
+    fun signIn(
+        @Body requestBody: SignInRequest?,
+    ): LiveData<GenericApiResponse<SignInResponse>>
+
+    @POST("api/mall/")
+    fun signUp(
+        @Body requestBody: SignUpRequest?,
+    ): LiveData<GenericApiResponse<SignUpResponse>>
     /*@POST("auth")
     fun googleAccountRegister(
         @Body requestBody: SocialRegisterRequest?,
