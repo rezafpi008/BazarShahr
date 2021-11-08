@@ -2,18 +2,18 @@ package com.bazar.bane.bazarshahr.api.request
 
 import com.google.gson.annotations.SerializedName
 
-class SignUpRequest(name: String, username: String, password: String) {
+class SignUpRequest(phone: String, username: String, password: String) {
     @SerializedName("data")
     var data: SignInData? = null
 
     init {
-        data = SignInData(name, username, password)
+        data = SignInData(phone, username, password)
     }
 
-    class SignInData(name: String, username: String, password: String) {
+    class SignInData(phone: String, username: String, password: String) {
 
-        @SerializedName("name")
-        var name: String? = null
+        @SerializedName("phone")
+        var phone: String? = null
 
         @SerializedName("username")
         var username: String? = null
@@ -22,7 +22,7 @@ class SignUpRequest(name: String, username: String, password: String) {
         var password: String? = null
 
         init {
-            this.name = name
+            this.phone = phone
             this.username = username
             this.password = password
         }

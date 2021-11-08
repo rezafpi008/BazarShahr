@@ -91,4 +91,7 @@ dependencies {
 
     //SearchBar
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
+
+    //country code picker
+    implementation 'com.hbb20:ccp:2.4.2'
 }

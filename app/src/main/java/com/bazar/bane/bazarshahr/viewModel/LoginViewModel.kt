@@ -8,6 +8,7 @@ import com.bazar.bane.bazarshahr.intent.LoginIntent
 import com.bazar.bane.bazarshahr.repository.AddRepository
 import com.bazar.bane.bazarshahr.repository.LoginRepository
 import com.bazar.bane.bazarshahr.state.LoginState
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_TOKEN
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 
@@ -45,6 +46,10 @@ class LoginViewModel : ViewModel() {
 
     fun saveToken(token: String) {
         SharedPreferenceUtil.saveStringValue(USER_TOKEN, token)
+    }
+
+    fun saveUserId(token: String) {
+        SharedPreferenceUtil.saveStringValue(USER_ID, token)
     }
 
 }

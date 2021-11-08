@@ -11,7 +11,7 @@ class SignInRequest(username: String, password: String) {
     }
 
     class SignInData(username: String, password: String) {
-        @SerializedName("username")
+        @SerializedName("phone_number")
         var username: String? = null
 
         @SerializedName("password")

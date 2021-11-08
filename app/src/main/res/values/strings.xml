@@ -26,6 +26,7 @@
     <string name="products">محصولات</string>
     <string name="nothing_to_see">nothing_to_see</string>
     <string name="phone_number">شماره تلفن:  </string>
+    <string name="user_phone_number">شماره تلفن</string>
     <string name="address">آدرس: </string>
     <string name="show_products">نمایش محصولات</string>
     <string name="show_jobs">نمایش فروشگاه‌ها</string>
@@ -34,6 +35,9 @@
     <string name="please_select_category">دسته بندی مورد نظر را انتخاب کنید</string>
     <string name="no_product_to_show">محصولی برای نمایش وجود ندارد</string>
     <string name="please_fill_this_field">لطفا این قسمت را پر کنید.</string>
+
+    <string name="incorrect_phone_number">شماره تلفن اشتباه است</string>
+    <string name="confirm_password_match">پسورد با تکرار آن برابر نیست</string>
 
     <string name="product_name">نام محصول</string>
     <string name="choice_image">انتخاب عکس</string>
@@ -55,7 +59,7 @@
     <string name="email">ایمیل</string>
     <string name="password">رمز عبور</string>
     <string name="login_user">ورود کاربر</string>
-    <string name="re_password">تکرار پسورد</string>
-    <string name="full_name">نام و نام‌ خانوادگی</string>
+    <string name="confirm_password">تکرار پسورد</string>
+    <string name="user_name">نام کاربری</string>
 
 </resources>
