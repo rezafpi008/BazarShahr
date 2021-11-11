@@ -72,6 +72,16 @@ class JobDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 bundle
             )
         }
+
+        binding.sendMessage.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(JOB_ID, jobId)
+            bundle.putString(TITLE, title)
+            findNavController().navigate(
+                R.id.action_jobDetailsFragment_to_chat,
+                bundle
+            )
+        }
     }
 
     override fun subscribeObservers() {

@@ -85,7 +85,7 @@
                         <RelativeLayout
                             android:layout_marginTop="@dimen/_10sdp"
                             android:id="@+id/add_image"
-                            android:layout_width="@dimen/_110sdp"
+                            android:layout_width="@dimen/_146sdp"
                             android:layout_height="@dimen/_110sdp"
                             android:layout_gravity="center"
                             android:background="@drawable/bg_round_stroke_primary_dark"
@@ -141,6 +141,24 @@
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:ems="10"
                             android:hint="@string/enter_details"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/job_id"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <EditText
+                            android:id="@+id/job_id"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:ems="10"
+                            android:hint="@string/insert_job_id"
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />

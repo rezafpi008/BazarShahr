@@ -2,9 +2,7 @@ package com.bazar.bane.bazarshahr.api.response
 
 import com.google.gson.annotations.SerializedName
 
-class CreateProductResponse {
+class CreateProductResponse : MainResponse() {
 
-    @SerializedName("data")
-    val data: String? = null
 
 }

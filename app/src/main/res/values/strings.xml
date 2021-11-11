@@ -7,6 +7,7 @@
     <string name="category_title">دسته‌بندی‌ فروشگاه‌ها</string>
     <string name="search">جستجو</string>
     <string name="my_store">فروشگاه من</string>
+    <string name="my_chat">پیام‌ها</string>
     <string name="title">title</string>
 
     <string name="home_page_title">خانه</string>
@@ -37,6 +38,7 @@
     <string name="no_product_to_show">محصولی برای نمایش وجود ندارد</string>
     <string name="please_fill_this_field">لطفا این قسمت را پر کنید.</string>
 
+
     <string name="incorrect_phone_number">شماره تلفن اشتباه است</string>
     <string name="confirm_password_match">پسورد با تکرار آن برابر نیست</string>
 
@@ -49,9 +51,16 @@
     <string name="enter_address">آدرس را وارد کنید</string>
     <string name="submit">ثبت</string>
 
+    <string name="job_id">کد فروشگاه شما</string>
+
     <string name="select_image">لطفا تصویر را وارد کنید.</string>
 
     <string name="product_added">محصول با موفقیت اضافه شد.</string>
+    <string name="try_again">لطفا دوباره امتحان کنید.</string>
+
+    <string name="check_username">نام کاربری و یا شماره تلفن شما تکراری می‌باشد.</string>
+    <string name="message_send">پیام ارسال شد.</string>
+    <string name="message_unsend">ارسال پیام با مشکل رو به رو شد.</string>
     <string name="job_added">فروشگاه با موفقیت ثبت شد.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -69,6 +78,13 @@
     <string name="job_details">مشخصات فروشگاه</string>
     <string name="mall_details">مشخصات پاساژ</string>
     <string name="error_sign_in">شماره تلفن و یا پسورد اشتباه است.</string>
+    <string name="select_category_of_job">دسته بندی فروشگاه خود را انتخاب کنید</string>
+    <string name="select_mall_of_job">پاساژ را انتخاب کنید</string>
+    <string name="insert_job_id">کد فروشگاه خود را وارد کنید</string>
+    <string name="your_message">پیام شما...</string>
+
+    <string name="my_chats">پیام‌های دریافتی</string>
+    <string name="send_message">ارسال پیام</string>
 
 
 </resources>

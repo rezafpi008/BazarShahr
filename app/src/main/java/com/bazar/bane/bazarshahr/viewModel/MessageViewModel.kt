@@ -11,7 +11,7 @@ import com.bazar.bane.bazarshahr.state.MessageState
 class MessageViewModel : ViewModel() {
     
     private val _stateIntent: MutableLiveData<MessageIntent> = MutableLiveData()
-    private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(false)
+    private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
     private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState

@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 class MessagesResponse {
 
     @SerializedName("data")
-    val jobs: ArrayList<Message>? = null
+    val messages: ArrayList<Message>? = null
 
 }

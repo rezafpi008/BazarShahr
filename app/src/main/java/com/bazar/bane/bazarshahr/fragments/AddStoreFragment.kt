@@ -1,5 +1,6 @@
 package com.bazar.bane.bazarshahr.fragments
 
+import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,17 +16,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.adapter.GalleryAdapter
+import com.bazar.bane.bazarshahr.api.request.CreateJobRequest
 import com.bazar.bane.bazarshahr.databinding.FragmentAddStoreBinding
+import com.bazar.bane.bazarshahr.intent.AddIntent
+import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
+import com.bazar.bane.bazarshahr.popUp.PopUpCallback
+import com.bazar.bane.bazarshahr.popUp.SelectCategoryPopUp
+import com.bazar.bane.bazarshahr.popUp.SelectMallPopUp
+import com.bazar.bane.bazarshahr.state.AddState
+import com.bazar.bane.bazarshahr.state.JobState
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_ID
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
+import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.util.imagePicker.ImagePickerDialogFragment
 import com.bazar.bane.bazarshahr.util.imagePicker.PickerBuilder
+import com.bazar.bane.bazarshahr.viewModel.AddViewModel
 
-class AddStoreFragment : Fragment(), ToolbarFunction {
+class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private lateinit var binding: FragmentAddStoreBinding
+    private lateinit var viewModel: AddViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GalleryAdapter
     var items: ArrayList<Any?> = ArrayList()
+    lateinit var categoryId: String
+    var mallId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +50,12 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_add_store, container, false)
         val view = binding.root
-        /*viewModel = ExploreViewModel()
-        binding.exploreViewModel = viewModel*/
+        viewModel = AddViewModel()
+        binding.addViewModel = viewModel
         binding.lifecycleOwner = this
         setToolbar()
-        initData()
+        initialData()
+        subscribeObservers()
         initialRecyclerView()
         return view
     }
@@ -49,10 +66,6 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
         toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
         }
-    }
-
-    private fun initData() {
-        binding.addImage.setOnClickListener { showBottomView() }
     }
 
     private fun initialRecyclerView() {
@@ -94,7 +107,7 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
             })
             ?.setImageName("ads")
             ?.setImageFolderName("MyAds")
-            ?.setCustomizedUcrop(1, 1)
+            ?.setCustomizedUcrop(4, 3)
             ?.start()
     }
 
@@ -102,6 +115,115 @@ class AddStoreFragment : Fragment(), ToolbarFunction {
         items.add(imageUri.toString())
         adapter.notifyDataSetChanged()
         recyclerView.visibility = View.VISIBLE
+    }
+
+    private fun checkSubmit(): Boolean {
+        var flag = true
+        if (binding.phoneNumber.text.length != 11) {
+            ToastUtil.showToast(R.string.incorrect_phone_number)
+            flag = false
+        }
+        if (binding.title.text.toString() == "") {
+            binding.title.error = getString(R.string.please_fill_this_field)
+            flag = false
+        }
+        if (binding.address.text.toString() == "") {
+            binding.address.error = getString(R.string.please_fill_this_field)
+            flag = false
+        }
+        if (binding.categoryTitle.text.toString() == "") {
+            ToastUtil.showToast(R.string.please_select_category)
+            flag = false
+        }
+
+        return flag
+    }
+
+    override fun initialData() {
+        binding.addImage.setOnClickListener { showBottomView() }
+        binding.categoryTitle.setOnClickListener {
+            SelectCategoryPopUp(
+                requireContext(),
+                popUpCallback
+            ).show()
+        }
+
+        binding.mallTitle.setOnClickListener {
+            SelectMallPopUp(
+                requireContext(),
+                mallPopUpCallback
+            ).show()
+        }
+
+        binding.submit.setOnClickListener {
+            if (checkSubmit()) {
+                viewModel.setMainLoadingState(true)
+                viewModel.setStateEvent(
+                    AddIntent.AddJob(
+                        CreateJobRequest(
+                            binding.title.text.toString(),
+                            binding.address.text.toString(),
+                            binding.phoneNumber.text.toString(),
+                            binding.details.text.toString(),
+                            categoryId,
+                            mallId,
+                            items
+                        )
+                    )
+                )
+            }
+        }
+    }
+
+    override fun subscribeObservers() {
+        viewModel.dataState.observe(viewLifecycleOwner, { dataState ->
+            when (dataState) {
+                is AddState.CreateJob -> {
+                    viewModel.setMainLoadingState(false)
+                    ToastUtil.showToast("فروشگاه با موفقیت ثبت شد.")
+                    SharedPreferenceUtil.saveStringValue(
+                        USER_JOB_ID,
+                        dataState.response.data?.jobId
+                    )
+                    showUserJobId(dataState.response.data?.jobId!!)
+                }
+
+                is AddState.ErrorCreateJob -> {
+                    viewModel.setMainLoadingState(false)
+                    ToastUtil.showToast(R.string.try_again)
+                }
+
+            }
+        })
+    }
+
+
+    private val popUpCallback: PopUpCallback = object : PopUpCallback {
+        override fun setId(id: String, title: String) {
+            binding.categoryTitle.text = title
+            categoryId = id
+        }
+    }
+
+    private val mallPopUpCallback: PopUpCallback = object : PopUpCallback {
+        override fun setId(id: String, title: String) {
+            binding.mallTitle.text = title
+            mallId = id
+        }
+    }
+
+    private fun showUserJobId(jobId: String) {
+        val builder = AlertDialog.Builder(activity)
+        builder.setTitle("کدفروشگاه شما")
+            .setMessage("کد فروشگاه شما$jobId")
+            .setCancelable(false)
+            .setPositiveButton("ذخیره") { dialogInterface, _ ->
+
+                dialogInterface.dismiss()
+            }.setNegativeButton("بستن") { dialogInterface, _ ->
+
+                dialogInterface.dismiss()
+            }.show()
     }
 
 }

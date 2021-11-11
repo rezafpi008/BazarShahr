@@ -72,7 +72,7 @@ class SignUpFragment : Fragment(), FragmentFunction {
 
                 is LoginState.ErrorSignUp -> {
                     viewModel.setMainLoadingState(false)
-                    ToastUtil.showToast(dataState.error)
+                    ToastUtil.showToast(R.string.check_username)
                 }
             }
         })

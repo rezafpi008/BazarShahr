@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_8sdp">
+
+    <TextView
+        android:id="@+id/receivedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_56sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:textSize="@dimen/_13sdp"
+        android:paddingEnd="@dimen/_18sdp"
+        android:gravity="start"
+        android:maxEms="13"
+        android:textColor="@color/colorWhite"
+        android:background="@drawable/bg_primary"
+        android:text="Hello this is a sample message"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/receivedText"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_alignStart="@id/receivedText" />
+
+</RelativeLayout>

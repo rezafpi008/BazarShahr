@@ -12,10 +12,10 @@ class SignUpRequest(phone: String, username: String, password: String) {
 
     class SignInData(phone: String, username: String, password: String) {
 
-        @SerializedName("phone")
+        @SerializedName("phone_number")
         var phone: String? = null
 
-        @SerializedName("username")
+        @SerializedName("name")
         var username: String? = null
 
         @SerializedName("password")

@@ -166,6 +166,17 @@
                         android:textAllCaps="false"
                         android:textColor="@color/colorPrimaryDark" />
 
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/send_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:background="@drawable/bg_round_primary"
+                        android:gravity="center"
+                        android:text="@string/send_message"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite" />
+
                 </LinearLayout>
             </ScrollView>
 

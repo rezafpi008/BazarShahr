@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-    <!--<data>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
 
         <import type="android.view.View" />
 
         <variable
-            name="createAd"
-            type="com.texonapp.blackstoneapp.viewModel.CreateAdViewModel" />
-    </data>-->
+            name="addViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.AddViewModel" />
+    </data>
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        android:background="@color/colorBackground"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/toolbar"
@@ -83,13 +84,13 @@
                         android:paddingRight="@dimen/_10sdp">
 
                         <RelativeLayout
-                            android:layout_marginTop="@dimen/_10sdp"
                             android:id="@+id/add_image"
-                            android:layout_width="@dimen/_110sdp"
+                            android:layout_width="@dimen/_146sdp"
                             android:layout_height="@dimen/_110sdp"
                             android:layout_gravity="center"
-                            android:background="@drawable/bg_round_stroke_primary_dark"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
+                            android:background="@drawable/bg_round_stroke_primary_dark"
                             app:cardCornerRadius="@dimen/_12sdp"
                             app:cardElevation="0dp">
 
@@ -104,8 +105,8 @@
                                     android:id="@+id/icon_take_photo"
                                     android:layout_width="@dimen/_30sdp"
                                     android:layout_height="@dimen/_30sdp"
-                                    android:padding="@dimen/_5sdp"
                                     android:layout_gravity="center"
+                                    android:padding="@dimen/_5sdp"
                                     android:scaleType="centerCrop"
                                     android:tint="@color/colorPrimary"
                                     app:srcCompat="@drawable/ic_add_static" />
@@ -122,10 +123,10 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/gallery_recycler"
-                            android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"/>
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:visibility="gone" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -157,9 +158,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            android:ems="10"
+                            android:ems="11"
                             android:hint="@string/enter_phone_number"
-                            android:inputType="textPersonName"
+                            android:inputType="phone"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
 
@@ -180,6 +181,37 @@
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="دسته بندی فروشگاه:"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/category_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:hint="@string/select_category_of_job"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="پاساژ فروشگاه:"
+                            android:textColor="@color/colorPrimaryDark" />
+
+                        <TextView
+                            android:id="@+id/mall_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:hint="@string/select_mall_of_job"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_12sdp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -195,7 +227,8 @@
                     <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:visibility="@{addViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/submit"
@@ -205,14 +238,13 @@
                         android:gravity="center"
                         android:text="@string/submit"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/colorWhite"
+                        android:visibility="@{addViewModel.mainLoadingState?View.GONE:View.VISIBLE}" />
 
 
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
-
-
 
 
     </LinearLayout>

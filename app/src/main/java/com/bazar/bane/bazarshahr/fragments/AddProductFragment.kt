@@ -1,5 +1,6 @@
 package com.bazar.bane.bazarshahr.fragments
 
+import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,20 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.adapter.GalleryAdapter
+import com.bazar.bane.bazarshahr.api.request.CreateProductRequest
 import com.bazar.bane.bazarshahr.databinding.FragmentAddProductBinding
+import com.bazar.bane.bazarshahr.intent.AddIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
 import com.bazar.bane.bazarshahr.state.AddState
-import com.bazar.bane.bazarshahr.state.JobState
+import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.util.imagePicker.ImagePickerDialogFragment
 import com.bazar.bane.bazarshahr.util.imagePicker.PickerBuilder
 import com.bazar.bane.bazarshahr.viewModel.AddViewModel
 
-class AddProductFragment : Fragment(),FragmentFunction, ToolbarFunction {
+class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private lateinit var binding: FragmentAddProductBinding
-    private lateinit var viewModel:AddViewModel
+    private lateinit var viewModel: AddViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GalleryAdapter
     var items: ArrayList<Any?> = ArrayList()
@@ -50,10 +54,25 @@ class AddProductFragment : Fragment(),FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
+        var jobId = SharedPreferenceUtil.getStringValue(AppConstants.USER_JOB_ID)
+        if (jobId != "") {
+            binding.jobId.setText(jobId)
+        }
+
         binding.addImage.setOnClickListener { showBottomView() }
         binding.submit.setOnClickListener {
-            if (check()){
+            if (checkSubmit()) {
                 viewModel.setMainLoadingState(true)
+                viewModel.setStateEvent(
+                    AddIntent.AddProduct(
+                        CreateProductRequest(
+                            binding.title.text.toString(),
+                            binding.details.text.toString(),
+                            binding.jobId.text.toString(),
+                            items
+                        )
+                    )
+                )
             }
         }
 
@@ -70,14 +89,14 @@ class AddProductFragment : Fragment(),FragmentFunction, ToolbarFunction {
     override fun subscribeObservers() {
         viewModel.dataState.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
-                is AddState.CreateJob -> {
+                is AddState.CreateProduct -> {
                     viewModel.setMainLoadingState(false)
                     ToastUtil.showToast(R.string.product_added)
                 }
 
-                is AddState.ErrorCreateJob -> {
+                is AddState.ErrorCreateProduct -> {
                     viewModel.setMainLoadingState(false)
-                    ToastUtil.showToast(dataState.error)
+                    ToastUtil.showToast(R.string.try_again)
                 }
 
             }
@@ -120,7 +139,7 @@ class AddProductFragment : Fragment(),FragmentFunction, ToolbarFunction {
             })
             ?.setImageName("ads")
             ?.setImageFolderName("MyAds")
-            ?.setCustomizedUcrop(1, 1)
+            ?.setCustomizedUcrop(4, 3)
             ?.start()
     }
 
@@ -130,17 +149,17 @@ class AddProductFragment : Fragment(),FragmentFunction, ToolbarFunction {
         recyclerView.visibility = View.VISIBLE
     }
 
-    private fun check(): Boolean {
-        var checkSubmit = true
-        if (binding.title.text.isEmpty()) {
-            checkSubmit = false
-            binding.title.error = getString(R.string.please_fill_this_field)
-        }
-        if (items.size == 0) {
-            checkSubmit = false
-            ToastUtil.showToast(R.string.select_image)
-        }
-        return checkSubmit
-    }
 
+    private fun checkSubmit(): Boolean {
+        var flag = true
+        if (binding.title.text.toString() == "") {
+            binding.title.error = getString(R.string.please_fill_this_field)
+            flag = false
+        }
+        if (binding.jobId.text.toString() == "") {
+            binding.jobId.error = getString(R.string.please_fill_this_field)
+            flag = false
+        }
+        return flag
+    }
 }

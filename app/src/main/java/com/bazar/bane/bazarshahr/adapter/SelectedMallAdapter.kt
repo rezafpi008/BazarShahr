@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,17 +12,14 @@ import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bumptech.glide.Glide
 
-class MallAdapter constructor(
+class SelectedMallAdapter constructor(
     context: Context,
     itemsList: ArrayList<Any?>,
     recyclerView: RecyclerView
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_ITEM = 0
-        private const val VIEW_TYPE_ITEM_HORIZONTAL = 2
-        private const val VIEW_TYPE_ITEM_HORIZONTAL_FIXED = 3
         private const val VIEW_TYPE_LOADING_VERTICAL = 1
-        private const val VIEW_TYPE_LOADING_HORIZONTAL = 4
     }
 
     var context: Context? = null
@@ -40,8 +36,6 @@ class MallAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
-    var horizontalItem = false
-    var horizontalItemFixed = false
 
     init {
         this.context = context
@@ -78,16 +72,7 @@ class MallAdapter constructor(
     override fun getItemViewType(position: Int): Int {
         return when {
             itemsList[position] == null -> {
-                if (horizontalItem || horizontalItemFixed)
-                    VIEW_TYPE_LOADING_HORIZONTAL
-                else
                     VIEW_TYPE_LOADING_VERTICAL
-            }
-            horizontalItem -> {
-                VIEW_TYPE_ITEM_HORIZONTAL
-            }
-            horizontalItemFixed -> {
-                VIEW_TYPE_ITEM_HORIZONTAL_FIXED
             }
             else -> VIEW_TYPE_ITEM
         }
@@ -97,34 +82,19 @@ class MallAdapter constructor(
         return when (viewType) {
             VIEW_TYPE_ITEM -> {
                 val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_mall, parent, false)
-                MallViewHolder(view)
-            }
-            VIEW_TYPE_ITEM_HORIZONTAL -> {
-                val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_mall_horizontal, parent, false)
-                MallViewHolder(view)
-            }
-            VIEW_TYPE_ITEM_HORIZONTAL_FIXED -> {
-                val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_mall_horizontal_fixed, parent, false)
-                MallViewHolder(view)
-            }
-            VIEW_TYPE_LOADING_VERTICAL -> {
-                val view: View = LayoutInflater.from(context)
-                    .inflate(R.layout.item_loading_vertical, parent, false)
-                LoadingViewHolder(view)
+                    LayoutInflater.from(context).inflate(R.layout.item_mall_horizontal_selected, parent, false)
+                SelectedMallViewHolder(view)
             }
             else -> {
                 val view: View = LayoutInflater.from(context)
-                    .inflate(R.layout.item_loading_horizental, parent, false)
+                    .inflate(R.layout.item_loading_vertical, parent, false)
                 LoadingViewHolder(view)
             }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is MallViewHolder) {
+        if (holder is SelectedMallViewHolder) {
             val item: Mall = itemsList[position] as Mall
             holder.title.text = item.name
             if (item.img != null)
@@ -134,12 +104,8 @@ class MallAdapter constructor(
                     .error(R.drawable.image_default)
                     .into(holder.jobImg)
 
-            holder.information.setOnClickListener {
+            holder.itemView.setOnClickListener {
                 onClickItem?.clickedInformation(item, position)
-            }
-
-            holder.products.setOnClickListener {
-                onClickItem?.clickedJobs(item, position)
             }
 
         } else if (holder is LoadingViewHolder) {
@@ -181,16 +147,11 @@ class MallAdapter constructor(
         notifyDataSetChanged()
     }
 
-    class MallViewHolder(itemView: View) :
+    class SelectedMallViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var jobImg: AppCompatImageView =
             itemView.findViewById<View>(R.id.image) as AppCompatImageView
         var title: TextView = itemView.findViewById<View>(R.id.title) as TextView
-        var information: AppCompatButton =
-            itemView.findViewById<View>(R.id.information_btn) as AppCompatButton
-        var products: AppCompatButton =
-            itemView.findViewById<View>(R.id.products_btn) as AppCompatButton
-
     }
 
 }

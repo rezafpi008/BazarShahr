@@ -1,8 +1,12 @@
 package com.bazar.bane.bazarshahr.api.request
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Base64
+import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.MainApplication.Companion.applicationContext
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.google.gson.annotations.SerializedName
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -13,49 +17,129 @@ import java.io.*
 
 
 class CreateJobRequest(
-    adTypeId: Int,
     title: String,
-    socialLink: String,
-    publishDate: String,
-    expirationDate: String, totalBudget: String, adImg: Bitmap
+    address: String,
+    phoneNumber: String,
+    description: String?,
+    categoryId: String,
+    mallId: String?,
+    images: ArrayList<Any?>?
 ) {
-    var adTypeId: RequestBody? = null
-    var title: RequestBody? = null
-    var socialLink: RequestBody? = null
-    var publishDate: RequestBody? = null
-    var expirationDate: RequestBody? = null
-    var totalBudget: RequestBody? = null
-    var adImg: MultipartBody.Part? = null
+    @SerializedName("data")
+    var data: CreateJObData? = null
 
     init {
-        this.adTypeId = adTypeId.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        this.title = title.trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        this.socialLink = socialLink.trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        this.publishDate = publishDate.trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        this.expirationDate = expirationDate.trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        this.totalBudget = totalBudget.trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        //this.adImg = buildImageBodyPart("img", adImg)
+        data = CreateJObData(
+            title,
+            address,
+            phoneNumber,
+            description,
+            categoryId,
+            mallId,
+            images
+        )
     }
 
+    class CreateJObData(
+        title: String,
+        address: String,
+        phoneNumber: String,
+        description: String?,
+        categoryId: String,
+        mallId: String?,
+        images: ArrayList<Any?>?
+    ) {
+        @SerializedName("params")
+        var createJObParam: CreateJObParam? = null
 
-    private fun convertToImageArrayData(images:ArrayList<Bitmap>):ArrayList<ImageData> {
-        val imagesString:ArrayList<ImageData> = ArrayList()
-        for (item in images){
-            imagesString.add(ImageData(bitmapToBase64(item)))
+        init {
+            this.createJObParam = CreateJObParam(
+                title,
+                address,
+                phoneNumber,
+                description,
+                categoryId,
+                mallId,
+                images
+            )
         }
-        return imagesString
+
     }
 
-    private fun bitmapToBase64(bitmap: Bitmap): String {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
-        val byteArray = byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(byteArray, Base64.DEFAULT)
+    class CreateJObParam(
+        title: String,
+        address: String,
+        phoneNumber: String,
+        description: String?,
+        categoryId: String,
+        mallId: String?,
+        images: ArrayList<Any?>?
+    ) {
+        @SerializedName("title")
+        var title: String? = null
+
+        @SerializedName("address")
+        var address: String? = null
+
+        @SerializedName("phone_number")
+        var phoneNumber: String? = null
+
+        @SerializedName("description")
+        var description: String? = null
+
+        @SerializedName("user_id")
+        var userId: String = SharedPreferenceUtil.getStringValue(AppConstants.USER_ID)!!
+
+        @SerializedName("category")
+        var categoryId: String? = null
+
+        @SerializedName("mall")
+        var mallId: String? = null
+
+        @SerializedName("images")
+        var images: ArrayList<ImageData>? = null
+
+
+        init {
+            this.title = title
+            this.address = address
+            this.phoneNumber = phoneNumber
+            this.description = description
+            this.categoryId = categoryId
+            this.mallId = mallId
+            if (images != null)
+                this.images = convertToImageArrayData(images)
+        }
+
+        private fun convertToImageArrayData(images: ArrayList<Any?>): ArrayList<ImageData> {
+            val imagesString: ArrayList<ImageData> = ArrayList()
+            for (item in images) {
+                imagesString.add(ImageData(bitmapToBase64(item!!)))
+            }
+            return imagesString
+        }
+
+        private fun bitmapToBase64(item: Any): String {
+            val imageUri = item as String
+            val bitmap = BitmapFactory.decodeStream(
+                applicationContext().contentResolver.openInputStream(
+                    Uri.parse(imageUri)
+                )
+            )
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+            val byteArray = byteArrayOutputStream.toByteArray()
+            return Base64.encodeToString(byteArray, Base64.DEFAULT)
+        }
+
     }
 
     class ImageData(image: String) {
         @SerializedName("data")
         var image: String? = null
+
+        @SerializedName("format")
+        var format:String="png"
 
         init {
             this.image = image
