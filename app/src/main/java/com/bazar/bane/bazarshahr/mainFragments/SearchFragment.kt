@@ -172,7 +172,7 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         jobRecyclerView.layoutManager = horizontalLayoutManager
         jobAdapter =
             JobAdapter(requireContext(), jobItems, jobRecyclerView)
-        jobAdapter.verticalItem = true
+        jobAdapter.horizontalItem = true
         jobRecyclerView.adapter = jobAdapter
 
         jobAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
@@ -213,7 +213,7 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         mallRecyclerView.layoutManager = horizontalLayoutManager
         mallAdapter =
             MallAdapter(requireContext(), mallItems, mallRecyclerView)
-        mallAdapter.verticalItem = true
+        mallAdapter.horizontalItem = true
         mallRecyclerView.adapter = mallAdapter
 
         mallAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {

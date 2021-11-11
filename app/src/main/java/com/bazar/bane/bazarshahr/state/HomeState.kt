@@ -11,9 +11,9 @@ sealed class HomeState {
 
     data class ErrorGetSlider(val error: String?) : HomeState()
 
-    data class GetHome(val response: HomeResponse) : HomeState()
+    data class GetJobs(val response: JobsResponse) : HomeState()
 
-    data class ErrorGetHome(val error: String?) : HomeState()
+    data class ErrorGetJobs(val error: String?) : HomeState()
 
     data class GetMalls(val response: MallsResponse) : HomeState()
 

@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.adapter.*
-import com.bazar.bane.bazarshahr.api.model.Job
 import com.bazar.bane.bazarshahr.api.model.JobCategory
+import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bazar.bane.bazarshahr.databinding.FragmentCategoryBinding
 import com.bazar.bane.bazarshahr.state.JobCategoryState
-import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.CATEGORY_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.MALL_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TITLE
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel
@@ -34,9 +35,10 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
     private lateinit var categoryAdapter: JobCategorySelectedAdapter
     private var categoryItems: ArrayList<Any?> = ArrayList()
 
-    private lateinit var jobRecyclerView: RecyclerView
-    private lateinit var jobAdapter: JobAdapter
-    private var jobItems: ArrayList<Any?> = ArrayList()
+    private lateinit var mallRecyclerView: RecyclerView
+    private lateinit var mallAdapter: MallAdapter
+    private var mallItems: ArrayList<Any?> = ArrayList()
+    private var getMall = true
 
     private lateinit var categoryId: String;
 
@@ -58,6 +60,7 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
+        getMall = true
         categoryItems.clear()
         categoryRecyclerView = binding.categoryRecyclerView
         categoryRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -73,46 +76,50 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
         })
         categoryAdapter.setItemOnClick(object : OnClickItem<JobCategory> {
             override fun clicked(item: JobCategory, position: Int) {
-                categoryId = item.id!!
-                setJobsLoading()
-                viewModel.getJobs(categoryId)
-            }
-        })
-
-
-        jobItems.clear()
-        jobRecyclerView = binding.jobRecyclerView
-        jobRecyclerView.layoutManager = LinearLayoutManager(context)
-        val horizontalLayoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        jobRecyclerView.layoutManager = horizontalLayoutManager
-        jobAdapter =
-            JobAdapter(requireContext(), jobItems, jobRecyclerView)
-        jobRecyclerView.adapter = jobAdapter
-
-        jobAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
-                viewModel.getJobs(categoryId)
-            }
-        })
-
-        jobAdapter.setItemOnClick(object : OnClickJob {
-            override fun clickedProducts(job: Job, position: Int) {
                 val bundle = Bundle()
-                bundle.putString(JOB_ID, job.id)
-                bundle.putString(TITLE, job.name)
+                bundle.putString(CATEGORY_ID, item.id)
+                bundle.putString(TITLE, item.name)
                 findNavController().navigate(
-                    R.id.action_categoryFragment_to_productsFragment,
+                    R.id.action_categoryFragment_to_jobsFragment,
+                    bundle
+                )
+            }
+        })
+
+
+        mallItems.clear()
+        mallRecyclerView = binding.mallRecyclerView
+        mallRecyclerView.layoutManager = LinearLayoutManager(context)
+        val mallGridLayoutManager =
+            GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
+        mallRecyclerView.layoutManager = mallGridLayoutManager
+        mallAdapter =
+            MallAdapter(requireContext(), mallItems, mallRecyclerView)
+        mallAdapter.horizontalItemFixed = true
+        mallRecyclerView.adapter = mallAdapter
+        mallAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
+            override fun onLoadMore() {
+                viewModel.getMalls()
+            }
+        })
+
+        mallAdapter.setItemOnClick(object : OnClickMall {
+            override fun clickedJobs(mall: Mall, position: Int) {
+                val bundle = Bundle()
+                bundle.putString(MALL_ID, mall.id)
+                bundle.putString(TITLE, mall.name)
+                findNavController().navigate(
+                    R.id.action_categoryFragment_to_jobsFragment,
                     bundle
                 )
             }
 
-            override fun clickedInformation(job: Job, position: Int) {
+            override fun clickedInformation(mall: Mall, position: Int) {
                 val bundle = Bundle()
-                bundle.putString(JOB_ID, job.id)
-                bundle.putString(TITLE, job.name)
+                bundle.putString(MALL_ID, mall.id)
+                bundle.putString(TITLE, mall.name)
                 findNavController().navigate(
-                    R.id.action_categoryFragment_to_jobDetailsFragment,
+                    R.id.action_categoryFragment_to_mallDetailsFragment,
                     bundle
                 )
             }
@@ -126,6 +133,12 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     viewModel.setMainLoadingState(false)
                     categoryItems.addAll(dataState.response.categories!!)
                     categoryAdapter.setLoading(categoryAdapter.loadingSuccessState)
+                    if (getMall) {
+                        viewModel.setMallLoadingState(true)
+                        viewModel.getMalls()
+                        getMall = false
+                    }
+
                 }
                 is JobCategoryState.ErrorGetCategories -> {
                     viewModel.setMainLoadingState(false)
@@ -133,20 +146,17 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     ToastUtil.showToast(dataState.error)
                 }
 
-                is JobCategoryState.GetJobs -> {
-                    viewModel.setJobLoadingState(false)
-                    jobItems.addAll(dataState.response.jobs!!)
-                    jobAdapter.setLoading(jobAdapter.loadingSuccessState)
-                    if (jobAdapter.itemCount == 0){
-                        viewModel.setMessage(getString(R.string.no_job_to_show))
+                is JobCategoryState.GetMalls -> {
+                    viewModel.setMallLoadingState(false)
+                    mallItems.addAll(dataState.response.malls!!)
+                    mallAdapter.setLoading(mallAdapter.loadingSuccessState)
+                    if (mallAdapter.itemCount == 0)
                         viewModel.setMessageVisibilityState(true)
-                    }
-
                 }
 
-                is JobCategoryState.ErrorGetJobs -> {
-                    viewModel.setJobLoadingState(false)
-                    jobAdapter.setLoading(jobAdapter.loadingFailState)
+                is JobCategoryState.ErrorGetMalls -> {
+                    viewModel.setMallLoadingState(false)
+                    mallAdapter.setLoading(mallAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
                 }
 
@@ -160,10 +170,4 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
             getString(R.string.category_page_title)
     }
 
-    private fun setJobsLoading() {
-        jobItems.clear()
-        viewModel.resetJobsPaginate()
-        viewModel.setMessageVisibilityState(false)
-        viewModel.setJobLoadingState(true)
-    }
 }

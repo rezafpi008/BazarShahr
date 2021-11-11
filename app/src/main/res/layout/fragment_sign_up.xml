@@ -51,39 +51,38 @@
                 android:padding="10dp">
 
                 <LinearLayout
-                    android:id="@+id/user_phone_number"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_42sdp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/bg_round_stroke_white"
                     android:gravity="center_vertical"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo">
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_6sdp">
 
-                    <com.hbb20.CountryCodePicker
-                        android:id="@+id/ccp"
-                        android:clickable="false"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:ccp_arrowSize="@dimen/_12sdp"
-                        app:ccp_autoDetectCountry="true"
-                        app:ccp_autoFormatNumber="true"
-                        app:ccp_defaultPhoneCode="98" />
+                        android:text="IR 09"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_18sdp"/>
 
                     <EditText
                         android:id="@+id/edt_mobile"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_42sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@android:color/transparent"
                         android:hint="@string/user_phone_number"
                         android:inputType="phone"
-                        android:background="@drawable/bg_round_stroke_white"
                         android:gravity="center"
-                        android:maxLength="30"
+                        android:maxLength="9"
+                        android:textSize="@dimen/_12sdp"
                         android:singleLine="true"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="@color/colorWhite" />
                 </LinearLayout>
 
                 <EditText
@@ -100,10 +99,7 @@
                     android:textSize="@dimen/_12sdp"
                     android:maxLines="1"
                     android:lines="1"
-                    android:singleLine="true"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/user_phone_number" />
+                    android:singleLine="true" />
 
                 <EditText
                     android:id="@+id/password"
@@ -116,10 +112,7 @@
                     android:inputType="textPassword"
                     android:textColor="@color/colorWhite"
                     android:textColorHint="@color/colorWhite"
-                    android:textSize="@dimen/_12sdp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/user_name" />
+                    android:textSize="@dimen/_12sdp" />
 
                 <EditText
                     android:id="@+id/user_confirm_password"

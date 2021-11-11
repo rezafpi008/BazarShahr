@@ -22,7 +22,6 @@ class SignUpFragment : Fragment(), FragmentFunction {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: LoginViewModel
-    private lateinit var countryCodePicker: CountryCodePicker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,20 +39,17 @@ class SignUpFragment : Fragment(), FragmentFunction {
     }
 
     override fun initialData() {
-        countryCodePicker = binding.ccp
-        countryCodePicker.registerCarrierNumberEditText(binding.edtMobile)
-
         binding.login.setOnClickListener {
             findNavController().popBackStack()
         }
 
         binding.register.setOnClickListener {
             if (checkRegister()) {
-                viewModel.setMainLoadingState(false)
+                viewModel.setMainLoadingState(true)
                 viewModel.setStateEvent(
                     LoginIntent.SignUp(
                         SignUpRequest(
-                            "0" + binding.edtMobile.text.toString(),
+                            "09" + binding.edtMobile.text.toString(),
                             binding.userName.text.toString(),
                             binding.password.text.toString()
                         )
@@ -84,7 +80,7 @@ class SignUpFragment : Fragment(), FragmentFunction {
 
     private fun checkRegister(): Boolean {
         var flag = true
-        if (!countryCodePicker.isValidFullNumber) {
+        if (binding.edtMobile.text.length != 9) {
             flag = false
             ToastUtil.showToast(R.string.incorrect_phone_number)
         }

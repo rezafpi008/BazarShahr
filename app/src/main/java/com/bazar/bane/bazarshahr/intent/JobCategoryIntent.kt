@@ -1,7 +1,7 @@
 package com.bazar.bane.bazarshahr.intent
 
 import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
-import com.bazar.bane.bazarshahr.api.request.JobsRequest
+import com.bazar.bane.bazarshahr.api.request.MallsRequest
 
 sealed class JobCategoryIntent {
 
@@ -9,8 +9,8 @@ sealed class JobCategoryIntent {
         val request: JobCategoryRequest
     ) : JobCategoryIntent()
 
-    class Jobs(
-        val request: JobsRequest
+    class Malls(
+        val request: MallsRequest
     ) : JobCategoryIntent()
 
 }

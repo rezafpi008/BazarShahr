@@ -6,29 +6,29 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
 import com.bazar.bane.bazarshahr.api.request.JobsRequest
+import com.bazar.bane.bazarshahr.api.request.MallsRequest
+import com.bazar.bane.bazarshahr.intent.HomeIntent
 import com.bazar.bane.bazarshahr.intent.JobCategoryIntent
 import com.bazar.bane.bazarshahr.repository.JobCategoryRepository
 import com.bazar.bane.bazarshahr.repository.JobRepository
+import com.bazar.bane.bazarshahr.repository.MallRepository
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 import com.bazar.bane.bazarshahr.util.AppConstants
 import java.text.FieldPosition
 
 class JobCategoryViewModel : ViewModel() {
     private var categoriesPage = -1
-    private var jobsPage = -1
+    private var mallsPage = -1
     private val _stateIntent: MutableLiveData<JobCategoryIntent> = MutableLiveData()
 
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
-    private val _jobLoadingState: MutableLiveData<Boolean> = MutableLiveData(false)
-    val jobLoadingState: LiveData<Boolean> get() = _jobLoadingState
+    private val _mallLoadingState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val mallLoadingState: LiveData<Boolean> get() = _mallLoadingState
 
-    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState
-
-    private val _message: MutableLiveData<String> = MutableLiveData()
-    val message: LiveData<String> get() = _message
 
 
     var dataState: LiveData<JobCategoryState> = Transformations
@@ -43,8 +43,8 @@ class JobCategoryViewModel : ViewModel() {
             is JobCategoryIntent.Categories -> {
                 JobCategoryRepository.getCategories(stateIntent.request)
             }
-            is JobCategoryIntent.Jobs -> {
-                JobRepository.getJobsCategoryState(stateIntent.request)
+            is JobCategoryIntent.Malls -> {
+                MallRepository.getMallsCategoryState(stateIntent.request)
             }
         }
     }
@@ -55,16 +55,12 @@ class JobCategoryViewModel : ViewModel() {
     }
 
 
-    fun setJobLoadingState(state: Boolean) {
-        _jobLoadingState.value = state
+    fun setMallLoadingState(state: Boolean) {
+        _mallLoadingState.value = state
     }
 
     fun setMessageVisibilityState(state: Boolean) {
         _messageVisibilityState.value = state
-    }
-
-    fun setMessage(state: String) {
-        _message.value = state
     }
 
     fun setStateEvent(intent: JobCategoryIntent) {
@@ -76,13 +72,9 @@ class JobCategoryViewModel : ViewModel() {
         return categoriesPage
     }
 
-    private fun getJobsPaginate(): Int {
-        jobsPage += 1
-        return jobsPage
-    }
-
-    fun resetJobsPaginate() {
-        jobsPage = -1
+    private fun getMallsPaginate(): Int {
+        mallsPage += 1
+        return mallsPage
     }
 
     fun getCategories() {
@@ -97,14 +89,12 @@ class JobCategoryViewModel : ViewModel() {
         )
     }
 
-    fun getJobs(categoryId: String) {
+    fun getMalls() {
         setStateEvent(
-            JobCategoryIntent.Jobs(
-                JobsRequest(
+            JobCategoryIntent.Malls(
+                MallsRequest(
                     AppConstants.PER_PAGE_ITEM,
-                    categoryId,
-                    getJobsPaginate(),
-                    null
+                    null, getMallsPaginate()
                 )
             )
         )

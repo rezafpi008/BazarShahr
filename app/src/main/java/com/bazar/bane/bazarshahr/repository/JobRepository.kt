@@ -9,27 +9,27 @@ import com.bazar.bane.bazarshahr.api.main.NetworkBoundResource
 import com.bazar.bane.bazarshahr.api.request.JobDetailsRequest
 import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.api.response.*
-import com.bazar.bane.bazarshahr.state.JobCategoryState
+import com.bazar.bane.bazarshahr.state.HomeState
 import com.bazar.bane.bazarshahr.state.JobState
-import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_CATEGORY_STATE
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.HOME_STATE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_STATE
 
 object JobRepository {
-    fun getJobsCategoryState(request: JobsRequest): LiveData<JobCategoryState> {
-        return getJobs(request, JOB_CATEGORY_STATE) as LiveData<JobCategoryState>
+    fun getJobsHomeState(request: JobsRequest): LiveData<HomeState> {
+        return getJobs(request, HOME_STATE) as LiveData<HomeState>
     }
 
     fun getJobsJobState(request: JobsRequest): LiveData<JobState> {
         return getJobs(request, JOB_STATE) as LiveData<JobState>
     }
 
-    fun getJobs(request: JobsRequest, state: String): LiveData<Any> {
+    private fun getJobs(request: JobsRequest, state: String): LiveData<Any> {
         return object : NetworkBoundResource<JobsResponse, Any>() {
 
             override fun handleApiSuccessResponse(response: ApiSuccessResponse<JobsResponse>) {
                 when (state) {
-                    JOB_CATEGORY_STATE -> {
-                        result.value = JobCategoryState.GetJobs(response.body)
+                    HOME_STATE -> {
+                        result.value = HomeState.GetJobs(response.body)
                     }
 
                     JOB_STATE -> {
@@ -40,8 +40,8 @@ object JobRepository {
 
             override fun onReturnError(message: String) {
                 when (state) {
-                    JOB_CATEGORY_STATE -> {
-                        result.value = JobCategoryState.ErrorGetJobs(message)
+                    HOME_STATE -> {
+                        result.value = HomeState.ErrorGetJobs(message)
                     }
 
                     JOB_STATE -> {

@@ -11,7 +11,7 @@ class SignInResponse {
         @SerializedName("user_id")
         val userId: String? = null
 
-        @SerializedName("api_token")
+        @SerializedName("apiToken")
         val token: String? = null
     }
 

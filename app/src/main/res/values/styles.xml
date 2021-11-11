@@ -18,7 +18,7 @@
     <style name="ThemeOverlay.App.TextInputLayout" parent="">
         <item name="colorPrimary">@color/white</item>  //Activated color
         <item name="colorOnSurface">@color/white</item>    //Normal color
-        <item name="colorError">@color/black</item>//Error color
+        <item name="colorError">@color/colorBlack</item>//Error color
         <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox</item>
     </style>
 

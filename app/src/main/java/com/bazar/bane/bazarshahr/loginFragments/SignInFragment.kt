@@ -22,7 +22,6 @@ class SignInFragment : Fragment(), FragmentFunction {
 
     private lateinit var binding: FragmentSignInBinding
     private lateinit var viewModel: LoginViewModel
-    private lateinit var countryCodePicker: CountryCodePicker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +39,6 @@ class SignInFragment : Fragment(), FragmentFunction {
     }
 
     override fun initialData() {
-        countryCodePicker = binding.ccp
-        countryCodePicker.registerCarrierNumberEditText(binding.edtMobile)
 
         binding.register.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
@@ -49,11 +46,11 @@ class SignInFragment : Fragment(), FragmentFunction {
 
         binding.login.setOnClickListener {
             if (checkLogin()) {
-                viewModel.setMainLoadingState(false)
+                viewModel.setMainLoadingState(true)
                 viewModel.setStateEvent(
                     LoginIntent.SignIn(
                         SignInRequest(
-                            "0" + binding.edtMobile.text.toString(),
+                            "09" + binding.edtMobile.text.toString(),
                             binding.password.text.toString()
                         )
                     )
@@ -75,7 +72,7 @@ class SignInFragment : Fragment(), FragmentFunction {
 
                 is LoginState.ErrorSignIn -> {
                     viewModel.setMainLoadingState(false)
-                    ToastUtil.showToast(dataState.error)
+                    ToastUtil.showToast(getString(R.string.error_sign_in))
                 }
             }
         })
@@ -83,7 +80,7 @@ class SignInFragment : Fragment(), FragmentFunction {
 
     private fun checkLogin(): Boolean {
         var flag = true
-        if (!countryCodePicker.isValidFullNumber) {
+        if (binding.edtMobile.text.length != 9) {
             ToastUtil.showToast(R.string.incorrect_phone_number)
             flag = false
         }

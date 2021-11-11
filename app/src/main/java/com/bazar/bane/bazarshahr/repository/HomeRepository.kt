@@ -30,23 +30,4 @@ object HomeRepository {
         }.asLiveData()
     }
 
-    fun getHome(page: Int): LiveData<HomeState> {
-        return object : NetworkBoundResource<HomeResponse, HomeState>() {
-
-            override fun handleApiSuccessResponse(response: ApiSuccessResponse<HomeResponse>) {
-                result.value = HomeState.GetHome(response.body)
-            }
-
-            override fun onReturnError(message: String) {
-                result.value = HomeState.ErrorGetHome(message)
-                Log.d("TAG22", "onReturnError: $message")
-            }
-
-            override fun createCall(): LiveData<GenericApiResponse<HomeResponse>> {
-                return MyRetrofitBuilder.apiService.getHome(page)
-            }
-
-        }.asLiveData()
-    }
-
 }

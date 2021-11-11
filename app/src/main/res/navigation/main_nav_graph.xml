@@ -9,21 +9,50 @@
         android:id="@+id/homeFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-        <argument android:name="mallId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        tools:layout="@layout/fragment_home">
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="mallId"
+            android:defaultValue="None" />
+        <argument
+            android:name="categoryId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_homeFragment_to_jobsFragment"
             app:destination="@id/jobsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_homeFragment_to_mallDetailsFragment"
             app:destination="@id/mallDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailsFragment"
+            app:destination="@id/productDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -33,96 +62,106 @@
         android:id="@+id/categoryFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.CategoryFragment"
         android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
-        <argument android:name="jobId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        tools:layout="@layout/fragment_category">
+        <argument
+            android:name="categoryId"
+            android:defaultValue="None" />
+        <argument
+            android:name="mallId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
-            android:id="@+id/action_categoryFragment_to_jobDetailsFragment"
-            app:destination="@id/jobDetailsFragment"
+            android:id="@+id/action_categoryFragment_to_mallDetailsFragment"
+            app:destination="@id/mallDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
-            android:id="@+id/action_categoryFragment_to_productsFragment"
-            app:destination="@id/productsFragment"
+            android:id="@+id/action_categoryFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
-        <argument android:name="productId"
-            android:defaultValue="None"/>
-        <argument android:name="categoryId"
-            android:defaultValue="None"/>
-        <argument android:name="jobId"
-            android:defaultValue="None"/>
-        <argument android:name="mallId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        tools:layout="@layout/fragment_search">
+        <argument
+            android:name="productId"
+            android:defaultValue="None" />
+        <argument
+            android:name="categoryId"
+            android:defaultValue="None" />
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="mallId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_searchFragment_to_jobsFragment"
             app:destination="@id/jobsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_searchFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_searchFragment_to_productsFragment"
             app:destination="@id/productsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_searchFragment_to_jobDetailsFragment"
             app:destination="@id/jobDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_searchFragment_to_mallDetailsFragment"
             app:destination="@id/mallDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/myStoreFragment"
         android:name="com.bazar.bane.bazarshahr.mainFragments.MyStoreFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_my_store" >
+        tools:layout="@layout/fragment_my_store">
         <action
             android:id="@+id/action_myStoreFragment_to_addProductFragment"
             app:destination="@id/addProductFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_myStoreFragment_to_addStoreFragment"
             app:destination="@id/addStoreFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/addStoreFragment"
@@ -135,58 +174,64 @@
     <fragment
         android:id="@+id/jobDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.JobDetailsFragment"
-        android:label="JobDetailsFragment" >
-        <argument android:name="jobId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        android:label="JobDetailsFragment">
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_jobDetailsFragment_to_productsFragment"
             app:destination="@id/productsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.ProductsFragment"
         android:label="fragment_products"
-        tools:layout="@layout/fragment_products" >
-        <argument android:name="productId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        tools:layout="@layout/fragment_products">
+        <argument
+            android:name="productId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_productsFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/jobsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.JobsFragment"
-        android:label="JobsFragment" >
-        <argument android:name="jobId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        android:label="JobsFragment">
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
             app:destination="@id/jobDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_jobsFragment_to_productsFragment"
             app:destination="@id/productsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
@@ -195,17 +240,19 @@
     <fragment
         android:id="@+id/mallDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.MallDetailsFragment"
-        android:label="MallDetailsFragment" >
-        <argument android:name="mallId"
-            android:defaultValue="None"/>
-        <argument android:name="title"
-            android:defaultValue="None"/>
+        android:label="MallDetailsFragment">
+        <argument
+            android:name="mallId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_mallDetailsFragment_to_jobsFragment"
             app:destination="@id/jobsFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"/>
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
 </navigation>

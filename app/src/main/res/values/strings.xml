@@ -4,6 +4,7 @@
     <string name="camera">دوربین</string>
     <string name="home">خانه</string>
     <string name="category">دسته‌بندی‌ها</string>
+    <string name="category_title">دسته‌بندی‌ فروشگاه‌ها</string>
     <string name="search">جستجو</string>
     <string name="my_store">فروشگاه من</string>
     <string name="title">title</string>
@@ -61,5 +62,13 @@
     <string name="login_user">ورود کاربر</string>
     <string name="confirm_password">تکرار پسورد</string>
     <string name="user_name">نام کاربری</string>
+
+    <string name="no_job_to_show">فروشگاهی برای نمایش وجود ندارد.</string>
+
+    <string name="product_details">مشخصات محصول</string>
+    <string name="job_details">مشخصات فروشگاه</string>
+    <string name="mall_details">مشخصات پاساژ</string>
+    <string name="error_sign_in">شماره تلفن و یا پسورد اشتباه است.</string>
+
 
 </resources>

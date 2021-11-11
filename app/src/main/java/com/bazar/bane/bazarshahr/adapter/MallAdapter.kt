@@ -10,7 +10,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
-import com.bazar.bane.bazarshahr.api.model.Job
 import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bumptech.glide.Glide
 
@@ -21,8 +20,10 @@ class MallAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_ITEM = 0
-        private const val VIEW_TYPE_ITEM_VERTICAL = 2
-        private const val VIEW_TYPE_LOADING = 1
+        private const val VIEW_TYPE_ITEM_HORIZONTAL = 2
+        private const val VIEW_TYPE_ITEM_HORIZONTAL_FIXED = 3
+        private const val VIEW_TYPE_LOADING_VERTICAL = 1
+        private const val VIEW_TYPE_LOADING_HORIZONTAL = 4
     }
 
     var context: Context? = null
@@ -39,7 +40,8 @@ class MallAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
-    var verticalItem = false
+    var horizontalItem = false
+    var horizontalItemFixed = false
 
     init {
         this.context = context
@@ -75,9 +77,17 @@ class MallAdapter constructor(
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            itemsList[position] == null -> VIEW_TYPE_LOADING
-            verticalItem -> {
-                VIEW_TYPE_ITEM_VERTICAL
+            itemsList[position] == null -> {
+                if (horizontalItem || horizontalItemFixed)
+                    VIEW_TYPE_LOADING_HORIZONTAL
+                else
+                    VIEW_TYPE_LOADING_VERTICAL
+            }
+            horizontalItem -> {
+                VIEW_TYPE_ITEM_HORIZONTAL
+            }
+            horizontalItemFixed -> {
+                VIEW_TYPE_ITEM_HORIZONTAL_FIXED
             }
             else -> VIEW_TYPE_ITEM
         }
@@ -90,10 +100,20 @@ class MallAdapter constructor(
                     LayoutInflater.from(context).inflate(R.layout.item_mall, parent, false)
                 MallViewHolder(view)
             }
-            VIEW_TYPE_ITEM_VERTICAL -> {
+            VIEW_TYPE_ITEM_HORIZONTAL -> {
                 val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_mall_vertical, parent, false)
+                    LayoutInflater.from(context).inflate(R.layout.item_mall_horizontal, parent, false)
                 MallViewHolder(view)
+            }
+            VIEW_TYPE_ITEM_HORIZONTAL_FIXED -> {
+                val view: View =
+                    LayoutInflater.from(context).inflate(R.layout.item_mall_horizontal_fixed, parent, false)
+                MallViewHolder(view)
+            }
+            VIEW_TYPE_LOADING_VERTICAL -> {
+                val view: View = LayoutInflater.from(context)
+                    .inflate(R.layout.item_loading_vertical, parent, false)
+                LoadingViewHolder(view)
             }
             else -> {
                 val view: View = LayoutInflater.from(context)

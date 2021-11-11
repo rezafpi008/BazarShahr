@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
@@ -21,8 +20,10 @@ class JobAdapter constructor(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val VIEW_TYPE_ITEM = 0
-        private const val VIEW_TYPE_ITEM_VERTICAL = 2
-        private const val VIEW_TYPE_LOADING = 1
+        private const val VIEW_TYPE_ITEM_HORIZONTAL = 2
+        private const val VIEW_TYPE_ITEM_HORIZONTAL_FIXED = 3
+        private const val VIEW_TYPE_LOADING_VERTICAL = 1
+        private const val VIEW_TYPE_LOADING_HORIZONTAL = 4
     }
 
     var context: Context? = null
@@ -39,7 +40,8 @@ class JobAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
-    var verticalItem = false
+    var horizontalItem = false
+    var horizontalItemFixed = false
 
     init {
         this.context = context
@@ -75,9 +77,17 @@ class JobAdapter constructor(
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            itemsList[position] == null -> VIEW_TYPE_LOADING
-            verticalItem -> {
-                VIEW_TYPE_ITEM_VERTICAL
+            itemsList[position] == null -> {
+                if (horizontalItem || horizontalItemFixed)
+                    VIEW_TYPE_LOADING_HORIZONTAL
+                else
+                    VIEW_TYPE_LOADING_VERTICAL
+            }
+            horizontalItem -> {
+                VIEW_TYPE_ITEM_HORIZONTAL
+            }
+            horizontalItemFixed -> {
+                VIEW_TYPE_ITEM_HORIZONTAL_FIXED
             }
             else -> VIEW_TYPE_ITEM
         }
@@ -90,14 +100,26 @@ class JobAdapter constructor(
                     LayoutInflater.from(context).inflate(R.layout.item_job, parent, false)
                 JobViewHolder(view)
             }
-            VIEW_TYPE_ITEM_VERTICAL -> {
+            VIEW_TYPE_ITEM_HORIZONTAL -> {
                 val view: View =
-                    LayoutInflater.from(context).inflate(R.layout.item_job_vertical, parent, false)
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.item_job_horizontal, parent, false)
                 JobViewHolder(view)
+            }
+            VIEW_TYPE_ITEM_HORIZONTAL_FIXED -> {
+                val view: View =
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.item_job_horizontal_fixed, parent, false)
+                JobViewHolder(view)
+            }
+            VIEW_TYPE_LOADING_VERTICAL -> {
+                val view: View = LayoutInflater.from(context)
+                    .inflate(R.layout.item_loading_vertical, parent, false)
+                LoadingViewHolder(view)
             }
             else -> {
                 val view: View = LayoutInflater.from(context)
-                    .inflate(R.layout.item_loading_vertical, parent, false)
+                    .inflate(R.layout.item_loading_horizental, parent, false)
                 LoadingViewHolder(view)
             }
         }
