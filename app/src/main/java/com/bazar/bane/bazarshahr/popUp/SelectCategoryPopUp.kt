@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Window
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,20 +19,25 @@ import com.bazar.bane.bazarshahr.adapter.JobCategorySelectedAdapter
 import com.bazar.bane.bazarshahr.adapter.OnClickItem
 import com.bazar.bane.bazarshahr.adapter.OnLoadMoreListener
 import com.bazar.bane.bazarshahr.api.model.JobCategory
+import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
 import com.bazar.bane.bazarshahr.databinding.SelectCategoryPopUpBinding
+import com.bazar.bane.bazarshahr.intent.JobCategoryIntent
 import com.bazar.bane.bazarshahr.state.JobCategoryState
+import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel
 
 class SelectCategoryPopUp(
     context: Context,
-    popUpCallback: PopUpCallback
+    popUpCallback: PopUpCallback,
+    owner: LifecycleOwner
 ) :
     Dialog(context) {
 
     lateinit var binding: SelectCategoryPopUpBinding
     lateinit var viewModel: JobCategoryViewModel
     var callback: PopUpCallback = popUpCallback
+    var lifecycleOwner = owner
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var categoryAdapter: JobCategorySelectedAdapter
     private var categoryItems: ArrayList<Any?> = ArrayList()
@@ -48,10 +54,17 @@ class SelectCategoryPopUp(
         setContentView(binding.root)
         viewModel = JobCategoryViewModel()
         binding.categoryViewModel = viewModel
-        viewModel.setMainLoadingState(false)
+        binding.lifecycleOwner = lifecycleOwner
         initialData()
         subscribeObservers()
-        viewModel.getCategories()
+        viewModel.setStateEvent(
+            JobCategoryIntent.Categories(
+                JobCategoryRequest(
+                    100,
+                    viewModel.getCategoriesPaginate(),
+                )
+            )
+        )
 
     }
 
@@ -63,12 +76,9 @@ class SelectCategoryPopUp(
         categoryRecyclerView.layoutManager = gridLayoutManager
         categoryAdapter =
             JobCategorySelectedAdapter(context, categoryItems, categoryRecyclerView)
+        categoryAdapter.horizontalItemFixed = true
         categoryRecyclerView.adapter = categoryAdapter
-        categoryAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
-                viewModel.getCategories()
-            }
-        })
+
         categoryAdapter.setItemOnClick(object : OnClickItem<JobCategory> {
             override fun clicked(item: JobCategory, position: Int) {
                 callback.setId(item.id!!, item.name!!)
@@ -78,9 +88,10 @@ class SelectCategoryPopUp(
     }
 
     fun subscribeObservers() {
-        viewModel.dataState.observeForever { dataState ->
+        viewModel.dataState.observe(lifecycleOwner, { dataState ->
             when (dataState) {
                 is JobCategoryState.GetCategories -> {
+                    viewModel.setMainLoadingState(false)
                     categoryItems.addAll(dataState.response.categories!!)
                     categoryAdapter.setLoading(categoryAdapter.loadingSuccessState)
                 }
@@ -90,7 +101,7 @@ class SelectCategoryPopUp(
                     ToastUtil.showToast(dataState.error)
                 }
             }
-        }
+        })
     }
 
 }

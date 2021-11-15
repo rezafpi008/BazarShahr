@@ -50,7 +50,7 @@ class SignInFragment : Fragment(), FragmentFunction {
                 viewModel.setStateEvent(
                     LoginIntent.SignIn(
                         SignInRequest(
-                            "09" + binding.edtMobile.text.toString(),
+                            binding.phoneNumber.text.toString(),
                             binding.password.text.toString()
                         )
                     )
@@ -80,7 +80,7 @@ class SignInFragment : Fragment(), FragmentFunction {
 
     private fun checkLogin(): Boolean {
         var flag = true
-        if (binding.edtMobile.text.length != 9) {
+        if (binding.phoneNumber.text.length != 11) {
             ToastUtil.showToast(R.string.incorrect_phone_number)
             flag = false
         }

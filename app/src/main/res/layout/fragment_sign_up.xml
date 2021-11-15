@@ -50,40 +50,20 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/phone_number"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_height="@dimen/_42sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/bg_round_stroke_white"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_20sdp"
-                    android:paddingTop="@dimen/_6sdp"
-                    android:paddingEnd="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_6sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="IR 09"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_18sdp"/>
-
-                    <EditText
-                        android:id="@+id/edt_mobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_30sdp"
-                        android:background="@android:color/transparent"
-                        android:hint="@string/user_phone_number"
-                        android:inputType="phone"
-                        android:gravity="center"
-                        android:maxLength="9"
-                        android:textSize="@dimen/_12sdp"
-                        android:singleLine="true"
-                        android:textColor="@color/colorWhite"
-                        android:textColorHint="@color/colorWhite" />
-                </LinearLayout>
+                    android:gravity="center"
+                    android:hint="@string/user_phone_number"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
                 <EditText
                     android:id="@+id/user_name"

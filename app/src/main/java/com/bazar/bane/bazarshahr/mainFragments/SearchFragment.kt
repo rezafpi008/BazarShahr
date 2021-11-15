@@ -228,7 +228,7 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
                 bundle.putString(AppConstants.MALL_ID, mall.id)
                 bundle.putString(AppConstants.TITLE, mall.name)
                 findNavController().navigate(
-                    R.id.action_searchFragment_to_jobsFragment,
+                    R.id.action_searchFragment_to_mallCategoryFragment,
                     bundle
                 )
             }

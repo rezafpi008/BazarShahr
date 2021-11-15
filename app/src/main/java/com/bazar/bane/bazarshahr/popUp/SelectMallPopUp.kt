@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Window
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,21 +22,19 @@ import com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel
 
 class SelectMallPopUp(
     context: Context,
-    popUpCallback: PopUpCallback
+    popUpCallback: PopUpCallback,
+    owner: LifecycleOwner
 ) :
     Dialog(context) {
 
     lateinit var binding: SelectMallPopUpBinding
     lateinit var viewModel: JobCategoryViewModel
     var callback: PopUpCallback = popUpCallback
+    var lifecycleOwner = owner
 
     private lateinit var mallRecyclerView: RecyclerView
     private lateinit var mallAdapter: SelectedMallAdapter
     private var mallItems: ArrayList<Any?> = ArrayList()
-
-    private lateinit var categoryRecyclerView: RecyclerView
-    private lateinit var categoryAdapter: JobCategorySelectedAdapter
-    private var categoryItems: ArrayList<Any?> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +48,10 @@ class SelectMallPopUp(
         setContentView(binding.root)
         viewModel = JobCategoryViewModel()
         binding.categoryViewModel = viewModel
-        viewModel.setMainLoadingState(false)
+        binding.lifecycleOwner = lifecycleOwner
         initialData()
         subscribeObservers()
         viewModel.getMalls()
-
     }
 
     private fun initialData() {
@@ -85,10 +83,10 @@ class SelectMallPopUp(
     }
 
     fun subscribeObservers() {
-        viewModel.dataState.observeForever { dataState ->
+        viewModel.dataState.observe(lifecycleOwner, { dataState ->
             when (dataState) {
                 is JobCategoryState.GetMalls -> {
-                    viewModel.setMallLoadingState(false)
+                    viewModel.setMainLoadingState(false)
                     mallItems.addAll(dataState.response.malls!!)
                     mallAdapter.setLoading(mallAdapter.loadingSuccessState)
                     if (mallAdapter.itemCount == 0)
@@ -96,13 +94,13 @@ class SelectMallPopUp(
                 }
 
                 is JobCategoryState.ErrorGetMalls -> {
-                    viewModel.setMallLoadingState(false)
+                    viewModel.setMainLoadingState(false)
                     mallAdapter.setLoading(mallAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
                 }
 
             }
-        }
+        })
     }
 
 }

@@ -23,13 +23,6 @@
             android:name="title"
             android:defaultValue="None" />
         <action
-            android:id="@+id/action_homeFragment_to_jobsFragment"
-            app:destination="@id/jobsFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
-        <action
             android:id="@+id/action_homeFragment_to_mallDetailsFragment"
             app:destination="@id/mallDetailsFragment"
             app:enterAnim="@anim/slide_in_left"
@@ -57,6 +50,13 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_homeFragment_to_mallCategoryFragment"
+            app:destination="@id/mallCategoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -86,6 +86,13 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_categoryFragment_to_mallCategoryFragment"
+            app:destination="@id/mallCategoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -142,6 +149,13 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_searchFragment_to_mallCategoryFragment"
+            app:destination="@id/mallCategoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/myStoreFragment"
@@ -285,5 +299,24 @@
         android:id="@+id/chat"
         android:name="com.bazar.bane.bazarshahr.fragments.Chat"
         android:label="Chat" />
+    <fragment
+        android:id="@+id/mallCategoryFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.MallCategoryFragment"
+        android:label="MallCategoryFragment" >
+        <action
+            android:id="@+id/action_mallCategoryFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_mallCategoryFragment_to_productsFragment"
+            app:destination="@id/productsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
 
 </navigation>

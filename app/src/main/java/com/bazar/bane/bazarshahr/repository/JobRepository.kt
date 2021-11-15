@@ -11,8 +11,10 @@ import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.api.response.*
 import com.bazar.bane.bazarshahr.state.HomeState
 import com.bazar.bane.bazarshahr.state.JobState
+import com.bazar.bane.bazarshahr.state.MallCategoryState
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.HOME_STATE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_STATE
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.MALL_STATE
 
 object JobRepository {
     fun getJobsHomeState(request: JobsRequest): LiveData<HomeState> {
@@ -21,6 +23,10 @@ object JobRepository {
 
     fun getJobsJobState(request: JobsRequest): LiveData<JobState> {
         return getJobs(request, JOB_STATE) as LiveData<JobState>
+    }
+
+    fun getJobsMallState(request: JobsRequest): LiveData<MallCategoryState> {
+        return getJobs(request, MALL_STATE) as LiveData<MallCategoryState>
     }
 
     private fun getJobs(request: JobsRequest, state: String): LiveData<Any> {
@@ -35,6 +41,10 @@ object JobRepository {
                     JOB_STATE -> {
                         result.value = JobState.GetJobs(response.body)
                     }
+
+                    MALL_STATE->{
+                        result.value = MallCategoryState.GetJobs(response.body)
+                    }
                 }
             }
 
@@ -46,6 +56,9 @@ object JobRepository {
 
                     JOB_STATE -> {
                         result.value = JobState.ErrorGetJobs(message)
+                    }
+                    MALL_STATE->{
+                        result.value = MallCategoryState.ErrorGetJobs(message)
                     }
                 }
                 Log.d("TAG22", "onReturnError: $message")

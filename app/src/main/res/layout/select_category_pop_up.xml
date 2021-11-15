@@ -18,10 +18,10 @@
 
 
         <RelativeLayout
-            android:layout_margin="@dimen/_10sdp"
-            android:background="@drawable/bg_round_grey"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/_10sdp"
+            android:background="@drawable/bg_round_grey">
 
             <ProgressBar
                 android:layout_width="wrap_content"
@@ -29,58 +29,53 @@
                 android:layout_centerInParent="true"
                 android:visibility="@{categoryViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{categoryViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
+                android:layout_margin="@dimen/_5sdp"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_5sdp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:orientation="horizontal">
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/category_title"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_12sdp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:text="@string/category_title"
-                            android:textColor="@color/colorPrimaryDark"
-                            android:textSize="@dimen/_12sdp" />
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imageView4"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:tint="@color/colorPrimaryDark"
-                            app:srcCompat="@drawable/ic_category" />
-
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_margin="@dimen/_5sdp"
-                        android:background="@color/colorPrimaryDark" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/category_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="@dimen/_5sdp" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:tint="@color/colorPrimaryDark"
+                        app:srcCompat="@drawable/ic_category" />
 
 
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:background="@color/colorPrimaryDark" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="@{categoryViewModel.mainLoadingState?View.GONE:View.VISIBLE}"
+                    android:id="@+id/category_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp" />
+
+
+            </LinearLayout>
 
         </RelativeLayout>
 

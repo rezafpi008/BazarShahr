@@ -134,7 +134,7 @@ class MallAdapter constructor(
                     .error(R.drawable.image_default)
                     .into(holder.jobImg)
 
-            holder.information.setOnClickListener {
+            holder.itemView.setOnClickListener {
                 onClickItem?.clickedInformation(item, position)
             }
 
@@ -186,8 +186,6 @@ class MallAdapter constructor(
         var jobImg: AppCompatImageView =
             itemView.findViewById<View>(R.id.image) as AppCompatImageView
         var title: TextView = itemView.findViewById<View>(R.id.title) as TextView
-        var information: AppCompatButton =
-            itemView.findViewById<View>(R.id.information_btn) as AppCompatButton
         var products: AppCompatButton =
             itemView.findViewById<View>(R.id.products_btn) as AppCompatButton
 

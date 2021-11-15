@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_ITEM
+import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_ITEM_HORIZONTAL_FIXED
 import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_ITEM_SELECTED
 import com.bazar.bane.bazarshahr.adapter.AdapterConstant.Companion.VIEW_TYPE_LOADING
 import com.bazar.bane.bazarshahr.api.model.JobCategory
@@ -37,6 +38,7 @@ class JobCategorySelectedAdapter constructor(
     val loadingState = 0
     val loadingSuccessState = 1
     val loadingFailState = 2
+    var horizontalItemFixed = false
 
     init {
         this.context = context
@@ -74,10 +76,11 @@ class JobCategorySelectedAdapter constructor(
         return when {
             itemsList[position] == null -> VIEW_TYPE_LOADING
             else -> {
-                if (selectedItem == position)
-                    VIEW_TYPE_ITEM_SELECTED
-                else
-                    VIEW_TYPE_ITEM
+                when {
+                    horizontalItemFixed -> VIEW_TYPE_ITEM_HORIZONTAL_FIXED
+                    selectedItem == position -> VIEW_TYPE_ITEM_SELECTED
+                    else -> VIEW_TYPE_ITEM
+                }
             }
         }
     }
@@ -95,6 +98,12 @@ class JobCategorySelectedAdapter constructor(
                         .inflate(R.layout.item_category_selected, parent, false)
                 LostAuctionViewHolder(view)
             }
+            VIEW_TYPE_ITEM_HORIZONTAL_FIXED -> {
+                val view: View =
+                    LayoutInflater.from(context)
+                        .inflate(R.layout.item_category_fixed, parent, false)
+                LostAuctionViewHolder(view)
+            }
             else -> {
                 val view: View = LayoutInflater.from(context)
                     .inflate(R.layout.item_loading_horizental, parent, false)
@@ -109,6 +118,13 @@ class JobCategorySelectedAdapter constructor(
             holder.title.text = item.name
             if (item.name == null)
                 holder.title.text = item.title
+
+            if (item.img != null)
+                Glide.with(context!!)
+                    .load(item.img)
+                    .placeholder(R.drawable.image_default)
+                    .error(R.drawable.image_default)
+                    .into(holder.categoryImg)
 
             holder.itemView.setOnClickListener {
                 selectCategory(position)
@@ -156,6 +172,8 @@ class JobCategorySelectedAdapter constructor(
     class LostAuctionViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById<View>(R.id.title) as TextView
+        var categoryImg: AppCompatImageView =
+            itemView.findViewById<View>(R.id.img) as AppCompatImageView
 
     }
 

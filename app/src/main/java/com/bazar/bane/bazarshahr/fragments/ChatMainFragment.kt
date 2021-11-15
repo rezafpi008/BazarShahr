@@ -17,6 +17,8 @@ import com.bazar.bane.bazarshahr.databinding.FragmentChatMainBinding
 import com.bazar.bane.bazarshahr.intent.MessageIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.state.MessageState
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_ID
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.MessageViewModel
 
@@ -73,6 +75,7 @@ abstract class ChatMainFragment : Fragment(), FragmentFunction {
         recyclerView.layoutManager = horizontalLayoutManager
         adapter =
             MessageAdapter(requireContext(), items)
+        adapter.setUserid(SharedPreferenceUtil.getStringValue(USER_ID)!!)
         recyclerView.adapter = adapter
 
         adapter.setItemOnClick(object : OnClickItem<Message> {
@@ -99,11 +102,10 @@ abstract class ChatMainFragment : Fragment(), FragmentFunction {
 
                 is MessageState.SendMessage -> {
                     viewModel.setMessageVisibilityState(false)
-                    val message = Message(binding.message.text.toString(), true)
+                    val message = Message(binding.message.text.toString())
                     items.add(message)
                     binding.message.setText("")
                     adapter.setLoading()
-                    ToastUtil.showToast(R.string.message_send)
                 }
 
                 is MessageState.ErrorSendMessage -> {

@@ -32,6 +32,7 @@ class MessageAdapter constructor(
     val loadingFailState = 2
     lateinit var userId: String
 
+
     init {
         this.context = context
         this.messages = itemsList
@@ -53,10 +54,10 @@ class MessageAdapter constructor(
     override fun getItemViewType(position: Int): Int {
         return when {
             messages[position] is Message -> {
-                if ((messages[position] as Message).send !=null)
-                    TYPE_MESSAGE_SENT
-                else
-                    TYPE_MESSAGE_RECEIVED
+                when {
+                    (messages[position] as Message).to != null -> TYPE_MESSAGE_SENT
+                    else -> TYPE_MESSAGE_RECEIVED
+                }
             }
             else ->
                 VIEW_TYPE_LOADING

@@ -109,7 +109,7 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 bundle.putString(MALL_ID, mall.id)
                 bundle.putString(TITLE, mall.name)
                 findNavController().navigate(
-                    R.id.action_categoryFragment_to_jobsFragment,
+                    R.id.action_categoryFragment_to_mallCategoryFragment,
                     bundle
                 )
             }

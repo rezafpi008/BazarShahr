@@ -26,6 +26,8 @@ open class AppConstants {
 
         const val HOME_STATE = "homeState"
 
+        const val MALL_STATE = "mallState"
+
         const val PER_PAGE_ITEM = 10
 
         const val TYPE_JOB = "job"

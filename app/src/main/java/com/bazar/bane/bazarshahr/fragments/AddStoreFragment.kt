@@ -3,14 +3,15 @@ package com.bazar.bane.bazarshahr.fragments
 import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,13 +26,13 @@ import com.bazar.bane.bazarshahr.popUp.PopUpCallback
 import com.bazar.bane.bazarshahr.popUp.SelectCategoryPopUp
 import com.bazar.bane.bazarshahr.popUp.SelectMallPopUp
 import com.bazar.bane.bazarshahr.state.AddState
-import com.bazar.bane.bazarshahr.state.JobState
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_ID
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.util.imagePicker.ImagePickerDialogFragment
 import com.bazar.bane.bazarshahr.util.imagePicker.PickerBuilder
 import com.bazar.bane.bazarshahr.viewModel.AddViewModel
+
 
 class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
@@ -131,6 +132,10 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
             binding.address.error = getString(R.string.please_fill_this_field)
             flag = false
         }
+        if (binding.city.text.toString() == "") {
+            ToastUtil.showToast(R.string.please_select_city)
+            flag = false
+        }
         if (binding.categoryTitle.text.toString() == "") {
             ToastUtil.showToast(R.string.please_select_category)
             flag = false
@@ -141,17 +146,24 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     override fun initialData() {
         binding.addImage.setOnClickListener { showBottomView() }
+
+        binding.city.setOnClickListener {
+            showMenu(it)
+        }
+
         binding.categoryTitle.setOnClickListener {
             SelectCategoryPopUp(
                 requireContext(),
-                popUpCallback
+                popUpCallback,
+                this
             ).show()
         }
 
         binding.mallTitle.setOnClickListener {
             SelectMallPopUp(
                 requireContext(),
-                mallPopUpCallback
+                mallPopUpCallback,
+                this
             ).show()
         }
 
@@ -209,6 +221,26 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
         override fun setId(id: String, title: String) {
             binding.mallTitle.text = title
             mallId = id
+        }
+    }
+
+    private fun showMenu(v: View) {
+        val popup = PopupMenu(context, v)
+        popup.menuInflater.inflate(R.menu.city_menu, popup.menu)
+        popup.show()
+        popup.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.bane -> {
+                    binding.city.text = getString(R.string.bane)
+                }
+                R.id.saghz -> {
+                    binding.city.text = getString(R.string.saghz)
+                }
+                R.id.marivan -> {
+                    binding.city.text = getString(R.string.marivan)
+                }
+            }
+            false
         }
     }
 

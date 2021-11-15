@@ -37,6 +37,7 @@
     <string name="please_select_category">دسته بندی مورد نظر را انتخاب کنید</string>
     <string name="no_product_to_show">محصولی برای نمایش وجود ندارد</string>
     <string name="please_fill_this_field">لطفا این قسمت را پر کنید.</string>
+    <string name="please_select_city">شهر نظر را انتخاب کنید</string>
 
 
     <string name="incorrect_phone_number">شماره تلفن اشتباه است</string>
@@ -48,7 +49,7 @@
     <string name="enter_details">توضیحات خود را وارد کنید</string>
     <string name="job_name">نام فروشگاه</string>
     <string name="enter_phone_number">شماره تلفن را وارد کنید</string>
-    <string name="enter_address">آدرس را وارد کنید</string>
+    <string name="enter_address_details">جزئیات آدرس را وارد کنید</string>
     <string name="submit">ثبت</string>
 
     <string name="job_id">کد فروشگاه شما</string>
@@ -83,8 +84,14 @@
     <string name="insert_job_id">کد فروشگاه خود را وارد کنید</string>
     <string name="your_message">پیام شما...</string>
 
+    <string name="select_city">شهر خود را انتخاب کنید</string>
+
     <string name="my_chats">پیام‌های دریافتی</string>
     <string name="send_message">ارسال پیام</string>
+
+    <string name="bane">بانه</string>
+    <string name="saghz">سقز</string>
+    <string name="marivan">مریوان</string>
 
 
 </resources>

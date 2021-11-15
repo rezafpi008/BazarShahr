@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.databinding.FragmentSplashScreenBinding
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_TOKEN
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 
@@ -28,12 +29,14 @@ class SplashScreenFragment : Fragment() {
         binding.lifecycleOwner = this
         initData()
         Handler(Looper.getMainLooper()).postDelayed({
-           startApp()
+            startApp()
         }, 3000)
         return view
     }
 
     private fun startApp() {
+        /*var a = SharedPreferenceUtil.getStringValue(USER_TOKEN)
+        var b = SharedPreferenceUtil.getStringValue(USER_ID)*/
         when {
             !existUser() -> {
                 findNavController().navigate(R.id.action_splashScreenFragment_to_signInFragment)

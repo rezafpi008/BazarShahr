@@ -67,7 +67,7 @@ class JobCategoryViewModel : ViewModel() {
         _stateIntent.value = intent
     }
 
-    private fun getCategoriesPaginate(): Int {
+    fun getCategoriesPaginate(): Int {
         categoriesPage += 1
         return categoriesPage
     }
@@ -82,8 +82,7 @@ class JobCategoryViewModel : ViewModel() {
             JobCategoryIntent.Categories(
                 JobCategoryRequest(
                     AppConstants.PER_PAGE_ITEM,
-                    getCategoriesPaginate(),
-                    true
+                    getCategoriesPaginate()
                 )
             )
         )

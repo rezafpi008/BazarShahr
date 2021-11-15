@@ -89,4 +89,9 @@ interface ApiService {
     fun getMessage(
         @Body requestBody: MessagesRequest?,
     ): LiveData<GenericApiResponse<MessagesResponse>>
+
+    @POST("api/mall/categories/")
+    fun getMallCategories(
+        @Body requestBody: MallCategoriesRequest?,
+    ): LiveData<GenericApiResponse<MallCategoriesResponse>>
 }
