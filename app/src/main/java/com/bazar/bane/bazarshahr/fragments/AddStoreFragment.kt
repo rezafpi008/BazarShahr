@@ -109,7 +109,7 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 }
             })
             ?.setImageName("ads")
-            ?.setImageFolderName("MyAds")
+            ?.setImageFolderName("bazarShahr")
             ?.setCustomizedUcrop(4, 3)
             ?.start()
     }

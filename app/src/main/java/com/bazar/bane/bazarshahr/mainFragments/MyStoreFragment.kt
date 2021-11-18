@@ -34,7 +34,7 @@ class MyStoreFragment : Fragment(), FragmentFunction {
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
-        viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
+        //viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
         return view
     }
 
@@ -45,6 +45,10 @@ class MyStoreFragment : Fragment(), FragmentFunction {
 
         binding.submitProduct.setOnClickListener {
             findNavController().navigate(R.id.action_myStoreFragment_to_addProductFragment)
+        }
+
+        binding.editProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_myStoreFragment_to_editProfileFragment)
         }
     }
 
@@ -61,13 +65,6 @@ class MyStoreFragment : Fragment(), FragmentFunction {
                     viewModel.setMainLoadingState(false)
                     ToastUtil.showToast(dataState.error)
                 }
-
-                is UserState.EditUserDetails -> {
-
-                }
-                is UserState.ErrorEditUserDetails -> {
-
-                }
             }
         })
     }
@@ -76,8 +73,8 @@ class MyStoreFragment : Fragment(), FragmentFunction {
         if (url != null)
             Glide.with(requireContext())
                 .load(url)
-                .placeholder(R.drawable.image_default)
-                .error(R.drawable.image_default)
+                .placeholder(R.drawable.image_default_avatar)
+                .error(R.drawable.image_default_avatar)
                 .into(binding.userImg)
     }
 }

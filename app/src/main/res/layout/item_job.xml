@@ -80,7 +80,7 @@
 
     </RelativeLayout>
 
-    <androidx.viewpager.widget.ViewPager
+    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/colorGray"

@@ -18,6 +18,9 @@ class UserViewModel : ViewModel() {
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
+    private val _submitLoadingState: MutableLiveData<Boolean> = MutableLiveData(false)
+    val submitLoadingState: LiveData<Boolean> get() = _submitLoadingState
+
     private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState
 
@@ -45,6 +48,9 @@ class UserViewModel : ViewModel() {
         _mainLoadingState.value = state
     }
 
+    fun setSubmitLoadingState(state: Boolean) {
+        _submitLoadingState.value = state
+    }
 
     fun setUser(state: User) {
         _user.value = state

@@ -11,7 +11,7 @@ import java.io.*
 
 class EditUserRequest(
     name: String,
-    phoneNumber: String?,
+    phoneNumber: String,
     image: String?
 ) {
     @SerializedName("data")
@@ -27,7 +27,7 @@ class EditUserRequest(
 
     class CreateJObData(
         name: String,
-        phoneNumber: String?,
+        phoneNumber: String,
         image: String?
     ) {
         @SerializedName("name")

@@ -92,9 +92,10 @@ dependencies {
     //SearchBar
     implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
 
-    //country code picker
-    implementation 'com.hbb20:ccp:2.4.2'
-
     //circle Image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Calligraphy
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
 }

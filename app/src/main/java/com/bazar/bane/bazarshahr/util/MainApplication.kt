@@ -1,7 +1,11 @@
 package com.bazar.bane.bazarshahr.util
 
+import android.R
 import android.app.Application
 import android.content.Context
+import io.github.inflationx.calligraphy3.CalligraphyConfig
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor
+import io.github.inflationx.viewpump.ViewPump
 
 
 class MainApplication : Application() {
@@ -20,5 +24,16 @@ class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ViewPump.init(
+            ViewPump.builder()
+                .addInterceptor(
+                    CalligraphyInterceptor(
+                        CalligraphyConfig.Builder()
+                            .setDefaultFontPath("fonts/shabnam_medium.ttf")
+                            .build()
+                    )
+                )
+                .build()
+        )
     }
 }

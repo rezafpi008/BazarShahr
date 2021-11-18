@@ -15,7 +15,6 @@ import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.state.LoginState
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.LoginViewModel
-import com.hbb20.CountryCodePicker
 
 
 class SignInFragment : Fragment(), FragmentFunction {

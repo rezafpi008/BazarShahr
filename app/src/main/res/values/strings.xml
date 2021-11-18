@@ -97,6 +97,7 @@
     <string name="city">شهر:</string>
     <string name="choice_city">انتخاب شهر</string>
     <string name="cities">شهر‌ها</string>
-
+    <string name="user_profile">عکس کاربر</string>
+    <string name="edit_profile_success">ویرایش با موفقیت انجام شد.</string>
 
 </resources>
