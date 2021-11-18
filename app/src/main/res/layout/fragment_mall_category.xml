@@ -21,7 +21,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/toolbar_main" />
+            layout="@layout/toolbar_with_back" />
 
         <RelativeLayout
             android:layout_width="match_parent"

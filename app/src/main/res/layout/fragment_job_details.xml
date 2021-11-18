@@ -40,6 +40,7 @@
                         android:id="@+id/gallery_view"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_150sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         android:visibility="visible"
                         app:sliderAnimationDuration="600"
@@ -58,35 +59,64 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp">
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/title"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/_10sdp"
-                                android:text="@{jobViewModel.job.name}"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/_14sdp" />
-
-
                             <LinearLayout
-                                android:layout_marginBottom="@dimen/_10sdp"
-                                android:id="@+id/price_section"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
+                                    android:id="@+id/title"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:text="@{jobViewModel.job.name}"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:tint="@color/colorPrimaryDark"
+                                    app:srcCompat="@drawable/ic_store" />
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@color/colorBackground" />
+
+
+                            <LinearLayout
+                                android:id="@+id/price_section"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:orientation="horizontal">
+
+                                <TextView
                                     android:id="@+id/price"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_10sdp"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="@{jobViewModel.job.phoneNumber}"
@@ -94,9 +124,9 @@
                                     android:textSize="@dimen/_14sdp" />
 
                                 <TextView
-                                    android:layout_marginTop="@dimen/_10sdp"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_10sdp"
                                     android:gravity="start"
                                     android:text="@string/phone_number"
                                     android:textColor="@color/colorPrimaryDark"
@@ -106,25 +136,33 @@
                                     android:id="@+id/imageView2"
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
+                                    android:layout_marginStart="@dimen/_5sdp"
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:layout_marginEnd="@dimen/_10sdp"
-                                    android:layout_marginStart="@dimen/_5sdp"
                                     android:tint="@color/colorPrimaryDark"
                                     app:srcCompat="@drawable/ic_phone_number" />
 
 
                             </LinearLayout>
 
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@color/colorBackground" />
+
                             <LinearLayout
-                                android:layout_marginBottom="@dimen/_10sdp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
                                 android:orientation="horizontal">
 
                                 <TextView
-                                    android:layout_margin="@dimen/_10sdp"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_10sdp"
                                     android:layout_weight="1"
                                     android:text="@{jobViewModel.job.address}"
                                     android:textColor="@color/colorGray"
@@ -133,8 +171,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/address"
                                     android:layout_marginTop="@dimen/_10sdp"
+                                    android:text="@string/address"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="@dimen/_14sdp" />
 
@@ -142,11 +180,53 @@
                                     android:id="@+id/imageView3"
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
-                                    android:tint="@color/colorPrimaryDark"
+                                    android:layout_marginStart="@dimen/_5sdp"
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:layout_marginEnd="@dimen/_10sdp"
-                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:tint="@color/colorPrimaryDark"
                                     app:srcCompat="@drawable/ic_location" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_1sdp"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:background="@color/colorBackground" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:text="@{jobViewModel.job.content}"
+                                    android:textColor="@color/colorGray"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:text="@string/more_details"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:textSize="@dimen/_14sdp" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:tint="@color/colorPrimaryDark"
+                                    app:srcCompat="@drawable/ic_info" />
 
                             </LinearLayout>
 
@@ -154,28 +234,6 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/show_product"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:background="@drawable/bg_round_stroke_primary_dark"
-                        android:gravity="center"
-                        android:text="@string/show_products"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorPrimaryDark" />
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/send_message"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/_10sdp"
-                        android:background="@drawable/bg_round_primary"
-                        android:gravity="center"
-                        android:text="@string/send_message"
-                        android:textAllCaps="false"
-                        android:textColor="@color/colorWhite" />
 
                 </LinearLayout>
             </ScrollView>
@@ -185,6 +243,47 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="@{jobViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/send_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_weight="1"
+                    android:background="@color/colorPrimaryDark">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/send_message"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/show_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_weight="1"
+                    android:background="@color/colorWhite">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/show_products"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 

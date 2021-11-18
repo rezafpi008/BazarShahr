@@ -61,7 +61,7 @@ class MallDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
-        binding.showProduct.setOnClickListener {
+        binding.showJobs.setOnClickListener {
             val bundle = Bundle()
             bundle.putString(MALL_ID, mallId)
             bundle.putString(TITLE, title)

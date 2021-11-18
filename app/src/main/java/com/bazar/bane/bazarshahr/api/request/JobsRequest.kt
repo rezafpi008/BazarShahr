@@ -1,5 +1,7 @@
 package com.bazar.bane.bazarshahr.api.request
 
+import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.google.gson.annotations.SerializedName
 
 class JobsRequest(perPage: Int, category: String?, offset: Int, mallId: String?) {
@@ -23,11 +25,15 @@ class JobsRequest(perPage: Int, category: String?, offset: Int, mallId: String?)
         @SerializedName("mall_id")
         var mallId: String? = null
 
+        @SerializedName("city")
+        var city: String? = null
+
         init {
             this.perPage = perPage
             this.category = category
             this.offset = offset * perPage
             this.mallId = mallId
+            this.city = SharedPreferenceUtil.getStringValue(AppConstants.CITY_ID)!!
         }
 
     }

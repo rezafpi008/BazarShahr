@@ -94,4 +94,17 @@ interface ApiService {
     fun getMallCategories(
         @Body requestBody: MallCategoriesRequest?,
     ): LiveData<GenericApiResponse<MallCategoriesResponse>>
+
+    @POST("api/job/register/")
+    fun getUserDetails(
+        @Body requestBody: UserDetailsRequest?,
+    ): LiveData<GenericApiResponse<UserDetailsResponse>>
+
+    @POST("api/job/register/")
+    fun editUserDetails(
+        @Body requestBody: EditUserRequest?,
+    ): LiveData<GenericApiResponse<MainResponse>>
+
+    @POST("api/cities/")
+    fun getCities(): LiveData<GenericApiResponse<CitiesResponse>>
 }

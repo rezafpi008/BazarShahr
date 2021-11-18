@@ -67,6 +67,13 @@ class HomeViewModel : ViewModel() {
         return jobPage
     }
 
+    fun changeCity() {
+        page = -1
+        jobPage = -1
+        setStateEvent(HomeIntent.Slider)
+        setMainLoadingState(true)
+    }
+
     fun getMalls() {
         setStateEvent(
             HomeIntent.Malls(

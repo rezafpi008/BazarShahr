@@ -8,16 +8,12 @@ import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.MainApplication.Companion.applicationContext
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.google.gson.annotations.SerializedName
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.*
 
 
 class CreateJobRequest(
     title: String,
+    cityId: String,
     address: String,
     phoneNumber: String,
     description: String?,
@@ -31,6 +27,7 @@ class CreateJobRequest(
     init {
         data = CreateJObData(
             title,
+            cityId,
             address,
             phoneNumber,
             description,
@@ -42,6 +39,7 @@ class CreateJobRequest(
 
     class CreateJObData(
         title: String,
+        cityId: String,
         address: String,
         phoneNumber: String,
         description: String?,
@@ -55,6 +53,7 @@ class CreateJobRequest(
         init {
             this.createJObParam = CreateJObParam(
                 title,
+                cityId,
                 address,
                 phoneNumber,
                 description,
@@ -68,6 +67,7 @@ class CreateJobRequest(
 
     class CreateJObParam(
         title: String,
+        cityId: String,
         address: String,
         phoneNumber: String,
         description: String?,
@@ -77,6 +77,9 @@ class CreateJobRequest(
     ) {
         @SerializedName("title")
         var title: String? = null
+
+        @SerializedName("cityId")
+        var cityId: String? = null
 
         @SerializedName("address")
         var address: String? = null
@@ -102,6 +105,7 @@ class CreateJobRequest(
 
         init {
             this.title = title
+            this.cityId = cityId
             this.address = address
             this.phoneNumber = phoneNumber
             this.description = description
@@ -139,7 +143,7 @@ class CreateJobRequest(
         var image: String? = null
 
         @SerializedName("format")
-        var format:String="png"
+        var format: String = "png"
 
         init {
             this.image = image

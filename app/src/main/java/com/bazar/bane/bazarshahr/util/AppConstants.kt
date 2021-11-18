@@ -30,11 +30,13 @@ open class AppConstants {
 
         const val PER_PAGE_ITEM = 10
 
+
         const val TYPE_JOB = "job"
         const val TYPE_PRODUCT = "product"
         const val TYPE_MALL = "mall"
 
-
+        const val CITY_NAME = "cityName"
+        const val CITY_ID = "cityId"
 
     }
 }

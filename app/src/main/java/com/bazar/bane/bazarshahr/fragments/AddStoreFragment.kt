@@ -24,6 +24,7 @@ import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
 import com.bazar.bane.bazarshahr.popUp.PopUpCallback
 import com.bazar.bane.bazarshahr.popUp.SelectCategoryPopUp
+import com.bazar.bane.bazarshahr.popUp.SelectCityPopUp
 import com.bazar.bane.bazarshahr.popUp.SelectMallPopUp
 import com.bazar.bane.bazarshahr.state.AddState
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_ID
@@ -43,6 +44,7 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
     var items: ArrayList<Any?> = ArrayList()
     lateinit var categoryId: String
     var mallId: String? = null
+    var cityId: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -148,13 +150,17 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding.addImage.setOnClickListener { showBottomView() }
 
         binding.city.setOnClickListener {
-            showMenu(it)
+            SelectCityPopUp(
+                requireContext(),
+                cityPopUpCallback,
+                this
+            ).show()
         }
 
         binding.categoryTitle.setOnClickListener {
             SelectCategoryPopUp(
                 requireContext(),
-                popUpCallback,
+                categoryPopUpCallback,
                 this
             ).show()
         }
@@ -174,6 +180,7 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     AddIntent.AddJob(
                         CreateJobRequest(
                             binding.title.text.toString(),
+                            cityId!!,
                             binding.address.text.toString(),
                             binding.phoneNumber.text.toString(),
                             binding.details.text.toString(),
@@ -210,7 +217,7 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
 
-    private val popUpCallback: PopUpCallback = object : PopUpCallback {
+    private val categoryPopUpCallback: PopUpCallback = object : PopUpCallback {
         override fun setId(id: String, title: String) {
             binding.categoryTitle.text = title
             categoryId = id
@@ -224,23 +231,10 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
         }
     }
 
-    private fun showMenu(v: View) {
-        val popup = PopupMenu(context, v)
-        popup.menuInflater.inflate(R.menu.city_menu, popup.menu)
-        popup.show()
-        popup.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.bane -> {
-                    binding.city.text = getString(R.string.bane)
-                }
-                R.id.saghz -> {
-                    binding.city.text = getString(R.string.saghz)
-                }
-                R.id.marivan -> {
-                    binding.city.text = getString(R.string.marivan)
-                }
-            }
-            false
+    private val cityPopUpCallback: PopUpCallback = object : PopUpCallback {
+        override fun setId(id: String, title: String) {
+            binding.city.text = getString(R.string.bane)
+            cityId = id
         }
     }
 

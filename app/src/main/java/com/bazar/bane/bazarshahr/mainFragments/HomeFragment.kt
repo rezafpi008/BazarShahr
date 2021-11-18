@@ -19,8 +19,11 @@ import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bazar.bane.bazarshahr.api.model.Slider
 import com.bazar.bane.bazarshahr.databinding.FragmentHomeBinding
 import com.bazar.bane.bazarshahr.intent.HomeIntent
+import com.bazar.bane.bazarshahr.popUp.PopUpCallback
+import com.bazar.bane.bazarshahr.popUp.SelectCityPopUp
 import com.bazar.bane.bazarshahr.state.HomeState
-import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.CITY_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.CITY_NAME
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.MALL_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PRODUCT_ID
@@ -28,13 +31,14 @@ import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TITLE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TYPE_JOB
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TYPE_MALL
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TYPE_PRODUCT
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.HomeViewModel
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 
 
-class HomeFragment : Fragment(), FragmentFunction, ToolbarFunction {
+class HomeFragment : Fragment(), FragmentFunction {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewModel: HomeViewModel
@@ -62,14 +66,33 @@ class HomeFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
-        setToolbar()
         viewModel.setStateEvent(HomeIntent.Slider)
         return view
     }
 
     override fun initialData() {
+        if (!SharedPreferenceUtil.getStringValue(CITY_NAME).isNullOrBlank()) {
+            binding.cityName.text = SharedPreferenceUtil.getStringValue(CITY_NAME)
+        }
+        binding.choiceCity.setOnClickListener {
+            SelectCityPopUp(
+                requireContext(),
+                popUpCallback,
+                this
+            ).show()
+        }
         initialMallRecyclerView()
         initialJobRecyclerView()
+    }
+
+    private val popUpCallback: PopUpCallback = object : PopUpCallback {
+        override fun setId(id: String, title: String) {
+            binding.cityName.text = title
+            SharedPreferenceUtil.saveStringValue(CITY_ID, id)
+            SharedPreferenceUtil.saveStringValue(CITY_NAME, title)
+            initialData()
+            viewModel.changeCity()
+        }
     }
 
     private fun initialMallRecyclerView() {
@@ -203,11 +226,6 @@ class HomeFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
             }
         })
-    }
-
-    override fun setToolbar() {
-        val toolbar: Toolbar = binding.toolbar as Toolbar
-        toolbar.findViewById<TextView>(R.id.title_page).text = getString(R.string.home_page_title)
     }
 
     private fun initSliderView() {

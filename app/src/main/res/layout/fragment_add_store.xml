@@ -170,30 +170,18 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="@string/address"
                             android:textColor="@color/colorPrimaryDark" />
-                        <LinearLayout
-                            android:layout_marginTop="@dimen/_5sdp"
+                        <TextView
                             android:layout_gravity="end"
-                            android:orientation="horizontal"
+                            android:id="@+id/city"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <TextView
-                                android:id="@+id/city"
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_5sdp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/select_city"
-                                android:textSize="@dimen/_12sdp"
-                                android:textColor="@color/colorBlack"/>
-                            <TextView
-                                android:layout_marginBottom="@dimen/_5sdp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="کردستان"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:textSize="@dimen/_12sdp"
-                                android:textColor="@color/colorBlack"/>
-                        </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:hint="@string/select_city"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_12sdp" />
+
                         <EditText
                             android:id="@+id/address"
                             android:layout_width="match_parent"
@@ -204,6 +192,7 @@
                             android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

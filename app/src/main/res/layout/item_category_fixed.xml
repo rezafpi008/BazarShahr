@@ -39,7 +39,7 @@
             android:visibility="gone"
             app:cardCornerRadius="@dimen/_8sdp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="match_parent"
