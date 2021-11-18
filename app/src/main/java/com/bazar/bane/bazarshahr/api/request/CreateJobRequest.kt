@@ -78,7 +78,7 @@ class CreateJobRequest(
         @SerializedName("title")
         var title: String? = null
 
-        @SerializedName("cityId")
+        @SerializedName("city")
         var cityId: String? = null
 
         @SerializedName("address")

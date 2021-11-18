@@ -233,7 +233,7 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private val cityPopUpCallback: PopUpCallback = object : PopUpCallback {
         override fun setId(id: String, title: String) {
-            binding.city.text = getString(R.string.bane)
+            binding.city.text = title
             cityId = id
         }
     }

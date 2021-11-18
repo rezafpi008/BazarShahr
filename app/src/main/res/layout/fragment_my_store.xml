@@ -88,7 +88,7 @@
                 android:layout_marginBottom="@dimen/_3sdp"
                 android:elevation="@dimen/_5sdp"
                 android:fitsSystemWindows="true"
-                app:cardCornerRadius="@dimen/_6sdp"
+                app:cardCornerRadius="@dimen/_10sdp"
                 app:cardElevation="@dimen/_5sdp">
 
                 <LinearLayout

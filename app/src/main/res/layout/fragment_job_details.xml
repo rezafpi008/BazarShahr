@@ -26,6 +26,7 @@
             android:layout_height="match_parent">
 
             <ScrollView
+                android:layout_marginBottom="@dimen/_45sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{jobViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
@@ -58,9 +59,8 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
-                        app:cardElevation="0dp">
+                        android:layout_margin="@dimen/_10sdp"
+                        app:cardCornerRadius="@dimen/_10sdp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                                     android:layout_weight="1"
                                     android:text="@{jobViewModel.job.name}"
                                     android:textColor="@color/colorBlack"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_13sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/_20sdp"
@@ -101,7 +101,7 @@
                                 android:layout_height="@dimen/_1sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:background="@color/colorBackground" />
+                                android:background="@color/colorGrayLight" />
 
 
                             <LinearLayout
@@ -121,7 +121,7 @@
                                     android:gravity="center"
                                     android:text="@{jobViewModel.job.phoneNumber}"
                                     android:textColor="@color/colorGray"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -130,7 +130,7 @@
                                     android:gravity="start"
                                     android:text="@string/phone_number"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/imageView2"
@@ -150,7 +150,7 @@
                                 android:layout_height="@dimen/_1sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:background="@color/colorBackground" />
+                                android:background="@color/colorGrayLight" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -166,7 +166,7 @@
                                     android:layout_weight="1"
                                     android:text="@{jobViewModel.job.address}"
                                     android:textColor="@color/colorGray"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -174,7 +174,7 @@
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:text="@string/address"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:id="@+id/imageView3"
@@ -193,7 +193,7 @@
                                 android:layout_height="@dimen/_1sdp"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
-                                android:background="@color/colorBackground" />
+                                android:background="@color/colorGrayLight" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                                     android:layout_weight="1"
                                     android:text="@{jobViewModel.job.content}"
                                     android:textColor="@color/colorGray"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
                                     android:layout_marginTop="@dimen/_10sdp"
                                     android:text="@string/more_details"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="@dimen/_14sdp" />
+                                    android:textSize="@dimen/_12sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="@dimen/_20sdp"
@@ -245,6 +245,7 @@
                 android:visibility="@{jobViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
             <LinearLayout
+                android:id="@+id/btn_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
