@@ -4,15 +4,15 @@ import com.bazar.bane.bazarshahr.util.AppConstants.Companion.CITY_ID
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.google.gson.annotations.SerializedName
 
-class MallsRequest(perPage: Int, category: String?, offset: Int) {
+class MallsRequest(perPage: Int, category: String?, offset: Int, city: String) {
     @SerializedName("data")
     var data: MallData? = null
 
     init {
-        data = MallData(perPage, category, offset)
+        data = MallData(perPage, category, offset, city)
     }
 
-    class MallData(perPage: Int, category: String?, offset: Int) {
+    class MallData(perPage: Int, category: String?, offset: Int, city: String) {
         @SerializedName("per_page")
         var perPage: Int? = null
 
@@ -30,7 +30,7 @@ class MallsRequest(perPage: Int, category: String?, offset: Int) {
             this.perPage = perPage
             this.category = category
             this.offset = offset * perPage
-            this.city = SharedPreferenceUtil.getStringValue(CITY_ID)!!
+            this.city = city
         }
 
     }

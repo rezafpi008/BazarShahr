@@ -17,11 +17,14 @@ import com.bazar.bane.bazarshahr.adapter.*
 import com.bazar.bane.bazarshahr.api.model.Mall
 import com.bazar.bane.bazarshahr.databinding.SelectMallPopUpBinding
 import com.bazar.bane.bazarshahr.state.JobCategoryState
+import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.viewModel.JobCategoryViewModel
 
 class SelectMallPopUp(
     context: Context,
+    cityId: String,
     popUpCallback: PopUpCallback,
     owner: LifecycleOwner
 ) :
@@ -29,6 +32,7 @@ class SelectMallPopUp(
 
     lateinit var binding: SelectMallPopUpBinding
     lateinit var viewModel: JobCategoryViewModel
+    var cityId = cityId
     var callback: PopUpCallback = popUpCallback
     var lifecycleOwner = owner
 
@@ -51,7 +55,7 @@ class SelectMallPopUp(
         binding.lifecycleOwner = lifecycleOwner
         initialData()
         subscribeObservers()
-        viewModel.getMalls()
+        viewModel.getMalls(cityId)
     }
 
     private fun initialData() {
@@ -65,7 +69,7 @@ class SelectMallPopUp(
         mallRecyclerView.adapter = mallAdapter
         mallAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
             override fun onLoadMore() {
-                viewModel.getMalls()
+                viewModel.getMalls(cityId)
             }
         })
 

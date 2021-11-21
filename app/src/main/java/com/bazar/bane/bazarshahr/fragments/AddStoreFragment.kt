@@ -166,11 +166,15 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
         }
 
         binding.mallTitle.setOnClickListener {
-            SelectMallPopUp(
-                requireContext(),
-                mallPopUpCallback,
-                this
-            ).show()
+            if (binding.city.text.toString() == "")
+                ToastUtil.showToast(R.string.select_city)
+            else
+                SelectMallPopUp(
+                    requireContext(),
+                    cityId!!,
+                    mallPopUpCallback,
+                    this
+                ).show()
         }
 
         binding.submit.setOnClickListener {

@@ -11,7 +11,7 @@ class MallCategoriesRequest(id: String) {
     }
 
     class MallCategoriesData(id: String) {
-        @SerializedName("id")
+        @SerializedName("mall_id")
         var id: String? = null
 
         init {

@@ -4,14 +4,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Base64
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_TOKEN
 import com.bazar.bane.bazarshahr.util.MainApplication.Companion.applicationContext
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.google.gson.annotations.SerializedName
 import java.io.*
 
 
 class EditUserRequest(
     name: String,
-    phoneNumber: String,
     image: String?
 ) {
     @SerializedName("data")
@@ -20,29 +22,29 @@ class EditUserRequest(
     init {
         data = CreateJObData(
             name,
-            phoneNumber,
             image
         )
     }
 
     class CreateJObData(
         name: String,
-        phoneNumber: String,
         image: String?
     ) {
+        @SerializedName("api_token")
+        var apiToken: String = SharedPreferenceUtil.getStringValue(USER_TOKEN)!!
+
+        @SerializedName("id")
+        var id: String = SharedPreferenceUtil.getStringValue(USER_ID)!!
+
         @SerializedName("name")
         var name: String? = null
 
-        @SerializedName("phone_number")
-        var phoneNumber: String? = null
-
-        @SerializedName("image")
+        @SerializedName("avatar")
         var image: ImageData? = null
 
 
         init {
             this.name = name
-            this.phoneNumber = phoneNumber
             if (image != null)
                 this.image = ImageData(bitmapToBase64(image))
         }

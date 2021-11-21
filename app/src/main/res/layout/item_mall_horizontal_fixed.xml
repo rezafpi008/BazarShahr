@@ -40,7 +40,7 @@
                 android:maxLines="1"
                 android:text="@string/title"
                 android:textColor="@color/colorBlack"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="@dimen/_12sdp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/products_btn"

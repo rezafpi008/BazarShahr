@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.api.request.EditUserRequest
+import com.bazar.bane.bazarshahr.api.request.UserDetailsRequest
 import com.bazar.bane.bazarshahr.databinding.FragmentEditProfileBinding
 import com.bazar.bane.bazarshahr.intent.UserIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
@@ -43,7 +44,7 @@ class EditProfileFragment : Fragment(), FragmentFunction, ToolbarFunction {
         initialData()
         subscribeObservers()
         viewModel.setMainLoadingState(false)
-        //viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
+        viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
         return view
     }
 
@@ -59,7 +60,6 @@ class EditProfileFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     UserIntent.EditUser(
                         EditUserRequest(
                             binding.userName.text.toString(),
-                            binding.userPhoneNumber.text.toString(),
                             image
                         )
                     )
@@ -152,10 +152,6 @@ class EditProfileFragment : Fragment(), FragmentFunction, ToolbarFunction {
         var flag = true
         if (binding.userName.text.toString() == "") {
             binding.userName.error = getString(R.string.please_fill_this_field)
-            flag = false
-        }
-        if (binding.userPhoneNumber.text.length != 11) {
-            ToastUtil.showToast(R.string.incorrect_phone_number)
             flag = false
         }
         return flag

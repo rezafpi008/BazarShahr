@@ -19,7 +19,7 @@ class MallCategoryViewModel : ViewModel() {
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
-    private val _mainViewState: MutableLiveData<Boolean> = MutableLiveData(true)
+    private val _mainViewState: MutableLiveData<Boolean> = MutableLiveData(false)
     val mainViewState: LiveData<Boolean> get() = _mainViewState
 
     private val _jobLoadingState: MutableLiveData<Boolean> = MutableLiveData(false)

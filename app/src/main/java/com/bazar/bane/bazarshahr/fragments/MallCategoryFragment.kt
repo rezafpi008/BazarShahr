@@ -137,8 +137,8 @@ class MallCategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     else {
                         categoryId = dataState.response.data.categories[0].id!!
                         viewModel.setMainViewState(true)
-                        viewModel.setJobLoadingState(true)
-                        viewModel.getJobs(categoryId, mallId)
+                        categoryAdapter.selectCategory(0)
+                        getNewJobs()
                     }
 
                 }

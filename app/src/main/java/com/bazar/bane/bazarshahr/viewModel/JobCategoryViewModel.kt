@@ -14,6 +14,7 @@ import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.repository.MallRepository
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import java.text.FieldPosition
 
 class JobCategoryViewModel : ViewModel() {
@@ -93,7 +94,22 @@ class JobCategoryViewModel : ViewModel() {
             JobCategoryIntent.Malls(
                 MallsRequest(
                     AppConstants.PER_PAGE_ITEM,
-                    null, getMallsPaginate()
+                    null,
+                    getMallsPaginate(),
+                    SharedPreferenceUtil.getStringValue(AppConstants.CITY_ID)!!
+                )
+            )
+        )
+    }
+
+    fun getMalls(cityId:String) {
+        setStateEvent(
+            JobCategoryIntent.Malls(
+                MallsRequest(
+                    AppConstants.PER_PAGE_ITEM,
+                    null,
+                    getMallsPaginate(),
+                    cityId
                 )
             )
         )

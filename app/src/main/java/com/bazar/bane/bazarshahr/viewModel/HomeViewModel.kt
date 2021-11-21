@@ -11,7 +11,9 @@ import com.bazar.bane.bazarshahr.repository.HomeRepository
 import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.repository.MallRepository
 import com.bazar.bane.bazarshahr.state.HomeState
+import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PER_PAGE_ITEM
+import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 
 class HomeViewModel : ViewModel() {
     private var page = -1;
@@ -79,7 +81,9 @@ class HomeViewModel : ViewModel() {
             HomeIntent.Malls(
                 MallsRequest(
                     PER_PAGE_ITEM,
-                    null, getPaginate()
+                    null,
+                    getPaginate(),
+                    SharedPreferenceUtil.getStringValue(AppConstants.CITY_ID)!!
                 )
             )
         )

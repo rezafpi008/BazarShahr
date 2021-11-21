@@ -95,12 +95,12 @@ interface ApiService {
         @Body requestBody: MallCategoriesRequest?,
     ): LiveData<GenericApiResponse<MallCategoriesResponse>>
 
-    @POST("api/job/register/")
+    @POST("api/user/me/")
     fun getUserDetails(
         @Body requestBody: UserDetailsRequest?,
     ): LiveData<GenericApiResponse<UserDetailsResponse>>
 
-    @POST("api/job/register/")
+    @POST("api/user/edit/")
     fun editUserDetails(
         @Body requestBody: EditUserRequest?,
     ): LiveData<GenericApiResponse<MainResponse>>

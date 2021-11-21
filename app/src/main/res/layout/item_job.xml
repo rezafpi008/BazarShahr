@@ -36,7 +36,7 @@
                     android:layout_weight="1"
                     android:text="@string/title"
                     android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp"
                     card_view:ignore="NestedWeights" />
 
                 <LinearLayout

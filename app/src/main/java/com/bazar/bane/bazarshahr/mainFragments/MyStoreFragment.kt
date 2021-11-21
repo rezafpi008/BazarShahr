@@ -34,7 +34,7 @@ class MyStoreFragment : Fragment(), FragmentFunction {
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
-        //viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
+        viewModel.setStateEvent(UserIntent.UserDetails(UserDetailsRequest()))
         return view
     }
 
