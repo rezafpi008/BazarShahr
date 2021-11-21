@@ -204,10 +204,6 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 is AddState.CreateJob -> {
                     viewModel.setMainLoadingState(false)
                     ToastUtil.showToast("فروشگاه با موفقیت ثبت شد.")
-                    SharedPreferenceUtil.saveStringValue(
-                        USER_JOB_ID,
-                        dataState.response.data?.jobId
-                    )
                     showUserJobId(dataState.response.data?.jobId!!)
                 }
 

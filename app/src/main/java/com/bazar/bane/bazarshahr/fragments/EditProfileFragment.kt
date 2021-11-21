@@ -41,6 +41,7 @@ class EditProfileFragment : Fragment(), FragmentFunction, ToolbarFunction {
         viewModel = UserViewModel()
         binding.userViewModel = viewModel
         binding.lifecycleOwner = this
+        setToolbar()
         initialData()
         subscribeObservers()
         viewModel.setMainLoadingState(false)

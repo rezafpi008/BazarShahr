@@ -152,14 +152,13 @@
                             android:text="@string/job_id"
                             android:textColor="@color/colorPrimaryDark" />
 
-                        <EditText
-                            android:id="@+id/job_id"
+                        <TextView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:id="@+id/job_title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:ems="10"
+                            android:layout_marginBottom="@dimen/_10sdp"
                             android:hint="@string/insert_job_id"
-                            android:inputType="textPersonName"
                             android:textColor="@color/colorBlack"
                             android:textSize="@dimen/_12sdp" />
 

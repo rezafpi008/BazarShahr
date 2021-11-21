@@ -1,6 +1,5 @@
 package com.bazar.bane.bazarshahr.fragments
 
-import android.app.AlertDialog
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +20,8 @@ import com.bazar.bane.bazarshahr.databinding.FragmentAddProductBinding
 import com.bazar.bane.bazarshahr.intent.AddIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
+import com.bazar.bane.bazarshahr.popUp.PopUpCallback
+import com.bazar.bane.bazarshahr.popUp.SelectUserJobPopUp
 import com.bazar.bane.bazarshahr.state.AddState
 import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
@@ -36,6 +37,7 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GalleryAdapter
     var items: ArrayList<Any?> = ArrayList()
+    lateinit var jobId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +56,13 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
-        var jobId = SharedPreferenceUtil.getStringValue(AppConstants.USER_JOB_ID)
-        if (jobId != "") {
-            binding.jobId.setText(jobId)
+
+        binding.jobTitle.setOnClickListener {
+            SelectUserJobPopUp(
+                requireContext(),
+                popUpCallback,
+                this
+            ).show()
         }
 
         binding.addImage.setOnClickListener { showBottomView() }
@@ -68,7 +74,7 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
                         CreateProductRequest(
                             binding.title.text.toString(),
                             binding.details.text.toString(),
-                            binding.jobId.text.toString(),
+                            jobId,
                             items
                         )
                     )
@@ -108,6 +114,13 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
         toolbar.findViewById<TextView>(R.id.title_page).text = getString(R.string.add_product_title)
         toolbar.findViewById<AppCompatImageView>(R.id.back).setOnClickListener {
             findNavController().popBackStack()
+        }
+    }
+
+    private val popUpCallback: PopUpCallback = object : PopUpCallback {
+        override fun setId(id: String, title: String) {
+            binding.jobTitle.text = title
+            jobId = id
         }
     }
 
@@ -156,8 +169,8 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
             binding.title.error = getString(R.string.please_fill_this_field)
             flag = false
         }
-        if (binding.jobId.text.toString() == "") {
-            binding.jobId.error = getString(R.string.please_fill_this_field)
+        if (binding.jobTitle.text.toString() == "") {
+            binding.jobTitle.error = getString(R.string.please_fill_this_field)
             flag = false
         }
         return flag
