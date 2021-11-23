@@ -18,11 +18,16 @@ import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 class HomeViewModel : ViewModel() {
     private var page = -1;
     private var jobPage = -1;
+    private val _idleState = MutableLiveData<HomeState>(HomeState.Idle)
     private val _stateIntent: MutableLiveData<HomeIntent> = MutableLiveData()
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
     private val _messageVisibilityState: MutableLiveData<Boolean> = MutableLiveData(false)
     val messageVisibilityState: LiveData<Boolean> get() = _messageVisibilityState
+
+    init {
+        setStateEvent(HomeIntent.Slider)
+    }
 
     var dataState: LiveData<HomeState> = Transformations
         .switchMap(_stateIntent) { stateIntent ->
@@ -41,6 +46,9 @@ class HomeViewModel : ViewModel() {
             }
             is HomeIntent.Malls -> {
                 MallRepository.getMallsHomeState(stateIntent.request)
+            }
+            is HomeIntent.Idle -> {
+                _idleState
             }
         }
     }
@@ -101,5 +109,9 @@ class HomeViewModel : ViewModel() {
             )
         )
 
+    }
+
+    fun stateOff() {
+        setStateEvent(HomeIntent.Idle)
     }
 }

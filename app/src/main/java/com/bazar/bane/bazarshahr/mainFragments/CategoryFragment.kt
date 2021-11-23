@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,7 +31,7 @@ import kotlin.collections.ArrayList
 class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private lateinit var binding: FragmentCategoryBinding
-    private lateinit var viewModel: JobCategoryViewModel
+    private val viewModel: JobCategoryViewModel by viewModels()
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var categoryAdapter: JobCategorySelectedAdapter
     private var categoryItems: ArrayList<Any?> = ArrayList()
@@ -38,7 +39,7 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
     private lateinit var mallRecyclerView: RecyclerView
     private lateinit var mallAdapter: MallAdapter
     private var mallItems: ArrayList<Any?> = ArrayList()
-    private var getMall = true
+    private var getData = true
 
     private lateinit var categoryId: String;
 
@@ -49,22 +50,20 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_category, container, false)
         val view = binding.root
-        viewModel = JobCategoryViewModel()
         binding.jobcategoryViewModel = viewModel
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
         setToolbar()
-        viewModel.getCategories()
+        if (getData)
+            viewModel.getCategories()
         return view
     }
 
     override fun initialData() {
-        getMall = true
-        categoryItems.clear()
         categoryRecyclerView = binding.categoryRecyclerView
         categoryRecyclerView.layoutManager = LinearLayoutManager(context)
-        val gridLayoutManager = GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, true)
+        val gridLayoutManager = GridLayoutManager(context, 1, LinearLayoutManager.HORIZONTAL, true)
         categoryRecyclerView.layoutManager = gridLayoutManager
         categoryAdapter =
             JobCategorySelectedAdapter(requireContext(), categoryItems, categoryRecyclerView)
@@ -86,8 +85,6 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
             }
         })
 
-
-        mallItems.clear()
         mallRecyclerView = binding.mallRecyclerView
         mallRecyclerView.layoutManager = LinearLayoutManager(context)
         val mallGridLayoutManager =
@@ -133,11 +130,12 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     viewModel.setMainLoadingState(false)
                     categoryItems.addAll(dataState.response.categories!!)
                     categoryAdapter.setLoading(categoryAdapter.loadingSuccessState)
-                    if (getMall) {
+                    if (getData) {
                         viewModel.setMallLoadingState(true)
                         viewModel.getMalls()
-                        getMall = false
-                    }
+                        getData = false
+                    } else
+                        viewModel.stateOff()
 
                 }
                 is JobCategoryState.ErrorGetCategories -> {
@@ -152,12 +150,14 @@ class CategoryFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     mallAdapter.setLoading(mallAdapter.loadingSuccessState)
                     if (mallAdapter.itemCount == 0)
                         viewModel.setMessageVisibilityState(true)
+                    viewModel.stateOff()
                 }
 
                 is JobCategoryState.ErrorGetMalls -> {
                     viewModel.setMallLoadingState(false)
                     mallAdapter.setLoading(mallAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
+                    viewModel.stateOff()
                 }
 
             }

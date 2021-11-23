@@ -32,18 +32,16 @@
             tools:ignore="UselessParent">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_marginStart="@dimen/_40sdp"
-                android:layout_marginEnd="@dimen/_40sdp"
-                app:cardCornerRadius="@dimen/_15sdp">
+                android:layout_gravity="center"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                app:cardCornerRadius="@dimen/_6sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
                     android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_margin="@dimen/_5sdp"
                     app:srcCompat="@drawable/logo" />
             </androidx.cardview.widget.CardView>
 
@@ -104,7 +102,7 @@
                         android:gravity="center"
                         android:text="@string/login"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="@dimen/_16sdp"
+                        android:textSize="@dimen/_13sdp"
                         android:visibility="@{loginViewModel.mainLoadingState?View.GONE:View.VISIBLE}" />
                 </RelativeLayout>
 
@@ -152,7 +150,7 @@
                     android:gravity="center"
                     android:text="@string/register"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_13sdp" />
 
 
             </LinearLayout>

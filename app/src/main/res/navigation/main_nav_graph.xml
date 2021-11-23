@@ -228,6 +228,12 @@
         <argument
             android:name="title"
             android:defaultValue="None" />
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="jobTitle"
+            android:defaultValue="None" />
         <action
             android:id="@+id/action_productsFragment_to_productDetailsFragment"
             app:destination="@id/productDetailsFragment"
@@ -264,7 +270,21 @@
     <fragment
         android:id="@+id/productDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.ProductDetailsFragment"
-        android:label="ProductDetailsFragment" />
+        android:label="ProductDetailsFragment" >
+        <argument
+            android:name="jobId"
+            android:defaultValue="None" />
+        <argument
+            android:name="title"
+            android:defaultValue="None" />
+        <action
+            android:id="@+id/action_productDetailsFragment_to_chat"
+            app:destination="@id/chat"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
     <fragment
         android:id="@+id/mallDetailsFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.MallDetailsFragment"
@@ -276,8 +296,8 @@
             android:name="title"
             android:defaultValue="None" />
         <action
-            android:id="@+id/action_mallDetailsFragment_to_jobsFragment"
-            app:destination="@id/jobsFragment"
+            android:id="@+id/action_mallDetailsFragment_to_mallCategoryFragment"
+            app:destination="@id/mallCategoryFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"

@@ -31,7 +31,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
     MaterialSearchBar.OnSearchActionListener {
 
     private lateinit var binding: FragmentSearchBinding
-    //private lateinit var viewModel: SearchViewModel
     val viewModel by viewModels<SearchViewModel>()
     private lateinit var productRecyclerView: RecyclerView
     private lateinit var productAdapter: ProductAdapter
@@ -56,7 +55,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         val view = binding.root
-        //viewModel = SearchViewModel()
         binding.searchViewModel = viewModel
         binding.lifecycleOwner = this
         initialData()
@@ -76,7 +74,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         viewModel.dataState.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
                 is SearchState.GetSearch -> {
-                    viewModel.setSearchResponse(dataState.response)
                     setSearchData(dataState.response)
                     viewModel.setMainLoadingState(false)
                 }
@@ -117,12 +114,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
             ProductAdapter(requireContext(), productItems, productRecyclerView)
         productRecyclerView.adapter = productAdapter
 
-        productAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
-
-            }
-        })
-
         productAdapter.setItemOnClick(object : OnClickItem<Product> {
             override fun clicked(item: Product, position: Int) {
                 val bundle = Bundle()
@@ -145,11 +136,7 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         categoryAdapter =
             JobCategorySelectedAdapter(requireContext(), categoryItems, categoryRecyclerView)
         categoryRecyclerView.adapter = categoryAdapter
-        categoryAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
 
-            }
-        })
         categoryAdapter.setItemOnClick(object : OnClickItem<JobCategory> {
             override fun clicked(item: JobCategory, position: Int) {
                 val bundle = Bundle()
@@ -174,12 +161,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
             JobAdapter(requireContext(), jobItems, jobRecyclerView)
         jobAdapter.horizontalItem = true
         jobRecyclerView.adapter = jobAdapter
-
-        jobAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
-
-            }
-        })
 
         jobAdapter.setItemOnClick(object : OnClickJob {
             override fun clickedProducts(job: Job, position: Int) {
@@ -216,12 +197,6 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         mallAdapter.horizontalItem = true
         mallRecyclerView.adapter = mallAdapter
 
-        mallAdapter.setOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLoadMore() {
-
-            }
-        })
-
         mallAdapter.setItemOnClick(object : OnClickMall {
             override fun clickedJobs(mall: Mall, position: Int) {
                 val bundle = Bundle()
@@ -246,6 +221,7 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
     }
 
     private fun search(searchKey: String) {
+        viewModel.setMessageVisibilityState(false)
         viewModel.setMainLoadingState(true)
         productItems.clear()
         categoryItems.clear()
@@ -254,29 +230,38 @@ class SearchFragment : Fragment(), FragmentFunction, ToolbarFunction,
         viewModel.search(searchKey)
     }
 
-    private fun setSearchData(response: SearchResponse?){
-            productItems.addAll(response?.data?.products!!)
-            productAdapter.setLoading(productAdapter.loadingSuccessState)
-            if (productAdapter.itemCount != 0)
-                binding.productLayout.visibility = View.VISIBLE
-            else binding.productLayout.visibility = View.GONE
+    private fun setSearchData(response: SearchResponse?) {
+        productItems.addAll(response?.data?.products!!)
+        productAdapter.setLoading(productAdapter.loadingSuccessState)
+        if (productAdapter.itemCount != 0)
+            binding.productLayout.visibility = View.VISIBLE
+        else binding.productLayout.visibility = View.GONE
 
-            categoryItems.addAll(response.data.categories!!)
-            categoryAdapter.setLoading(categoryAdapter.loadingSuccessState)
-            if (categoryAdapter.itemCount != 0)
-                binding.categoryLayout.visibility = View.VISIBLE
-            else binding.categoryLayout.visibility = View.GONE
+        categoryItems.addAll(response.data.categories!!)
+        categoryAdapter.setLoading(categoryAdapter.loadingSuccessState)
+        if (categoryAdapter.itemCount != 0)
+            binding.categoryLayout.visibility = View.VISIBLE
+        else binding.categoryLayout.visibility = View.GONE
 
-            jobItems.addAll(response.data.jobs!!)
-            jobAdapter.setLoading(jobAdapter.loadingSuccessState)
-            if (jobAdapter.itemCount != 0)
-                binding.jobLayout.visibility = View.VISIBLE
-            else binding.jobLayout.visibility = View.GONE
+        jobItems.addAll(response.data.jobs!!)
+        jobAdapter.setLoading(jobAdapter.loadingSuccessState)
+        if (jobAdapter.itemCount != 0)
+            binding.jobLayout.visibility = View.VISIBLE
+        else binding.jobLayout.visibility = View.GONE
 
-            mallItems.addAll(response.data.malls!!)
-            mallAdapter.setLoading(mallAdapter.loadingSuccessState)
-            if (mallAdapter.itemCount != 0)
-                binding.mallLayout.visibility = View.VISIBLE
-            else binding.mallLayout.visibility = View.GONE
+        mallItems.addAll(response.data.malls!!)
+        mallAdapter.setLoading(mallAdapter.loadingSuccessState)
+        if (mallAdapter.itemCount != 0)
+            binding.mallLayout.visibility = View.VISIBLE
+        else binding.mallLayout.visibility = View.GONE
+
+        checkSearchResult()
+    }
+
+    private fun checkSearchResult() {
+        if (productAdapter.itemCount == 0 && categoryAdapter.itemCount == 0 &&
+            jobAdapter.itemCount == 0 && mallAdapter.itemCount == 0
+        )
+            viewModel.setMessageVisibilityState(true)
     }
 }

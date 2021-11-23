@@ -13,6 +13,9 @@ import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PER_PAGE_ITEM
 
 class ProductViewModel : ViewModel() {
     private var page = -1;
+
+    private val _idleState = MutableLiveData<ProductState>(ProductState.Idle)
+
     private val _stateIntent: MutableLiveData<ProductIntent> = MutableLiveData()
 
     private val _product: MutableLiveData<Product> = MutableLiveData()
@@ -38,6 +41,9 @@ class ProductViewModel : ViewModel() {
             }
             is ProductIntent.ProductDetails -> {
                 ProductRepository.getProductDetails(stateIntent.request)
+            }
+            is ProductIntent.Idle -> {
+                _idleState
             }
         }
     }
@@ -75,5 +81,9 @@ class ProductViewModel : ViewModel() {
                 )
             )
         )
+    }
+
+    fun stateOff() {
+        setStateEvent(ProductIntent.Idle)
     }
 }

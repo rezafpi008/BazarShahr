@@ -18,6 +18,8 @@ class JobViewModel : ViewModel() {
     private val _job: MutableLiveData<Job> = MutableLiveData()
     val job: LiveData<Job> get() = _job
 
+    private val _idleState = MutableLiveData<JobState>(JobState.Idle)
+
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
@@ -39,6 +41,9 @@ class JobViewModel : ViewModel() {
             }
             is JobIntent.JobDetails -> {
                 JobRepository.getJobDetails(stateIntent.request)
+            }
+            JobIntent.Idle -> {
+                _idleState
             }
         }
     }
@@ -66,30 +71,17 @@ class JobViewModel : ViewModel() {
         return page
     }
 
-    fun getJobs(id: String, byCategory: Boolean) {
-        if (byCategory)
-            setStateEvent(
-                JobIntent.Jobs(
-                    JobsRequest(
-                        AppConstants.PER_PAGE_ITEM,
-                        id,
-                        getPaginate(),
-                        null
-                    )
+    fun getJobs(id: String) {
+        setStateEvent(
+            JobIntent.Jobs(
+                JobsRequest(
+                    AppConstants.PER_PAGE_ITEM,
+                    id,
+                    getPaginate(),
+                    null
                 )
             )
-        else
-            setStateEvent(
-                JobIntent.Jobs(
-                    JobsRequest(
-                        AppConstants.PER_PAGE_ITEM,
-                        null,
-                        getPaginate(),
-                        id
-                    )
-                )
-            )
-
+        )
     }
 
 }

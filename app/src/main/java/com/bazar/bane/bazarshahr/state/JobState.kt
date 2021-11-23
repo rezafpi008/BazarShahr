@@ -13,4 +13,7 @@ sealed class JobState {
     data class GetJobDetails(val response: JobDetailsResponse) : JobState()
 
     data class ErrorGetJob(val error: String?) : JobState()
+
+    object Idle : JobState()
+
 }

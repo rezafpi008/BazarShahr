@@ -39,7 +39,7 @@
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/gallery_view"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_150sdp"
+                        android:layout_height="@dimen/_180sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         android:visibility="visible"
@@ -149,7 +149,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:visibility="@{productViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/send_message"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@color/colorPrimaryDark">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/send_message_to_supplier"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_12sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </RelativeLayout>
 
 

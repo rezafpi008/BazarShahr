@@ -13,4 +13,5 @@ sealed class ProductIntent {
         val request: ProductDetailsRequest
     ) : ProductIntent()
 
+    object Idle : ProductIntent()
 }

@@ -18,7 +18,7 @@ open class AppConstants {
         const val CATEGORY_ID = "categoryId"
 
         const val TITLE = "title"
-
+        const val JOB_TITLE = "jobTitle"
 
         const val JOB_CATEGORY_STATE = "jobCategoryState"
 

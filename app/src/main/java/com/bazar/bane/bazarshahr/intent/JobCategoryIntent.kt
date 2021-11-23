@@ -13,4 +13,5 @@ sealed class JobCategoryIntent {
         val request: MallsRequest
     ) : JobCategoryIntent()
 
+    object Idle : JobCategoryIntent()
 }

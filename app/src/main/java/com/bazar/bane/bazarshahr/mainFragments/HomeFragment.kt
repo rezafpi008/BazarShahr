@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +42,7 @@ import com.smarteist.autoimageslider.SliderAnimations
 class HomeFragment : Fragment(), FragmentFunction {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var viewModel: HomeViewModel
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var sliderAdapter: SliderAdapter
     private var sliderItems: ArrayList<Slider> = ArrayList()
 
@@ -61,12 +62,10 @@ class HomeFragment : Fragment(), FragmentFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         val view = binding.root
-        viewModel = HomeViewModel()
         binding.homeViewModel = viewModel
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
-        viewModel.setStateEvent(HomeIntent.Slider)
         return view
     }
 
@@ -83,6 +82,7 @@ class HomeFragment : Fragment(), FragmentFunction {
         }
         initialMallRecyclerView()
         initialJobRecyclerView()
+        initSliderView()
     }
 
     private val popUpCallback: PopUpCallback = object : PopUpCallback {
@@ -96,7 +96,6 @@ class HomeFragment : Fragment(), FragmentFunction {
     }
 
     private fun initialMallRecyclerView() {
-        mallItems.clear()
         mallRecyclerView = binding.mallRecycler
         mallRecyclerView.layoutManager = LinearLayoutManager(context)
         val horizontalLayoutManager =
@@ -137,8 +136,6 @@ class HomeFragment : Fragment(), FragmentFunction {
     }
 
     private fun initialJobRecyclerView() {
-        getJob = true
-        jobItems.clear()
         jobRecyclerView = binding.jobRecyclerView
         jobRecyclerView.layoutManager = LinearLayoutManager(context)
         val horizontalLayoutManager =
@@ -182,11 +179,10 @@ class HomeFragment : Fragment(), FragmentFunction {
 
             when (dataState) {
                 is HomeState.GetSlider -> {
-                    sliderItems.clear()
                     sliderItems.addAll(dataState.response.sliders!!)
                     if (sliderItems.size != 0) {
                         binding.slider.visibility = View.VISIBLE
-                        initSliderView()
+                        sliderAdapter.notifyDataSetChanged()
                     }
                     viewModel.getMalls()
                 }
@@ -203,6 +199,8 @@ class HomeFragment : Fragment(), FragmentFunction {
                     if (getJob) {
                         getJob = false
                         viewModel.getJobs()
+                    }else{
+                        viewModel.stateOff()
                     }
                 }
 
@@ -210,6 +208,7 @@ class HomeFragment : Fragment(), FragmentFunction {
                     viewModel.setMainLoadingState(false)
                     mallAdapter.setLoading(mallAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
+                    viewModel.stateOff()
                 }
                 is HomeState.GetJobs -> {
                     viewModel.setMainLoadingState(false)
@@ -217,11 +216,13 @@ class HomeFragment : Fragment(), FragmentFunction {
                     jobAdapter.setLoading(jobAdapter.loadingSuccessState)
                     if (jobAdapter.itemCount == 0)
                         viewModel.setMessageVisibilityState(true)
+                    viewModel.stateOff()
                 }
                 is HomeState.ErrorGetJobs -> {
                     viewModel.setMainLoadingState(false)
                     jobAdapter.setLoading(jobAdapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
+                    viewModel.stateOff()
                 }
 
             }

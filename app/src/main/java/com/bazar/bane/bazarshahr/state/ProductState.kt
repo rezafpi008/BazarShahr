@@ -11,4 +11,5 @@ sealed class ProductState {
 
     data class ErrorGetProductDetails(val error: String?) : ProductState()
 
+    object Idle : ProductState()
 }

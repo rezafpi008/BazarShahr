@@ -16,6 +16,8 @@ class MallCategoryViewModel : ViewModel() {
     private var jobsPage = -1
     private val _stateIntent: MutableLiveData<MallCategoryIntent> = MutableLiveData()
 
+    private val _idleState = MutableLiveData<MallCategoryState>(MallCategoryState.Idle)
+
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
     val mainLoadingState: LiveData<Boolean> get() = _mainLoadingState
 
@@ -43,6 +45,9 @@ class MallCategoryViewModel : ViewModel() {
             }
             is MallCategoryIntent.Jobs -> {
                 JobRepository.getJobsMallState(stateIntent.request)
+            }
+            is MallCategoryIntent.Idle -> {
+                _idleState
             }
         }
     }

@@ -28,12 +28,12 @@
             android:textSize="@dimen/_10sdp" />
         <androidx.cardview.widget.CardView
             android:layout_margin="@dimen/_5sdp"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
             app:cardCornerRadius="@dimen/_8sdp">
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img"
-                android:layout_width="@dimen/_50sdp"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:srcCompat="@drawable/image_default" />

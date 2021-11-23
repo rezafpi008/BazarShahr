@@ -12,4 +12,6 @@ sealed class MallCategoryState {
     data class GetMallCategories(val response: MallCategoriesResponse) : MallCategoryState()
 
     data class ErrorGetMallCategories(val error: String?) : MallCategoryState()
+
+    object Idle : MallCategoryState()
 }

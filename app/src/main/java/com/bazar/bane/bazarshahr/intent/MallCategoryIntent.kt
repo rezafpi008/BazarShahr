@@ -13,4 +13,5 @@ sealed class MallCategoryIntent {
         val request: MallCategoriesRequest
     ) : MallCategoryIntent()
 
+    object Idle : MallCategoryIntent()
 }

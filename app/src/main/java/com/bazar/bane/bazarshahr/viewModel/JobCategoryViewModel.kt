@@ -5,21 +5,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.bazar.bane.bazarshahr.api.request.JobCategoryRequest
-import com.bazar.bane.bazarshahr.api.request.JobsRequest
 import com.bazar.bane.bazarshahr.api.request.MallsRequest
-import com.bazar.bane.bazarshahr.intent.HomeIntent
 import com.bazar.bane.bazarshahr.intent.JobCategoryIntent
 import com.bazar.bane.bazarshahr.repository.JobCategoryRepository
-import com.bazar.bane.bazarshahr.repository.JobRepository
 import com.bazar.bane.bazarshahr.repository.MallRepository
 import com.bazar.bane.bazarshahr.state.JobCategoryState
 import com.bazar.bane.bazarshahr.util.AppConstants
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
-import java.text.FieldPosition
 
 class JobCategoryViewModel : ViewModel() {
     private var categoriesPage = -1
     private var mallsPage = -1
+
+    private val _idleState = MutableLiveData<JobCategoryState>(JobCategoryState.Idle)
+
     private val _stateIntent: MutableLiveData<JobCategoryIntent> = MutableLiveData()
 
     private val _mainLoadingState: MutableLiveData<Boolean> = MutableLiveData(true)
@@ -46,6 +45,9 @@ class JobCategoryViewModel : ViewModel() {
             }
             is JobCategoryIntent.Malls -> {
                 MallRepository.getMallsCategoryState(stateIntent.request)
+            }
+            is JobCategoryIntent.Idle -> {
+                _idleState
             }
         }
     }
@@ -102,7 +104,7 @@ class JobCategoryViewModel : ViewModel() {
         )
     }
 
-    fun getMalls(cityId:String) {
+    fun getMalls(cityId: String) {
         setStateEvent(
             JobCategoryIntent.Malls(
                 MallsRequest(
@@ -113,5 +115,9 @@ class JobCategoryViewModel : ViewModel() {
                 )
             )
         )
+    }
+
+    fun stateOff() {
+        JobCategoryIntent.Idle
     }
 }

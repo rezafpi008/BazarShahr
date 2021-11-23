@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,8 @@ import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
 import com.bazar.bane.bazarshahr.state.ProductState
 import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_TITLE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PRODUCT_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TITLE
 import com.bazar.bane.bazarshahr.util.ToastUtil
@@ -31,7 +34,7 @@ import com.bazar.bane.bazarshahr.viewModel.ProductViewModel
 class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private lateinit var binding: FragmentProductsBinding
-    private lateinit var viewModel: ProductViewModel
+    private val viewModel: ProductViewModel by viewModels()
     private lateinit var jobId: String
     private lateinit var title: String
     private lateinit var recyclerView: RecyclerView
@@ -40,8 +43,9 @@ class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        jobId = arguments?.getString(AppConstants.JOB_ID)!!
+        jobId = arguments?.getString(JOB_ID)!!
         title = arguments?.getString(TITLE)!!
+        viewModel.getProducts(jobId)
     }
 
     override fun onCreateView(
@@ -51,18 +55,15 @@ class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_products, container, false)
         val view = binding.root
-        viewModel = ProductViewModel()
         binding.productViewModel = viewModel
         binding.lifecycleOwner = this
         setToolbar()
         initialData()
         subscribeObservers()
-        viewModel.getProducts(jobId)
         return view
     }
 
     override fun initialData() {
-        items.clear()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         val gridLayoutManager =
@@ -83,6 +84,8 @@ class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 val bundle = Bundle()
                 bundle.putString(PRODUCT_ID, item.id)
                 bundle.putString(TITLE, item.name)
+                bundle.putString(JOB_ID, jobId)
+                bundle.putString(JOB_TITLE, title)
                 findNavController().navigate(
                     R.id.action_productsFragment_to_productDetailsFragment,
                     bundle
@@ -100,12 +103,14 @@ class ProductsFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     adapter.setLoading(adapter.loadingSuccessState)
                     if (adapter.itemCount == 0)
                         viewModel.setMessageVisibilityState(true)
+                    viewModel.stateOff()
 
                 }
                 is ProductState.ErrorGetProducts -> {
                     viewModel.setMainLoadingState(false)
                     adapter.setLoading(adapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
+                    viewModel.stateOff()
                 }
             }
         })

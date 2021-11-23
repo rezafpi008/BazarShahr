@@ -13,4 +13,6 @@ sealed class HomeIntent {
     class Malls(
         val request: MallsRequest
     ) : HomeIntent()
+
+    object Idle : HomeIntent()
 }

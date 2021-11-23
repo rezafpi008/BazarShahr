@@ -39,6 +39,7 @@
     <string name="no_product_to_show">محصولی برای نمایش وجود ندارد</string>
     <string name="please_fill_this_field">لطفا این قسمت را پر کنید.</string>
     <string name="please_select_city">شهر را انتخاب کنید</string>
+    <string name="no_search_result">آیتمی پبدا نشد، کلمه دیگری را جستجو کنید</string>
 
 
     <string name="incorrect_phone_number">شماره تلفن اشتباه است</string>
@@ -101,5 +102,6 @@
     <string name="edit_profile_success">ویرایش با موفقیت انجام شد.</string>
     <string name="your_jobs">فروشگاه‌های شما</string>
     <string name="no_user_jobs">شما فروشگاهی ثبت نکرده‌اید.</string>
+    <string name="send_message_to_supplier">ارسال پیام به فروشنده</string>
 
 </resources>

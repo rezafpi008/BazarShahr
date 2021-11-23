@@ -14,4 +14,5 @@ sealed class JobCategoryState {
 
     data class ErrorGetMalls(val error: String?) : JobCategoryState()
 
+    object Idle:JobCategoryState()
 }

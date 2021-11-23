@@ -17,6 +17,8 @@ import com.bazar.bane.bazarshahr.intent.ProductIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
 import com.bazar.bane.bazarshahr.state.ProductState
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.JOB_TITLE
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.PRODUCT_ID
 import com.bazar.bane.bazarshahr.util.AppConstants.Companion.TITLE
 import com.bazar.bane.bazarshahr.util.ToastUtil
@@ -30,6 +32,8 @@ class ProductDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
     private lateinit var viewModel: ProductViewModel
     private lateinit var productId: String
     private lateinit var title: String
+    private lateinit var jobId: String
+    private lateinit var jobTitle: String
     private lateinit var galleryAdapter: GallerySliderAdapter
     private var galleryItems: ArrayList<String> = ArrayList()
 
@@ -37,6 +41,8 @@ class ProductDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
         super.onCreate(savedInstanceState)
         productId = arguments?.getString(PRODUCT_ID)!!
         title = arguments?.getString(TITLE)!!
+        jobId = arguments?.getString(JOB_ID)!!
+        jobTitle = arguments?.getString(JOB_TITLE)!!
     }
 
     override fun onCreateView(
@@ -63,7 +69,15 @@ class ProductDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
     }
 
     override fun initialData() {
-
+        binding.sendMessage.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString(JOB_ID, jobId)
+            bundle.putString(TITLE, jobTitle)
+            findNavController().navigate(
+                R.id.action_productDetailsFragment_to_chat,
+                bundle
+            )
+        }
     }
 
     override fun subscribeObservers() {

@@ -19,4 +19,6 @@ sealed class HomeState {
 
     data class ErrorGetMalls(val error: String?) : HomeState()
 
+    object Idle : HomeState()
+
 }

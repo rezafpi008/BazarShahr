@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ import com.bazar.bane.bazarshahr.adapter.OnLoadMoreListener
 import com.bazar.bane.bazarshahr.api.model.Job
 
 import com.bazar.bane.bazarshahr.databinding.FragmentJobsBinding
+import com.bazar.bane.bazarshahr.intent.JobIntent
 import com.bazar.bane.bazarshahr.mainFragments.FragmentFunction
 import com.bazar.bane.bazarshahr.mainFragments.ToolbarFunction
 import com.bazar.bane.bazarshahr.state.JobState
@@ -33,21 +35,18 @@ import com.bazar.bane.bazarshahr.viewModel.JobViewModel
 class JobsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     private lateinit var binding: FragmentJobsBinding
-    private lateinit var viewModel: JobViewModel
+    private val viewModel: JobViewModel by viewModels()
     private lateinit var id: String
     private lateinit var title: String
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: JobAdapter
     private var items: ArrayList<Any?> = ArrayList()
-    private var searchByCategory = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments?.getString(MALL_ID) == null) {
-            id = arguments?.getString(CATEGORY_ID)!!
-            searchByCategory = true
-        } else id = arguments?.getString(MALL_ID)!!
+        id = arguments?.getString(CATEGORY_ID)!!
         title = arguments?.getString(TITLE)!!
+        viewModel.getJobs(id)
     }
 
     override fun onCreateView(
@@ -57,18 +56,15 @@ class JobsFragment : Fragment(), FragmentFunction, ToolbarFunction {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_jobs, container, false)
         val view = binding.root
-        viewModel = JobViewModel()
         binding.jobViewModel = viewModel
         binding.lifecycleOwner = this
         initialData()
         subscribeObservers()
         setToolbar()
-        viewModel.getJobs(id, searchByCategory)
         return view
     }
 
     override fun initialData() {
-        items.clear()
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
         val horizontalLayoutManager =
@@ -80,7 +76,7 @@ class JobsFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
         adapter.setOnLoadMoreListener(object : OnLoadMoreListener {
             override fun onLoadMore() {
-                viewModel.getJobs(id, searchByCategory)
+                viewModel.getJobs(id)
             }
         })
 
@@ -116,12 +112,14 @@ class JobsFragment : Fragment(), FragmentFunction, ToolbarFunction {
                     adapter.setLoading(adapter.loadingSuccessState)
                     if (adapter.itemCount == 0)
                         viewModel.setMessageVisibilityState(true)
+                    viewModel.setStateEvent(JobIntent.Idle)
                 }
 
                 is JobState.ErrorGetJobs -> {
                     viewModel.setMainLoadingState(false)
                     adapter.setLoading(adapter.loadingFailState)
                     ToastUtil.showToast(dataState.error)
+                    viewModel.setStateEvent(JobIntent.Idle)
                 }
             }
         })

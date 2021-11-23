@@ -40,7 +40,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/mall_image"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_150sdp"
+                        android:layout_height="@dimen/_180sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         app:srcCompat="@drawable/image_default" />

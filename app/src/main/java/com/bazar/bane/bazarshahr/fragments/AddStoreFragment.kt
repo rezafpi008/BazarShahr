@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
@@ -27,8 +26,6 @@ import com.bazar.bane.bazarshahr.popUp.SelectCategoryPopUp
 import com.bazar.bane.bazarshahr.popUp.SelectCityPopUp
 import com.bazar.bane.bazarshahr.popUp.SelectMallPopUp
 import com.bazar.bane.bazarshahr.state.AddState
-import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_ID
-import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.util.imagePicker.ImagePickerDialogFragment
 import com.bazar.bane.bazarshahr.util.imagePicker.PickerBuilder
@@ -204,7 +201,6 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
                 is AddState.CreateJob -> {
                     viewModel.setMainLoadingState(false)
                     ToastUtil.showToast("فروشگاه با موفقیت ثبت شد.")
-                    showUserJobId(dataState.response.data?.jobId!!)
                 }
 
                 is AddState.ErrorCreateJob -> {
@@ -236,20 +232,6 @@ class AddStoreFragment : Fragment(), FragmentFunction, ToolbarFunction {
             binding.city.text = title
             cityId = id
         }
-    }
-
-    private fun showUserJobId(jobId: String) {
-        val builder = AlertDialog.Builder(activity)
-        builder.setTitle("کدفروشگاه شما")
-            .setMessage("کد فروشگاه شما$jobId")
-            .setCancelable(false)
-            .setPositiveButton("ذخیره") { dialogInterface, _ ->
-
-                dialogInterface.dismiss()
-            }.setNegativeButton("بستن") { dialogInterface, _ ->
-
-                dialogInterface.dismiss()
-            }.show()
     }
 
 }
