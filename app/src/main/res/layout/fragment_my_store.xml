@@ -27,7 +27,7 @@
                 android:background="@color/colorPrimary">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/_15sdp"
@@ -43,38 +43,58 @@
                         android:src="@drawable/image_default_avatar"
                         android:tint="@color/colorWhite" />
 
-                    <TextView
-                        android:id="@+id/txt_user_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                    <RelativeLayout
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:text="@{userViewModel.user.name}"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp">
-
-                        <TextView
+                        <ProgressBar
+                            android:visibility="@{userViewModel.mainLoadingState?View.VISIBLE:View.GONE}"
+                            android:layout_centerInParent="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:text="@{userViewModel.user.phoneNumber}"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/_11sdp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
+                            android:indeterminateDrawable="@drawable/progress_bar"/>
+                        <LinearLayout
+                            android:visibility="@{userViewModel.mainLoadingState?View.GONE:View.VISIBLE}"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/phone_number"
-                            android:textColor="@color/colorWhite"
-                            android:textSize="@dimen/_11sdp" />
-                    </LinearLayout>
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_user_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@{userViewModel.user.name}"
+                                android:textColor="@color/colorWhite"
+                                android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="@dimen/_10sdp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:text="@{userViewModel.user.phoneNumber}"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="@dimen/_11sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/phone_number"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="@dimen/_11sdp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
 
                 </LinearLayout>
 
@@ -100,6 +120,7 @@
                         android:id="@+id/submit_store"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="@{!userViewModel.mainLoadingState}"
                         android:padding="@dimen/_10sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -110,7 +131,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/ic_store" />
+                            app:srcCompat="@drawable/ic_add" />
 
                         <TextView
                             android:id="@+id/submit_store_txt"
@@ -148,6 +169,7 @@
                         android:id="@+id/submit_product"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="@{!userViewModel.mainLoadingState}"
                         android:padding="@dimen/_10sdp">
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -191,6 +213,56 @@
                         android:background="@color/colorGrayLight"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/my_store"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="@{!userViewModel.mainLoadingState}"
+                        android:padding="@dimen/_10sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/my_store_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:tint="@color/colorPrimaryDark"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_store" />
+
+                        <TextView
+                            android:id="@+id/my_store_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:text="@string/my_store"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/_12sdp"
+                            app:layout_constraintBottom_toBottomOf="@id/my_store_icon"
+                            app:layout_constraintEnd_toStartOf="@id/my_store_icon"
+                            app:layout_constraintTop_toTopOf="@id/my_store_icon" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:tint="@color/colorGray"
+                            app:layout_constraintBottom_toBottomOf="@id/my_store_icon"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/my_store_icon"
+                            app:srcCompat="@drawable/ic_next" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:background="@color/colorGrayLight"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/edit_profile"

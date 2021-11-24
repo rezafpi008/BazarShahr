@@ -24,6 +24,8 @@ import com.bazar.bane.bazarshahr.popUp.PopUpCallback
 import com.bazar.bane.bazarshahr.popUp.SelectUserJobPopUp
 import com.bazar.bane.bazarshahr.state.AddState
 import com.bazar.bane.bazarshahr.util.AppConstants
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_ID
+import com.bazar.bane.bazarshahr.util.AppConstants.Companion.USER_JOB_NAME
 import com.bazar.bane.bazarshahr.util.SharedPreferenceUtil
 import com.bazar.bane.bazarshahr.util.ToastUtil
 import com.bazar.bane.bazarshahr.util.imagePicker.ImagePickerDialogFragment
@@ -57,13 +59,15 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
 
     override fun initialData() {
 
-        binding.jobTitle.setOnClickListener {
+        binding.jobTitle.text = SharedPreferenceUtil.getStringValue(USER_JOB_NAME)
+        jobId = SharedPreferenceUtil.getStringValue(USER_JOB_ID)!!
+        /*binding.jobTitle.setOnClickListener {
             SelectUserJobPopUp(
                 requireContext(),
                 popUpCallback,
                 this
             ).show()
-        }
+        }*/
 
         binding.addImage.setOnClickListener { showBottomView() }
         binding.submit.setOnClickListener {

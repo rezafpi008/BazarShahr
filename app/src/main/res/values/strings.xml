@@ -103,5 +103,8 @@
     <string name="your_jobs">فروشگاه‌های شما</string>
     <string name="no_user_jobs">شما فروشگاهی ثبت نکرده‌اید.</string>
     <string name="send_message_to_supplier">ارسال پیام به فروشنده</string>
+    <string name="user_submitted_job">هر کاربر تنها می‌تواند یک فروشگاه ثبت کند</string>
+
+
 
 </resources>

@@ -13,6 +13,6 @@ class ApiError {
             errorMessage = errorMessage.replace("[", "")
             errorMessage = errorMessage.replace("]", "")
             errorMessage
-        } else "null"
+        } else "مشکل دربرقرای ارتباط. اتصال اینترنت خود را چک کنید."
     }
 }

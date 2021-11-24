@@ -8,6 +8,7 @@ open class AppConstants {
         const val USER_TOKEN = "USER_TOKEN"
         const val USER_ID = "USER_ID"
         const val USER_JOB_ID = "USER_JOB_ID"
+        const val USER_JOB_NAME = "USER_JOB_NAME"
 
         const val JOB_ID = "jobId"
 
