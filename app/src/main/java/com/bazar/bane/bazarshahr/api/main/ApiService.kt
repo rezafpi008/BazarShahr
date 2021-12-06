@@ -112,4 +112,7 @@ interface ApiService {
 
     @POST("api/cities/")
     fun getCities(): LiveData<GenericApiResponse<CitiesResponse>>
+
+    @POST("api/reserve/")
+    fun getReserveAddDescription(): LiveData<GenericApiResponse<ReserveAddDescriptionResponse>>
 }

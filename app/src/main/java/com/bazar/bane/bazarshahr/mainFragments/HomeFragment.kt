@@ -80,6 +80,11 @@ class HomeFragment : Fragment(), FragmentFunction {
                 this
             ).show()
         }
+
+        binding.reserveAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_reserveAddFragment)
+        }
+
         initialMallRecyclerView()
         initialJobRecyclerView()
         initSliderView()
@@ -199,7 +204,7 @@ class HomeFragment : Fragment(), FragmentFunction {
                     if (getJob) {
                         getJob = false
                         viewModel.getJobs()
-                    }else{
+                    } else {
                         viewModel.stateOff()
                     }
                 }

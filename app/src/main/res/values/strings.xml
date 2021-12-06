@@ -106,6 +106,8 @@
     <string name="user_submitted_job">هر کاربر تنها می‌تواند یک فروشگاه ثبت کند</string>
     <string name="critics_and_suggestions">انتقادات و پیشنهادات</string>
     <string name="enter_your_critics_and_suggestions">اتقادات و پیشنهادات خود را بنویسید.</string>
-
+    <string name="enter_for_reserve">برای رزرو تبلیغات کلیک کنید.</string>
+    <string name="show_your_jobs">کسب و کار خود را به بهترین شکل به دیگران معرفی کنید.</string>
+    <string name="reserve_add">رزرو تبلیغات</string>
 
 </resources>

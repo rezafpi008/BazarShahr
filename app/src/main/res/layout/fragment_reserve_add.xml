@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="productViewModel"
-            type="com.bazar.bane.bazarshahr.viewModel.ProductViewModel" />
+            name="reserveAddViewModel"
+            type="com.bazar.bane.bazarshahr.viewModel.ReserveAddViewModel" />
     </data>
 
     <LinearLayout
@@ -26,10 +26,9 @@
             android:layout_height="match_parent">
 
             <ScrollView
-                android:layout_marginBottom="@dimen/_45sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{productViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
+                android:visibility="@{reserveAddViewModel.mainLoadingState?View.GONE:View.VISIBLE}">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -37,24 +36,20 @@
                     android:orientation="vertical">
 
 
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/gallery_view"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_270sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:scaleType="fitXY"
-                        android:visibility="visible"
-                        app:sliderAnimationDuration="600"
-                        app:sliderAutoCycleDirection="back_and_forth"
-                        app:sliderIndicatorAnimationDuration="600"
-                        app:sliderIndicatorEnabled="true"
-                        app:sliderIndicatorGravity="center_horizontal|bottom"
-                        app:sliderIndicatorMargin="@dimen/_15sdp"
-                        app:sliderIndicatorOrientation="horizontal"
-                        app:sliderIndicatorSelectedColor="@color/colorPrimaryDark"
-                        app:sliderIndicatorUnselectedColor="@color/colorPrimary"
-                        app:sliderScrollTimeInSec="3"
-                        app:sliderStartAutoCycle="true" />
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_5sdp">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/mall_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_150sdp"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/image_default" />
+                    </androidx.cardview.widget.CardView>
+
+
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -80,18 +75,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/_10sdp"
                                     android:layout_weight="1"
-                                    android:text="@{productViewModel.product.name}"
+                                    android:text="تیلیغ شما در قسمت اسلایدر صفحه اول با سایزی مطابق با سایز نمونه بالا به کاربران نشان داده می‌شود."
                                     android:textColor="@color/colorBlack"
                                     android:textSize="@dimen/_13sdp" />
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_marginStart="@dimen/_5sdp"
-                                    android:layout_marginTop="@dimen/_10sdp"
-                                    android:layout_marginEnd="@dimen/_10sdp"
-                                    android:tint="@color/colorPrimaryDark"
-                                    app:srcCompat="@drawable/ic_product" />
 
                             </LinearLayout>
 
@@ -101,6 +87,7 @@
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:background="@color/colorGrayLight" />
+
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -114,7 +101,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="@dimen/_10sdp"
                                     android:layout_weight="1"
-                                    android:text="@{productViewModel.product.content}"
+                                    android:text="@{reserveAddViewModel.description}"
                                     android:textColor="@color/colorGray"
                                     android:textSize="@dimen/_12sdp" />
 
@@ -122,11 +109,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_10sdp"
-                                    android:text="@string/more_details"
+                                    android:text="@string/details"
                                     android:textColor="@color/colorPrimaryDark"
                                     android:textSize="@dimen/_12sdp" />
 
                                 <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imageView3"
                                     android:layout_width="@dimen/_20sdp"
                                     android:layout_height="@dimen/_20sdp"
                                     android:layout_marginStart="@dimen/_5sdp"
@@ -142,6 +130,7 @@
 
                     </androidx.cardview.widget.CardView>
 
+
                 </LinearLayout>
             </ScrollView>
 
@@ -149,23 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:visibility="@{productViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
-            <RelativeLayout
-                android:layout_alignParentBottom="true"
-                android:id="@+id/send_message"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@color/colorPrimaryDark">
+                android:visibility="@{reserveAddViewModel.mainLoadingState?View.VISIBLE:View.GONE}" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="@string/send_message_to_supplier"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
         </RelativeLayout>
 
 
