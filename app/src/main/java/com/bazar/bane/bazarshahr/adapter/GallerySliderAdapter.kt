@@ -1,11 +1,13 @@
 package com.texonapp.oneringgit.adapter
 
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
+import com.ablanco.zoomy.Zoomy
 import com.bazar.bane.bazarshahr.R
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
@@ -35,6 +37,12 @@ class GallerySliderAdapter(
             .error(R.drawable.image_default)
             .placeholder(R.drawable.image_default)
             .into(holder.imageGallery)
+
+        val builder: Zoomy.Builder = Zoomy.Builder(context as Activity)
+            .target(holder.itemView)
+            .enableImmersiveMode(false)
+            .animateZooming(true)
+        builder.register()
     }
 
     override fun getCount(): Int {

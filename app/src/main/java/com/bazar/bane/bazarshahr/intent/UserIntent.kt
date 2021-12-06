@@ -1,6 +1,7 @@
 package com.bazar.bane.bazarshahr.intent
 
 import com.bazar.bane.bazarshahr.api.request.EditUserRequest
+import com.bazar.bane.bazarshahr.api.request.SuggestionsRequest
 import com.bazar.bane.bazarshahr.api.request.UserDetailsRequest
 
 sealed class UserIntent {
@@ -11,6 +12,10 @@ sealed class UserIntent {
 
     class EditUser(
         val request: EditUserRequest
+    ) : UserIntent()
+
+    class SendSuggestions(
+        val request: SuggestionsRequest
     ) : UserIntent()
 
 }

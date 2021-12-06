@@ -11,4 +11,8 @@ sealed class UserState {
     data class EditUserDetails(val response: MainResponse) : UserState()
 
     data class ErrorEditUserDetails(val error: String?) : UserState()
+
+    data class SendSuggestions(val response: MainResponse) : UserState()
+
+    data class ErrorSendSuggestions(val error: String?) : UserState()
 }

@@ -105,6 +105,11 @@ interface ApiService {
         @Body requestBody: EditUserRequest?,
     ): LiveData<GenericApiResponse<MainResponse>>
 
+    @POST("api/ciritc/register/")
+    fun sendSuggestions(
+        @Body requestBody: SuggestionsRequest?,
+    ): LiveData<GenericApiResponse<MainResponse>>
+
     @POST("api/cities/")
     fun getCities(): LiveData<GenericApiResponse<CitiesResponse>>
 }

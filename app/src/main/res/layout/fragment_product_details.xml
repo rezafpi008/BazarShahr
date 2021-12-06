@@ -39,7 +39,7 @@
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/gallery_view"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_180sdp"
+                        android:layout_height="@dimen/_270sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         android:visibility="visible"

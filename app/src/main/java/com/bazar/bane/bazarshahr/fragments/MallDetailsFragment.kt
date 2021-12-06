@@ -1,5 +1,6 @@
 package com.bazar.bane.bazarshahr.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.ablanco.zoomy.Zoomy
 import com.bazar.bane.bazarshahr.R
 import com.bazar.bane.bazarshahr.api.request.JobDetailsRequest
 import com.bazar.bane.bazarshahr.databinding.FragmentJobDetailsBinding
@@ -104,6 +106,11 @@ class MallDetailsFragment : Fragment(), FragmentFunction, ToolbarFunction {
             .placeholder(R.drawable.image_default)
             .error(R.drawable.image_default)
             .into(binding.mallImage)
+        val builder: Zoomy.Builder = Zoomy.Builder(context as Activity)
+            .target(binding.mallImage)
+            .enableImmersiveMode(false)
+            .animateZooming(true)
+        builder.register()
     }
 
 }

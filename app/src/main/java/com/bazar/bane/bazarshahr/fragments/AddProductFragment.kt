@@ -156,7 +156,7 @@ class AddProductFragment : Fragment(), FragmentFunction, ToolbarFunction {
             })
             ?.setImageName("ads")
             ?.setImageFolderName("bazarShahr")
-            ?.setCustomizedUcrop(4, 3)
+            ?.setCustomizedUcrop(6, 5)
             ?.start()
     }
 

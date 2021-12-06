@@ -104,7 +104,8 @@
     <string name="no_user_jobs">شما فروشگاهی ثبت نکرده‌اید.</string>
     <string name="send_message_to_supplier">ارسال پیام به فروشنده</string>
     <string name="user_submitted_job">هر کاربر تنها می‌تواند یک فروشگاه ثبت کند</string>
-
+    <string name="critics_and_suggestions">انتقادات و پیشنهادات</string>
+    <string name="enter_your_critics_and_suggestions">اتقادات و پیشنهادات خود را بنویسید.</string>
 
 
 </resources>

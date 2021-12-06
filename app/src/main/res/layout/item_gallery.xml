@@ -8,12 +8,13 @@
     app:cardCornerRadius="@dimen/_10sdp">
 
     <RelativeLayout
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_60sdp">
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_70sdp">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/gallery_img"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_60sdp"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_75sdp"
             android:scaleType="fitXY" />
 
         <androidx.appcompat.widget.AppCompatImageView

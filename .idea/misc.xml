@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/drawable/bac_gard_primary.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/drawable/bg_round_primary.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/drawable/bg_round_white.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_add_product.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_add_store.xml" value="0.15670289855072464" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_job_details.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_mall_details.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_my_store.xml" value="0.25" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_product_details.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/fragment_send_suggestions.xml" value="0.22" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_gallery.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_job.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_job_horizontal.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_job_horizontal_fixed.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_like.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_mall.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_mall_horizontal.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_mall_horizontal_fixed.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_mall_horizontal_selected.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_product.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/23/Desktop/BazarShahr/app/src/main/res/layout/item_slider_gallery.xml" value="0.17300724637681159" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

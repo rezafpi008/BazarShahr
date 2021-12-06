@@ -190,6 +190,13 @@
             app:exitAnim="@anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_myStoreFragment_to_sendSuggestionsFragment"
+            app:destination="@id/sendSuggestionsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/addStoreFragment"
@@ -356,5 +363,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.bazar.bane.bazarshahr.fragments.EditProfileFragment"
         android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/sendSuggestionsFragment"
+        android:name="com.bazar.bane.bazarshahr.fragments.SendSuggestionsFragment"
+        android:label="SendSuggestionsFragment" />
 
 </navigation>

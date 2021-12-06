@@ -81,6 +81,10 @@ class MyStoreFragment : Fragment(), FragmentFunction {
             if (userJob)
                 findNavController().navigate(R.id.action_myStoreFragment_to_editProfileFragment)
         }
+
+        binding.suggestions.setOnClickListener {
+            findNavController().navigate(R.id.action_myStoreFragment_to_sendSuggestionsFragment)
+        }
     }
 
     override fun subscribeObservers() {

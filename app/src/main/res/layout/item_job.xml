@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_81sdp"
+    android:layout_height="@dimen/_96sdp"
     android:layout_marginStart="@dimen/_5sdp"
     android:layout_marginTop="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_5sdp"
@@ -68,7 +68,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/image"
-                    android:layout_width="@dimen/_100sdp"
+                    android:layout_width="@dimen/_102sdp"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
                     android:src="@drawable/image_default" />

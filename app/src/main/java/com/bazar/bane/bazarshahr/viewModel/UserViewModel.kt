@@ -40,6 +40,9 @@ class UserViewModel : ViewModel() {
             is UserIntent.EditUser -> {
                 UserRepository.editUserDetails(stateIntent.request)
             }
+            is UserIntent.SendSuggestions -> {
+                UserRepository.sendSuggestions(stateIntent.request)
+            }
         }
     }
 
